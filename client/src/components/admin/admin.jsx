@@ -82,7 +82,6 @@ class AdminPage extends React.Component {
             }
 
             if (data.getcurrent.length !== 0) {
-             
               return (
                 <div>
                   <Table className="statstable">
@@ -178,6 +177,7 @@ class AdminPage extends React.Component {
                                       })
                                     }
                                   >
+                                    <option>N/A</option>
                                     <option>JAN</option>
                                     <option>FEB</option>
                                     <option>MAR</option>
@@ -204,6 +204,7 @@ class AdminPage extends React.Component {
                                       })
                                     }
                                   >
+                                    <option>N/A</option>
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -261,6 +262,7 @@ class AdminPage extends React.Component {
                                       })
                                     }}
                                   >
+                                    <option>N/A</option>
                                     <option>0</option>
                                     <option>1</option>
                                     <option>2</option>

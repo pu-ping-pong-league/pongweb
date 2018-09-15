@@ -116,7 +116,8 @@ class Navigation extends React.Component {
               variables={{
                 where: {
                   season: { season: 1 },
-                  confirmed: true
+                  confirmed: true,
+                  deactivated: false
                 }
               }}
             >

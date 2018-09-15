@@ -139,7 +139,7 @@ class SignupPage extends React.Component {
                 </FormGroup>
                 <FormGroup row>
                   <Label sm={3} for="exampleName">
-                    Name:
+                    Full Name:
                   </Label>
                   <Col sm={9}>
                     <Input

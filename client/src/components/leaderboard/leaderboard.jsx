@@ -15,6 +15,7 @@ const GET_STATS = gql`
       player {
         email
         name
+        confirmed
         stats {
           wins
           losts
@@ -124,7 +125,9 @@ class Leaderboard extends React.Component {
                           fixture: { round: i },
                           season: { season: 1 },
                           player: {
-                            comfirmed: true
+                            confirmed: true,
+                            deactivated: false,
+                            stats_none: []
                           }
                         }
                       }}
