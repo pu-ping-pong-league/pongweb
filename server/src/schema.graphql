@@ -1,0 +1,81 @@
+# import * from "./generated/prisma.graphql"
+
+type Query {
+  me: User!
+  getleaderboard(
+    where: UserOrderByInput
+    orderBy: UserOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [User]!
+  feed(
+    where: MatchOrderByInput
+    orderBy: MatchOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Match]!
+  getUser(email: String!): User!
+  getUsers(where: UserWhereInput!, orderBy: UserOrderByInput): [User]!
+  getStats(email: String!): User!
+  getMatches(email: String!): [Match]!
+  getResult(player1: String!, player2: String!): [Match]!
+  # getMatchId(player1: User!, player2: User!, league: String!, round: Int!): Id!
+  getPlayerMatches(player: String!, fixture: Int!, season: Int!): [Match]!
+  getPlayer1vsPlayer2Matches(
+    player1: String!
+    player2: String!
+    fixture: Int!
+    season: Int!
+  ): [Match]!
+  statses(where: StatsWhereInput, orderBy: StatsOrderByInput): [Stats]!
+  getallplayers: [User!]!
+  fixtures(where: FixtureWhereInput): [Fixture!]!
+  matches(where: MatchWhereInput): [Match!]!
+  getcurrent: [Current!]!
+  getUserbyID(where: UserWhereUniqueInput!): User!
+}
+
+type Mutation {
+  signup(
+    email: String!
+    password: String!
+    name: String!
+    residentialcollege: String
+  ): AuthPayload!
+  login(email: String!, password: String!): AuthPayload!
+  adminlogin(email: String!, password: String!): AuthPayload1!
+  submitmatch(
+    player1: String!
+    player2: String!
+    player1set: Int!
+    player2set: Int!
+    round: Int!
+    season: Int!
+  ): Match!
+  generateFixture(round: Int!, season: Int!): Fixture!
+  generateRound(round: Int!, season: Int!): Fixture!
+  generateSeason(season: Int!): Season!
+  addplayer(player: String!, season: Int!): User!
+  deleteplayer(player: String!, season: Int!): User!
+  generateStats(round: Int!, season: Int!): Stats!
+  updateinfo(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
+  updatecurrent(round: Int!, season: Int!, timer: String!): Current!
+  createcurrent(round: Int!, season: Int!, timer: String!): Current!
+  adminsignup(email: String!, password: String!, name: String!): AuthPayload1!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+type AuthPayload1 {
+  token: String!
+  user: Admin!
+}

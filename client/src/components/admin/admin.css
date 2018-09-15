@@ -1,0 +1,9 @@
+.timerinput {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.timerinput1 {
+  width: 20%;
+}

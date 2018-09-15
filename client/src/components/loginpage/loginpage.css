@@ -1,0 +1,32 @@
+.login-form {
+  border: 2px;
+  border-style: groove;
+  border-radius: 20px;
+  margin: 40px;
+  padding: 20px;
+  height: 300px;
+}
+
+h4 {
+  font-family: Montserrat;
+  color: black;
+}
+
+.center.toggle {
+  background-image: none;
+}
+
+.button {
+  background-color: black;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  padding: 6px 12px;
+  text-align: center;
+  font-size: 14px;
+  margin: 4px 2px;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: Montserrat;
+}

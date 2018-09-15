@@ -1,0 +1,82 @@
+header {
+  text-align: center;
+  font-family: Montserrat;
+}
+
+h1 {
+  font-family: Montserrat;
+  color: black;
+}
+
+h2 {
+  font-family: Montserrat;
+  color: black;
+}
+.profile-page {
+  background-color: lightgray;
+  height: 100%;
+}
+.profilecontainer {
+  display: flex;
+  height: 100%;
+  background-color: lightgray;
+}
+.playerinfo {
+  background-color: white;
+  margin: 10px;
+  height: 600px;
+  width: 50%;
+  padding: 20px;
+}
+.careerstats {
+  background-color: white;
+  margin: 10px;
+  padding: 20px;
+  width: 230%;
+}
+.piechart {
+  height: 50%;
+  width: 50%;
+  position: relative;
+  left: 160px;
+}
+.usernameprofile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.emailprofile {
+  display: flex;
+  flex-direction: row;
+}
+.hometown {
+  display: flex;
+  flex-direction: row;
+}
+.residentialcollege {
+  display: flex;
+  flex-direction: row;
+}
+#icon3 {
+  padding-left: 5px;
+}
+#icon2 {
+  padding-top: 5px;
+}
+.bio {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 10px;
+}
+.matches {
+  background-color: white;
+  margin: 10px;
+  padding: 20px;
+  width: 95%;
+}
+
+.matchescontainer {
+  display: flex;
+  flex-direction: column;
+}

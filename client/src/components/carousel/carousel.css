@@ -1,0 +1,15 @@
+carousel,
+.screen_img {
+  width: 800px;
+  height: 600px;
+  margin-top: 3%;
+}
+
+.homebutton {
+  position: absolute;
+  left: 400px;
+  top: 400px;
+  width: 150px;
+  height: 40px;
+  border-radius: 0px;
+}

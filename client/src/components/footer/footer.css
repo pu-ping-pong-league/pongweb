@@ -1,0 +1,18 @@
+.footer {
+  padding: 40px 150px 45px;
+  display: flex;
+  background-color: gray;
+  justify-content: space-between;
+}
+.rightcol {
+  display: flex;
+  flex-direction: column;
+}
+.leftcol {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+}
+.facebook {
+  font-size: 40px;
+}

@@ -1,0 +1,20 @@
+.bg {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+.info {
+  font-family: Montserrat;
+}
+.timer {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 25px;
+  color: red;
+}
+text {
+  margin-right: 5px;
+}
+.navigation {
+  position: fixed;
+}

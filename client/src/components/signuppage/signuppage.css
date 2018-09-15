@@ -1,0 +1,43 @@
+.signup-form {
+  border: 2px;
+  border-style: groove;
+  border-radius: 10px;
+  margin: 40px;
+  padding: 20px;
+  height: 500px;
+  width: 50%;
+  font-family: Montserrat;
+  flex-wrap: nowrap;
+}
+.header {
+  text-align: center;
+  font-family: Montserrat;
+}
+
+input {
+  width: 250px;
+  margin: 5px;
+  font-family: Montserrat;
+}
+.label {
+  padding: 10px;
+}
+button {
+  background-color: black;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  padding: 6px 12px;
+  text-align: center;
+  font-size: 14px;
+  margin: 4px 2px;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  font-family: Montserrat;
+}
+.formcontainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

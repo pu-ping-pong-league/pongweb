@@ -1,0 +1,76 @@
+.Navbar {
+  background-color: rgb(243, 239, 223);
+  /* width: 98%;
+  position: fixed; */
+}
+.titlelogo {
+  width: 20%;
+  height: 20%;
+}
+.dropdown {
+  background-color: transparent;
+  border: transparent;
+  color: gray;
+  font-family: Montserrat;
+}
+.search__component {
+  width: 300px;
+  position: relative;
+  font-family: Montserrat;
+}
+.NavbarTitle {
+  color: white;
+  font-family: Montserrat;
+  width: 20%;
+}
+.search__dropdown {
+  position: absolute;
+  top: 53px;
+  z-index: 20;
+  background-color: white;
+  width: 100%;
+}
+
+.welcome {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  margin-bottom: 0px;
+  font-family: Montserrat;
+}
+
+.welcomeText {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 0;
+  font-family: Montserrat;
+}
+.my-page {
+  font-family: Montserrat;
+}
+
+.welcome {
+  margin-right: 20px;
+}
+.LoginButton {
+  background-color: black;
+  color: white;
+  border: none;
+  width: 100%;
+  font-family: Montserrat;
+}
+.signupButton {
+  background-color: black;
+  color: black;
+  border: none;
+  width: 100%;
+  font-family: Montserrat;
+}
+
+.my-league:hover .dropdown-menu {
+  display: block;
+}
+
+.logindropdown:hover .dropdown-menu {
+  display: block;
+}

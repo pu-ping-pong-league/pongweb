@@ -1,0 +1,101 @@
+.App {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+.profile {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.center {
+  flex: 1 1 auto;
+  overflow-y: scroll;
+  height: 100%;
+  text-align: center;
+  background-size: 30%;
+  background-position-y: 200pxs;
+  background-repeat: repeat-y;
+  background-position: center;
+}
+
+.App-logo {
+  height: 100%;
+}
+
+.App-header {
+  background-color: white;
+  height: 300px;
+  padding: 20px;
+  color: orange;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+#offcanvas-left,
+#offcanvas-right {
+  flex: 0 0 280px;
+  background-color: white;
+  color: white;
+  transition-duration: 0.5s;
+}
+#offcanvas-left.hide {
+  margin-left: -280px;
+}
+#offcanvas-right.hide {
+  margin-right: -280px;
+}
+
+.togglebar {
+  background-color: rgb(243, 239, 223);
+  flex: 0 0;
+  min-width: 50px;
+  max-width: 5px;
+  font-size: 1.4em;
+  width: 100%;
+  color: var(--first-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.togglebar:hover {
+  color: var(--second-color);
+}
+.text {
+  font-family: "Courier New", Courier;
+  color: black;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+}
+
+i {
+  color: gray;
+}
+
+.hide1 {
+  display: none;
+}
+
+.fa .fa-user .fa-lg .fa-fw .hide1 {
+  display: none;
+}
+
+.image2 {
+  width: 50%;
+  height: 50%;
+}
+.image {
+  display: flex;
+  justify-content: center;
+}
