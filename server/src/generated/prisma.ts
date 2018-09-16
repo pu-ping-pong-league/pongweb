@@ -984,6 +984,7 @@ type Match implements Node {
   player2set: Int
   fixture(where: FixtureWhereInput): Fixture!
   season(where: SeasonWhereInput): Season!
+  sumbit: Boolean!
 }
 
 """A connection to a list of items."""
@@ -999,6 +1000,7 @@ type MatchConnection {
 input MatchCreateInput {
   player1set: Int
   player2set: Int
+  sumbit: Boolean
   player1: UserCreateOneInput!
   player2: UserCreateOneInput!
   fixture: FixtureCreateOneWithoutMatchesInput!
@@ -1018,6 +1020,7 @@ input MatchCreateManyWithoutFixtureInput {
 input MatchCreateWithoutFixtureInput {
   player1set: Int
   player2set: Int
+  sumbit: Boolean
   player1: UserCreateOneInput!
   player2: UserCreateOneInput!
   season: SeasonCreateOneInput!
@@ -1039,6 +1042,8 @@ enum MatchOrderByInput {
   player1set_DESC
   player2set_ASC
   player2set_DESC
+  sumbit_ASC
+  sumbit_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -1049,6 +1054,7 @@ type MatchPreviousValues {
   id: ID!
   player1set: Int
   player2set: Int
+  sumbit: Boolean!
 }
 
 type MatchSubscriptionPayload {
@@ -1093,6 +1099,7 @@ input MatchSubscriptionWhereInput {
 input MatchUpdateDataInput {
   player1set: Int
   player2set: Int
+  sumbit: Boolean
   player1: UserUpdateOneInput
   player2: UserUpdateOneInput
   fixture: FixtureUpdateOneWithoutMatchesInput
@@ -1102,6 +1109,7 @@ input MatchUpdateDataInput {
 input MatchUpdateInput {
   player1set: Int
   player2set: Int
+  sumbit: Boolean
   player1: UserUpdateOneInput
   player2: UserUpdateOneInput
   fixture: FixtureUpdateOneWithoutMatchesInput
@@ -1129,6 +1137,7 @@ input MatchUpdateManyWithoutFixtureInput {
 input MatchUpdateWithoutFixtureDataInput {
   player1set: Int
   player2set: Int
+  sumbit: Boolean
   player1: UserUpdateOneInput
   player2: UserUpdateOneInput
   season: SeasonUpdateOneInput
@@ -1249,6 +1258,10 @@ input MatchWhereInput {
 
   """All values greater than or equal the given value."""
   player2set_gte: Int
+  sumbit: Boolean
+
+  """All values that are not equal to given value."""
+  sumbit_not: Boolean
   player1: UserWhereInput
   player2: UserWhereInput
   fixture: FixtureWhereInput
@@ -2053,6 +2066,7 @@ type User implements Node {
   bio: String
   location: String
   confirmed: Boolean!
+  deactivated: Boolean!
 }
 
 """A connection to a list of items."""
@@ -2073,6 +2087,7 @@ input UserCreateInput {
   bio: String
   location: String
   confirmed: Boolean
+  deactivated: Boolean
   stats: StatsCreateManyWithoutPlayerInput
   matches: MatchCreateManyInput
   season: SeasonCreateOneWithoutPlayersInput
@@ -2107,6 +2122,7 @@ input UserCreateWithoutFixtureInput {
   bio: String
   location: String
   confirmed: Boolean
+  deactivated: Boolean
   stats: StatsCreateManyWithoutPlayerInput
   matches: MatchCreateManyInput
   season: SeasonCreateOneWithoutPlayersInput
@@ -2120,6 +2136,7 @@ input UserCreateWithoutSeasonInput {
   bio: String
   location: String
   confirmed: Boolean
+  deactivated: Boolean
   stats: StatsCreateManyWithoutPlayerInput
   matches: MatchCreateManyInput
   fixture: FixtureCreateManyWithoutPlayersInput
@@ -2133,6 +2150,7 @@ input UserCreateWithoutStatsInput {
   bio: String
   location: String
   confirmed: Boolean
+  deactivated: Boolean
   matches: MatchCreateManyInput
   season: SeasonCreateOneWithoutPlayersInput
   fixture: FixtureCreateManyWithoutPlayersInput
@@ -2164,6 +2182,8 @@ enum UserOrderByInput {
   location_DESC
   confirmed_ASC
   confirmed_DESC
+  deactivated_ASC
+  deactivated_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -2179,6 +2199,7 @@ type UserPreviousValues {
   bio: String
   location: String
   confirmed: Boolean!
+  deactivated: Boolean!
 }
 
 type UserSubscriptionPayload {
@@ -2228,6 +2249,7 @@ input UserUpdateDataInput {
   bio: String
   location: String
   confirmed: Boolean
+  deactivated: Boolean
   stats: StatsUpdateManyWithoutPlayerInput
   matches: MatchUpdateManyInput
   season: SeasonUpdateOneWithoutPlayersInput
@@ -2242,6 +2264,7 @@ input UserUpdateInput {
   bio: String
   location: String
   confirmed: Boolean
+  deactivated: Boolean
   stats: StatsUpdateManyWithoutPlayerInput
   matches: MatchUpdateManyInput
   season: SeasonUpdateOneWithoutPlayersInput
@@ -2290,6 +2313,7 @@ input UserUpdateWithoutFixtureDataInput {
   bio: String
   location: String
   confirmed: Boolean
+  deactivated: Boolean
   stats: StatsUpdateManyWithoutPlayerInput
   matches: MatchUpdateManyInput
   season: SeasonUpdateOneWithoutPlayersInput
@@ -2303,6 +2327,7 @@ input UserUpdateWithoutSeasonDataInput {
   bio: String
   location: String
   confirmed: Boolean
+  deactivated: Boolean
   stats: StatsUpdateManyWithoutPlayerInput
   matches: MatchUpdateManyInput
   fixture: FixtureUpdateManyWithoutPlayersInput
@@ -2316,6 +2341,7 @@ input UserUpdateWithoutStatsDataInput {
   bio: String
   location: String
   confirmed: Boolean
+  deactivated: Boolean
   matches: MatchUpdateManyInput
   season: SeasonUpdateOneWithoutPlayersInput
   fixture: FixtureUpdateManyWithoutPlayersInput
@@ -2646,6 +2672,10 @@ input UserWhereInput {
 
   """All values that are not equal to given value."""
   confirmed_not: Boolean
+  deactivated: Boolean
+
+  """All values that are not equal to given value."""
+  deactivated_not: Boolean
   stats_every: StatsWhereInput
   stats_some: StatsWhereInput
   stats_none: StatsWhereInput
@@ -2710,6 +2740,8 @@ export type MatchOrderByInput =   'id_ASC' |
   'player1set_DESC' |
   'player2set_ASC' |
   'player2set_DESC' |
+  'sumbit_ASC' |
+  'sumbit_DESC' |
   'updatedAt_ASC' |
   'updatedAt_DESC' |
   'createdAt_ASC' |
@@ -2731,6 +2763,8 @@ export type UserOrderByInput =   'id_ASC' |
   'location_DESC' |
   'confirmed_ASC' |
   'confirmed_DESC' |
+  'deactivated_ASC' |
+  'deactivated_DESC' |
   'updatedAt_ASC' |
   'updatedAt_DESC' |
   'createdAt_ASC' |
@@ -3046,6 +3080,8 @@ export interface UserWhereInput {
   location_not_ends_with?: String
   confirmed?: Boolean
   confirmed_not?: Boolean
+  deactivated?: Boolean
+  deactivated_not?: Boolean
   stats_every?: StatsWhereInput
   stats_some?: StatsWhereInput
   stats_none?: StatsWhereInput
@@ -3100,6 +3136,8 @@ export interface MatchWhereInput {
   player2set_lte?: Int
   player2set_gt?: Int
   player2set_gte?: Int
+  sumbit?: Boolean
+  sumbit_not?: Boolean
   player1?: UserWhereInput
   player2?: UserWhereInput
   fixture?: FixtureWhereInput
@@ -3114,6 +3152,7 @@ export interface UserUpdateWithoutStatsDataInput {
   bio?: String
   location?: String
   confirmed?: Boolean
+  deactivated?: Boolean
   matches?: MatchUpdateManyInput
   season?: SeasonUpdateOneWithoutPlayersInput
   fixture?: FixtureUpdateManyWithoutPlayersInput
@@ -3168,6 +3207,7 @@ export interface UserUpdateWithoutSeasonDataInput {
   bio?: String
   location?: String
   confirmed?: Boolean
+  deactivated?: Boolean
   stats?: StatsUpdateManyWithoutPlayerInput
   matches?: MatchUpdateManyInput
   fixture?: FixtureUpdateManyWithoutPlayersInput
@@ -3195,6 +3235,7 @@ export interface UserCreateWithoutFixtureInput {
   bio?: String
   location?: String
   confirmed?: Boolean
+  deactivated?: Boolean
   stats?: StatsCreateManyWithoutPlayerInput
   matches?: MatchCreateManyInput
   season?: SeasonCreateOneWithoutPlayersInput
@@ -3269,6 +3310,7 @@ export interface FixtureWhereUniqueInput {
 export interface MatchCreateWithoutFixtureInput {
   player1set?: Int
   player2set?: Int
+  sumbit?: Boolean
   player1: UserCreateOneInput
   player2: UserCreateOneInput
   season: SeasonCreateOneInput
@@ -3298,6 +3340,7 @@ export interface UserUpdateInput {
   bio?: String
   location?: String
   confirmed?: Boolean
+  deactivated?: Boolean
   stats?: StatsUpdateManyWithoutPlayerInput
   matches?: MatchUpdateManyInput
   season?: SeasonUpdateOneWithoutPlayersInput
@@ -3313,6 +3356,7 @@ export interface SeasonCreateInput {
 export interface MatchUpdateInput {
   player1set?: Int
   player2set?: Int
+  sumbit?: Boolean
   player1?: UserUpdateOneInput
   player2?: UserUpdateOneInput
   fixture?: FixtureUpdateOneWithoutMatchesInput
@@ -3338,6 +3382,7 @@ export interface UserCreateWithoutSeasonInput {
   bio?: String
   location?: String
   confirmed?: Boolean
+  deactivated?: Boolean
   stats?: StatsCreateManyWithoutPlayerInput
   matches?: MatchCreateManyInput
   fixture?: FixtureCreateManyWithoutPlayersInput
@@ -3532,6 +3577,7 @@ export interface UserSubscriptionWhereInput {
 export interface MatchUpdateDataInput {
   player1set?: Int
   player2set?: Int
+  sumbit?: Boolean
   player1?: UserUpdateOneInput
   player2?: UserUpdateOneInput
   fixture?: FixtureUpdateOneWithoutMatchesInput
@@ -3569,6 +3615,7 @@ export interface UserUpdateDataInput {
   bio?: String
   location?: String
   confirmed?: Boolean
+  deactivated?: Boolean
   stats?: StatsUpdateManyWithoutPlayerInput
   matches?: MatchUpdateManyInput
   season?: SeasonUpdateOneWithoutPlayersInput
@@ -3686,6 +3733,7 @@ export interface UserUpdateWithWhereUniqueWithoutFixtureInput {
 export interface MatchCreateInput {
   player1set?: Int
   player2set?: Int
+  sumbit?: Boolean
   player1: UserCreateOneInput
   player2: UserCreateOneInput
   fixture: FixtureCreateOneWithoutMatchesInput
@@ -3700,6 +3748,7 @@ export interface UserUpdateWithoutFixtureDataInput {
   bio?: String
   location?: String
   confirmed?: Boolean
+  deactivated?: Boolean
   stats?: StatsUpdateManyWithoutPlayerInput
   matches?: MatchUpdateManyInput
   season?: SeasonUpdateOneWithoutPlayersInput
@@ -3801,6 +3850,7 @@ export interface UserCreateInput {
   bio?: String
   location?: String
   confirmed?: Boolean
+  deactivated?: Boolean
   stats?: StatsCreateManyWithoutPlayerInput
   matches?: MatchCreateManyInput
   season?: SeasonCreateOneWithoutPlayersInput
@@ -3819,6 +3869,7 @@ export interface CurrentWhereUniqueInput {
 export interface MatchUpdateWithoutFixtureDataInput {
   player1set?: Int
   player2set?: Int
+  sumbit?: Boolean
   player1?: UserUpdateOneInput
   player2?: UserUpdateOneInput
   season?: SeasonUpdateOneInput
@@ -3930,6 +3981,7 @@ export interface UserCreateWithoutStatsInput {
   bio?: String
   location?: String
   confirmed?: Boolean
+  deactivated?: Boolean
   matches?: MatchCreateManyInput
   season?: SeasonCreateOneWithoutPlayersInput
   fixture?: FixtureCreateManyWithoutPlayersInput
@@ -3988,6 +4040,7 @@ export interface User extends Node {
   bio?: String
   location?: String
   confirmed: Boolean
+  deactivated: Boolean
 }
 
 export interface FixtureSubscriptionPayload {
@@ -4046,6 +4099,7 @@ export interface Match extends Node {
   player2set?: Int
   fixture: Fixture
   season: Season
+  sumbit: Boolean
 }
 
 export interface AggregateSeason {
@@ -4141,6 +4195,7 @@ export interface UserPreviousValues {
   bio?: String
   location?: String
   confirmed: Boolean
+  deactivated: Boolean
 }
 
 export interface AggregateAdmin {
@@ -4215,6 +4270,7 @@ export interface MatchPreviousValues {
   id: ID_Output
   player1set?: Int
   player2set?: Int
+  sumbit: Boolean
 }
 
 /*

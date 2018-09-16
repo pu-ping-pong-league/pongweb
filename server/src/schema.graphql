@@ -11,6 +11,7 @@ type Query {
     first: Int
     last: Int
   ): [User]!
+  getunplayedmatches(season: Int!, fixture: Int!): [Match!]!
   feed(
     where: MatchOrderByInput
     orderBy: MatchOrderByInput

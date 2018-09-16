@@ -126,8 +126,7 @@ class Leaderboard extends React.Component {
                           season: { season: 1 },
                           player: {
                             confirmed: true,
-                            deactivated: false,
-                            stats_none: []
+                            deactivated: false
                           }
                         }
                       }}

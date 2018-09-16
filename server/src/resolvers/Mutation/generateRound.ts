@@ -15,60 +15,9 @@ export default {
     });
 
     console.log(fixture);
-    for (var i = 0; i < users.length; i++) {
+    for (var i = 0; i < users.length; i = i + 2) {
       for (var j = 1; j < users.length; j++) {
-        const sonny = await ctx.db.query.matches({
-          where: {
-            player1: { email: users[i].playeremail },
-            player2: { email: users[j].playeremail },
-            season: { season: args.season }
-          }
-        });
-        const sonny5 = await ctx.db.query.matches({
-          where: {
-            player1: { email: users[j].playeremail },
-            player2: { email: users[i].playeremail },
-            season: { season: args.season }
-          }
-        });
-        const sonny1 = await ctx.db.query.matches({
-          where: {
-            player1: { email: users[i].playeremail },
-            season: { season: args.season },
-            fixture: { round: args.round }
-          }
-        });
-        const sonny2 = await ctx.db.query.matches({
-          where: {
-            player2: { email: users[j].playeremail },
-            season: { season: args.season },
-            fixture: { round: args.round }
-          }
-        });
-        const sonny3 = await ctx.db.query.matches({
-          where: {
-            player2: { email: users[i].playeremail },
-            season: { season: args.season },
-            fixture: { round: args.round }
-          }
-        });
-
-        const sonny4 = await ctx.db.query.matches({
-          where: {
-            player1: { email: users[j].playeremail },
-            season: { season: args.season },
-            fixture: { round: args.round }
-          }
-        });
-        if (
-          i != j &&
-          sonny5.length == 0 &&
-          sonny1.length == 0 &&
-          sonny2.length == 0 &&
-          sonny3.length == 0 &&
-          sonny4.length == 0 &&
-          sonny.length == 0
-        ) {
+        if (i != j) {
           await ctx.db.mutation.createMatch({
             data: {
               player1: {
@@ -81,9 +30,6 @@ export default {
               season: { connect: { season: args.season } }
             }
           });
-
-
-          
         }
       }
     }

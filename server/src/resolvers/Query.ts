@@ -14,6 +14,18 @@ export const Query = {
       info
     );
   },
+  getunplayedmatches: async (parent, args, ctx: Context, info) => {
+    return ctx.db.query.matches(
+      {
+        where: {
+          season: { season: args.season },
+          fixture: { round: args.fixture },
+          player1set: null
+        }
+      },
+      info
+    );
+  },
   getUser: async (parent, args, ctx: Context, info) => {
     return ctx.db.query.user(
       {
@@ -25,7 +37,7 @@ export const Query = {
   getUserbyID: async (parent, args, ctx: Context, info) => {
     return ctx.db.query.user(
       {
-       ...args
+        ...args
       },
       info
     );

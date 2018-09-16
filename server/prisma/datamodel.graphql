@@ -11,6 +11,7 @@ type User {
   bio: String
   location: String
   confirmed: Boolean! @default(value: false)
+  deactivated: Boolean! @default(value: false)
 }
 type Admin {
   id: ID! @unique
@@ -33,6 +34,7 @@ type Match {
   player2set: Int
   fixture: Fixture!
   season: Season!
+  sumbit: Boolean! @default(value: false)
 }
 
 type Fixture {

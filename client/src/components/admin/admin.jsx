@@ -4,6 +4,7 @@ import Navbar from "../navbar/navbar.jsx"
 import "./admin.css"
 import { Mutation, Query } from "react-apollo"
 import gql from "graphql-tag"
+import Matchinfo from "../matchinfo/matchinfo.jsx"
 import {
   Jumbotron,
   Nav,
@@ -48,6 +49,22 @@ const GETCURRENT = gql`
     }
   }
 `
+const UNPLAYEDMATCHES = gql`
+  query getunplayedmatches($season: Int!, $fixture: Int!) {
+    getunplayedmatches(season: $season, fixture: $fixture) {
+      player1 {
+        email
+        name
+      }
+      player2 {
+        email
+        name
+      }
+      player1set
+      player2set
+    }
+  }
+`
 
 class AdminPage extends React.Component {
   constructor(props) {
@@ -59,6 +76,7 @@ class AdminPage extends React.Component {
       season: null,
       timer: null,
       date: null,
+      year: null,
       month: null,
       hour: 0,
       error: null
@@ -80,225 +98,300 @@ class AdminPage extends React.Component {
             if (error) {
               return "OOps, somehing blew up."
             }
-
+            const season1 = data.getcurrent[0].season
+            const fixture1 = data.getcurrent[0].fixture
+            const timer1 = data.getcurrent[0].timer
+            const unplayedmatches = []
+            console.log("season", season1)
+            console.log("fixture", fixture1)
             if (data.getcurrent.length !== 0) {
               return (
-                <div>
-                  <Table className="statstable">
-                    <tr>
-                      <th>Current Round</th>
-                      <th>Current Season</th>
-                      <th>Current Round Ends</th>
-                    </tr>
-                    <tr>
-                      <th>{data.getcurrent[0].fixture}</th>
-                      <th>{data.getcurrent[0].season}</th>
-                      <th>{data.getcurrent[0].timer}</th>
-                    </tr>
-                  </Table>
-                  <Mutation mutation={UPDATECURRENT}>
-                    {updatecurrent => {
-                      return (
-                        <div>
-                          <h1>Update Current Round</h1>
-                          <Form
-                            horizontal
-                            onSubmit={async e => {
-                              e.preventDefault()
+                <Query
+                  query={UNPLAYEDMATCHES}
+                  variables={{
+                    season: season1,
+                    fixture: fixture1
+                  }}
+                >
+                  {({ loading, error, data, refetch }) => {
+                    if (loading) {
+                      return "Loading..."
+                    }
+                    if (
+                      error &&
+                      error.message === "GraphQL error: Not authorized"
+                    ) {
+                      return "You must login."
+                    }
+                    if (error) {
+                      return "Shit"
+                    }
+                    unplayedmatches.push(
+                      <Table>
+                        <thead>
+                          <tr>
+                            <th>Player1</th>
+                            <th>Player2</th>
+                            <th>Player1 Set</th>
+                            <th>Player2 Set</th>
+                          </tr>
+                        </thead>
+                        {data.getunplayedmatches.map(match => {
+                          return (
+                            <Matchinfo
+                              key={this.props.id}
+                              player1={match.player1}
+                              player2={match.player2}
+                              Player1Set={match.player1set}
+                              Player2Set={match.player2set}
+                            />
+                          )
+                        })}
+                      </Table>
+                    )
 
-                              try {
-                                const { data } = await updatecurrent({
-                                  variables: {
-                                    season: this.state.season,
-                                    round: this.state.round,
-                                    timer: this.state.timer
-                                  }
-                                })
-                                console.log(this.state.timer)
-                                this.props.history.push("/admin")
-                                location.reload()
-                              } catch (error) {
-                                this.setState({
-                                  error: "Oops! Something went wrong."
-                                })
-                              }
-                            }}
-                          >
-                            <FormGroup row>
-                              <Col className="label" sm={2}>
-                                Round
-                              </Col>
-                              <Col sm={10}>
-                                <Input
-                                  placeholder="round"
-                                  type="number"
-                                  id="exampleSelect11"
-                                  onChange={e =>
-                                    this.setState({
-                                      round: e.target.value
-                                    })
-                                  }
-                                />
-                              </Col>
-                            </FormGroup>
-                            <FormGroup row>
-                              <Col className="label" sm={2}>
-                                Season
-                              </Col>
-                              <Col sm={10}>
-                                <Input
-                                  placeholder="season"
-                                  id="exampleSelect16"
-                                  type="number"
-                                  onChange={e =>
-                                    this.setState({
-                                      season: e.target.value
-                                    })
-                                  }
-                                />
-                              </Col>
-                            </FormGroup>
-                            <FormGroup row>
-                              <Col className="label" sm={2}>
-                                When does the next round end?
-                              </Col>
-                              <Col sm={10}>
-                                <div className="timerinput">
-                                  <div>Month:</div>
-                                  <Input
-                                    type="select"
-                                    name="select"
-                                    placeholder="Bio"
-                                    className="timerinput1"
-                                    id="exampleSelect17"
-                                    onChange={e =>
+                    return (
+                      <div>
+                        <h1> Unplayed Matches This Round </h1>
+                        {unplayedmatches}
+                        <h1> Current Round </h1>
+                        <Table className="statstable">
+                          <tr>
+                            <th>Current Round</th>
+                            <th>Current Season</th>
+                            <th>Current Round Ends</th>
+                          </tr>
+                          <tr>
+                            <th>{season1}</th>
+                            <th>{fixture1}</th>
+                            <th>{timer1}</th>
+                          </tr>
+                        </Table>
+                        <Mutation mutation={UPDATECURRENT}>
+                          {updatecurrent => {
+                            return (
+                              <div>
+                                <h1>Update Current Round</h1>
+                                <Form
+                                  horizontal
+                                  onSubmit={async e => {
+                                    e.preventDefault()
+
+                                    try {
+                                      const { data } = await updatecurrent({
+                                        variables: {
+                                          season: this.state.season,
+                                          round: this.state.round,
+                                          timer: this.state.timer
+                                        }
+                                      })
+                                      console.log(this.state.timer)
+                                      this.props.history.push("/admin")
+                                      location.reload()
+                                    } catch (error) {
                                       this.setState({
-                                        month: e.target.value
+                                        error: "Oops! Something went wrong."
                                       })
                                     }
-                                  >
-                                    <option>N/A</option>
-                                    <option>JAN</option>
-                                    <option>FEB</option>
-                                    <option>MAR</option>
-                                    <option>APR</option>
-                                    <option>MAY</option>
-                                    <option>JUN</option>
-                                    <option>JUL</option>
-                                    <option>AUG</option>
-                                    <option>SEP</option>
-                                    <option>OCT</option>
-                                    <option>NOV</option>
-                                    <option>DEC</option>
-                                  </Input>
-                                  <div>Date:</div>
-                                  <Input
-                                    className="timerinput1"
-                                    type="select"
-                                    name="select"
-                                    placeholder="Bio"
-                                    id="exampleSelect18"
-                                    onChange={e =>
-                                      this.setState({
-                                        date: e.target.value
-                                      })
-                                    }
-                                  >
-                                    <option>N/A</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                    <option>8</option>
-                                    <option>9</option>
-                                    <option>10</option>
-                                    <option>11</option>
-                                    <option>12</option>
-                                    <option>13</option>
-                                    <option>14</option>
-                                    <option>15</option>
-                                    <option>16</option>
-                                    <option>17</option>
-                                    <option>18</option>
-                                    <option>19</option>
-                                    <option>20</option>
-                                    <option>21</option>
-                                    <option>22</option>
-                                    <option>23</option>
-                                    <option>24</option>
-                                    <option>25</option>
-                                    <option>26</option>
-                                    <option>27</option>
-                                    <option>28</option>
-                                    <option>29</option>
-                                    <option>30</option>
-                                    <option>31</option>
-                                  </Input>
-                                  <div>Hour:</div>
-                                  <Input
-                                    className="timerinput1"
-                                    type="select"
-                                    name="select"
-                                    placeholder="Hour"
-                                    id="exampleSelect19"
-                                    value={this.state.hour}
-                                    onChange={async e => {
-                                      this.setState({
-                                        hour: e.target.value
-                                      })
-                                      this.setState({
-                                        timer:
-                                          this.state.date +
-                                          " " +
-                                          this.state.month +
-                                          " " +
-                                          "2018" +
-                                          " " +
-                                          this.state.hour +
-                                          ":00:00"
-                                      })
-                                    }}
-                                  >
-                                    <option>N/A</option>
-                                    <option>0</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                    <option>6</option>
-                                    <option>7</option>
-                                    <option>8</option>
-                                    <option>9</option>
-                                    <option>10</option>
-                                    <option>11</option>
-                                    <option>12</option>
-                                    <option>13</option>
-                                    <option>14</option>
-                                    <option>15</option>
-                                    <option>16</option>
-                                    <option>17</option>
-                                    <option>18</option>
-                                    <option>19</option>
-                                    <option>20</option>
-                                    <option>21</option>
-                                    <option>22</option>
-                                    <option>23</option>
-                                  </Input>
-                                </div>
-                              </Col>
-                            </FormGroup>
-                            <button type="submit">Submit</button>
-                          </Form>
-                          <div>{this.state.error}</div>
-                        </div>
-                      )
-                    }}
-                  </Mutation>
-                </div>
+                                  }}
+                                >
+                                  <FormGroup row>
+                                    <Col className="label" sm={2}>
+                                      Round
+                                    </Col>
+                                    <Col sm={10}>
+                                      <Input
+                                        placeholder="round"
+                                        type="number"
+                                        id="exampleSelect11"
+                                        onChange={e =>
+                                          this.setState({
+                                            round: e.target.value
+                                          })
+                                        }
+                                      />
+                                    </Col>
+                                  </FormGroup>
+                                  <FormGroup row>
+                                    <Col className="label" sm={2}>
+                                      Season
+                                    </Col>
+                                    <Col sm={10}>
+                                      <Input
+                                        placeholder="season"
+                                        id="exampleSelect16"
+                                        type="number"
+                                        onChange={e =>
+                                          this.setState({
+                                            season: e.target.value
+                                          })
+                                        }
+                                      />
+                                    </Col>
+                                  </FormGroup>
+                                  <FormGroup row>
+                                    <Col className="label" sm={2}>
+                                      When does the next round end?
+                                    </Col>
+                                    <Col sm={10}>
+                                      <div className="timerinput">
+                                        <div>Year:</div>
+                                        <Input
+                                          type="select"
+                                          name="select"
+                                          placeholder="Bio"
+                                          className="timerinput122"
+                                          id="exampleSelect21"
+                                          onChange={e =>
+                                            this.setState({
+                                              year: e.target.value
+                                            })
+                                          }
+                                        >
+                                          <option>N/A</option>
+                                          <option>2018</option>
+                                          <option>2019</option>
+                                          <option>2020</option>
+                                          <option>2021</option>
+                                        </Input>
+                                        <div>Month:</div>
+                                        <Input
+                                          type="select"
+                                          name="select"
+                                          placeholder="Bio"
+                                          className="timerinput1"
+                                          id="exampleSelect17"
+                                          onChange={e =>
+                                            this.setState({
+                                              month: e.target.value
+                                            })
+                                          }
+                                        >
+                                          <option>N/A</option>
+                                          <option>JAN</option>
+                                          <option>FEB</option>
+                                          <option>MAR</option>
+                                          <option>APR</option>
+                                          <option>MAY</option>
+                                          <option>JUN</option>
+                                          <option>JUL</option>
+                                          <option>AUG</option>
+                                          <option>SEP</option>
+                                          <option>OCT</option>
+                                          <option>NOV</option>
+                                          <option>DEC</option>
+                                        </Input>
+                                        <div>Date:</div>
+                                        <Input
+                                          className="timerinput1"
+                                          type="select"
+                                          name="select"
+                                          placeholder="Bio"
+                                          id="exampleSelect18"
+                                          onChange={e =>
+                                            this.setState({
+                                              date: e.target.value
+                                            })
+                                          }
+                                        >
+                                          <option>N/A</option>
+                                          <option>1</option>
+                                          <option>2</option>
+                                          <option>3</option>
+                                          <option>4</option>
+                                          <option>5</option>
+                                          <option>6</option>
+                                          <option>7</option>
+                                          <option>8</option>
+                                          <option>9</option>
+                                          <option>10</option>
+                                          <option>11</option>
+                                          <option>12</option>
+                                          <option>13</option>
+                                          <option>14</option>
+                                          <option>15</option>
+                                          <option>16</option>
+                                          <option>17</option>
+                                          <option>18</option>
+                                          <option>19</option>
+                                          <option>20</option>
+                                          <option>21</option>
+                                          <option>22</option>
+                                          <option>23</option>
+                                          <option>24</option>
+                                          <option>25</option>
+                                          <option>26</option>
+                                          <option>27</option>
+                                          <option>28</option>
+                                          <option>29</option>
+                                          <option>30</option>
+                                          <option>31</option>
+                                        </Input>
+                                        <div>Hour:</div>
+                                        <Input
+                                          className="timerinput1"
+                                          type="select"
+                                          name="select"
+                                          placeholder="Hour"
+                                          id="exampleSelect19"
+                                          value={this.state.hour}
+                                          onChange={async e => {
+                                            this.setState({
+                                              hour: e.target.value
+                                            })
+                                            this.setState({
+                                              timer:
+                                                this.state.date +
+                                                " " +
+                                                this.state.month +
+                                                " " +
+                                                this.state.year +
+                                                " " +
+                                                this.state.hour +
+                                                ":00:00"
+                                            })
+                                          }}
+                                        >
+                                          <option>N/A</option>
+                                          <option>0</option>
+                                          <option>1</option>
+                                          <option>2</option>
+                                          <option>3</option>
+                                          <option>4</option>
+                                          <option>5</option>
+                                          <option>6</option>
+                                          <option>7</option>
+                                          <option>8</option>
+                                          <option>9</option>
+                                          <option>10</option>
+                                          <option>11</option>
+                                          <option>12</option>
+                                          <option>13</option>
+                                          <option>14</option>
+                                          <option>15</option>
+                                          <option>16</option>
+                                          <option>17</option>
+                                          <option>18</option>
+                                          <option>19</option>
+                                          <option>20</option>
+                                          <option>21</option>
+                                          <option>22</option>
+                                          <option>23</option>
+                                        </Input>
+                                      </div>
+                                    </Col>
+                                  </FormGroup>
+                                  <button type="submit">Submit</button>
+                                </Form>
+                                <div>{this.state.error}</div>
+                              </div>
+                            )
+                          }}
+                        </Mutation>
+                      </div>
+                    )
+                  }}
+                </Query>
               )
             } else {
               return (
@@ -366,6 +459,26 @@ class AdminPage extends React.Component {
                             </Col>
                             <Col sm={10}>
                               <div className="timerinput">
+                                <div>Year:</div>
+                                <Input
+                                  type="select"
+                                  name="select"
+                                  placeholder="Bio"
+                                  className="timerinput1221"
+                                  id="exampleSelect211"
+                                  onChange={e =>
+                                    this.setState({
+                                      year: e.target.value
+                                    })
+                                  }
+                                >
+                                  <option>N/A</option>
+                                  <option>2018</option>
+                                  <option>2019</option>
+                                  <option>2020</option>
+                                  <option>2021</option>
+                                </Input>
+
                                 <div>Month:</div>
                                 <Input
                                   type="select"
@@ -454,7 +567,7 @@ class AdminPage extends React.Component {
                                         " " +
                                         this.state.month +
                                         " " +
-                                        "2018" +
+                                        this.state.year +
                                         " " +
                                         this.state.hour +
                                         ":00:00"

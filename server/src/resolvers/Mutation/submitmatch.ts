@@ -12,6 +12,7 @@ export default {
       },
       info
     );
+
     const fixture = await ctx.db.query.fixtures({
       where: { round: args.round, season: { season: args.season } }
     });
@@ -50,10 +51,10 @@ export default {
                   match.player1.stats[0].rating +
                   (args.player1set - args.player2set + 1) *
                     10 *
-                    Math.pow(
-                      match.player2.stats[0].rating /
-                        match.player1.stats[0].rating,
-                      3
+                    Math.exp(
+                      1 -
+                        match.player1.stats[0].rating /
+                          match.player2.stats[0].rating
                     ),
                 netwins:
                   match.player1.stats[0].netwins +
@@ -75,10 +76,10 @@ export default {
                     match.player1.stats[0].rating +
                     (args.player1set - args.player2set + 1) *
                       10 *
-                      Math.pow(
-                        match.player2.stats[0].rating /
-                          match.player1.stats[0].rating,
-                        3
+                      Math.exp(
+                        1 -
+                          match.player1.stats[0].rating /
+                            match.player2.stats[0].rating
                       ),
                   netwins:
                     match.player1.stats[0].netwins +
@@ -110,12 +111,12 @@ export default {
                 losts: 1 + match.player2.stats[0].losts,
                 rating:
                   match.player2.stats[0].rating -
-                  10 *
-                    (args.player1set - args.player2set + 1) *
-                    Math.pow(
-                      match.player2.stats[0].rating /
-                        match.player1.stats[0].rating,
-                      3
+                  (args.player1set - args.player2set + 1) *
+                    10 *
+                    Math.exp(
+                      1 -
+                        match.player1.stats[0].rating /
+                          match.player2.stats[0].rating
                     ),
                 netwins:
                   match.player2.stats[0].netwins -
@@ -136,12 +137,12 @@ export default {
                     match.player2.stats[0].totalsetwon + args.player2set,
                   rating:
                     match.player2.stats[0].rating -
-                    10 *
-                      (args.player1set - args.player2set + 1) *
-                      Math.pow(
-                        match.player2.stats[0].rating /
-                          match.player1.stats[0].rating,
-                        3
+                    (args.player1set - args.player2set + 1) *
+                      10 *
+                      Math.exp(
+                        1 -
+                          match.player1.stats[0].rating /
+                            match.player2.stats[0].rating
                       ),
                   netwins:
                     match.player2.stats[0].netwins -
@@ -174,12 +175,12 @@ export default {
                   losts: match.player2.stats[0].losts,
                   rating:
                     match.player2.stats[0].rating +
-                    10 *
-                      (args.player2set - args.player1set + 1) *
-                      Math.pow(
-                        match.player1.stats[0].rating /
-                          match.player2.stats[0].rating,
-                        3
+                    (args.player2set - args.player1set + 1) *
+                      10 *
+                      Math.exp(
+                        1 -
+                          match.player2.stats[0].rating /
+                            match.player1.stats[0].rating
                       ),
                   netwins:
                     match.player1.stats[0].netwins +
@@ -199,12 +200,12 @@ export default {
                       match.player2.stats[0].totalsetlost + args.player1set,
                     rating:
                       match.player2.stats[0].rating +
-                      10 *
-                        (args.player2set - args.player1set + 1) *
-                        Math.pow(
-                          match.player1.stats[0].rating /
-                            match.player2.stats[0].rating,
-                          3
+                      (args.player2set - args.player1set + 1) *
+                        10 *
+                        Math.exp(
+                          1 -
+                            match.player2.stats[0].rating /
+                              match.player1.stats[0].rating
                         ),
                     netwins:
                       match.player1.stats[0].netwins +
@@ -239,12 +240,12 @@ export default {
                     season: { connect: { season: args.season } },
                     rating:
                       match.player1.stats[0].rating -
-                      10 *
-                        (args.player2set - args.player1set + 1) *
-                        Math.pow(
-                          match.player1.stats[0].rating /
-                            match.player2.stats[0].rating,
-                          3
+                      (args.player2set - args.player1set + 1) *
+                        10 *
+                        Math.exp(
+                          1 -
+                            match.player2.stats[0].rating /
+                              match.player1.stats[0].rating
                         ),
                     netwins:
                       match.player1.stats[0].netwins -
@@ -262,12 +263,12 @@ export default {
                         match.player1.stats[0].totalsetwon + args.player1set,
                       rating:
                         match.player1.stats[0].rating -
-                        10 *
-                          (args.player2set - args.player1set + 1) *
-                          Math.pow(
-                            match.player1.stats[0].rating /
-                              match.player2.stats[0].rating,
-                            3
+                        (args.player2set - args.player1set + 1) *
+                          10 *
+                          Math.exp(
+                            1 -
+                              match.player2.stats[0].rating /
+                                match.player1.stats[0].rating
                           ),
                       netwins:
                         match.player1.stats[0].netwins -
