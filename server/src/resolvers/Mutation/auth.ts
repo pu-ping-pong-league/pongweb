@@ -19,9 +19,27 @@ const EMAIL_SECRET = "asdf1093KMnzxcvnkljvasdu09123nlasdasdf";
 
 export const auth = {
   signup: async (parent, args, ctx: Context) => {
-    if (!EmailValidator.validate(args.email)) {
+    // validate input length
+    var maxLength = 50;
+    if (args.email.length > maxLength)
+      throw new Error('Email exceeds max length of 50 characters.');
+    if (args.password.length > maxLength)
+      throw new Error('Password exceeds max length of 50 characters.');
+    if (args.name.length > maxLength)
+      throw new Error('Full name exceeds max length of 50 characters.');
+
+    // validate email
+    if (!EmailValidator.validate(args.email))
       throw new Error(`${args.email} is not a valid email.`);
-    }
+    var email_split = args.email.split("@")
+    if (email_split[email_split.length - 1] != "princeton.edu")
+      throw new Error('Emails is not a valid princeton email.');
+    const users = await ctx.db.query.users({
+      where: { email: args.email }
+    });
+    if (users.length != 0)
+      throw new Error(`${args.email} is already used.`);
+
     const password = await bcrypt.hash(args.password, 10);
     const user = await ctx.db.mutation.createUser({
       data: {
@@ -93,9 +111,7 @@ export const auth = {
     }
 
     const valid = await bcrypt.compare(password, user.password);
-    if (!valid) {
-      throw new Error("Invalid password");
-    }
+    if (!valid) throw new Error("Invalid password");
 
     return {
       token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),
@@ -113,21 +129,4 @@ export const auth = {
       user
     };
   }
-  // async createTweet(parent, args, ctx: Context, info) {
-  //   const tweet = await ctx.db.mutation.createTweet(
-  //     {
-  //       data: {
-  //         text: args.text,
-  //         author: {
-  //           connect: {
-  //             email: args.email // make sure you use your created user's email!
-  //           }
-  //         }
-  //       }
-  //     },
-  //     info
-  //   );
-
-  //   return tweet;
-  // }
 };

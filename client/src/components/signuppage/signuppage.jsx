@@ -70,6 +70,7 @@ class SignupPage extends React.Component {
                 className="signup-form"
                 onSubmit={async e => {
                   e.preventDefault()
+
                   try {
                     const { data } = await signup({
                       variables: {
@@ -79,31 +80,6 @@ class SignupPage extends React.Component {
                         residentialcollege: this.state.residentialcollege
                       }
                     })
-                    // localStorage.setItem("token", data.signup.token)
-                    // localStorage.setItem("name", data.signup.user.name)
-                    // localStorage.setItem("email", data.signup.user.email)
-                    // localStorage.setItem(
-                    //   "residentialcollege",
-                    //   data.signup.user.residentialcollege
-                    // )
-                    // localStorage.setItem(
-                    //   "rating",
-                    //   data.signup.user.stats[0].rating.toFixed(0)
-                    // )
-
-                    // if (localStorage.getItem("name") == null) {
-                    //   document.getElementById("text2").classList.add("hide1")
-                    // }
-                    // if (localStorage.getItem("email") == null) {
-                    //   document.getElementById("text3").classList.add("hide1")
-                    // }
-
-                    // if (localStorage.getItem("name") !== null) {
-                    //   document.getElementById("text2").classList.remove("hide1")
-                    // }
-                    // if (localStorage.getItem("email") !== null) {
-                    //   document.getElementById("text3").classList.remove("hide1")
-                    // }
                     this.props.history.push(`/signupthankyou`)
                   } catch (error) {
                     alert(error.message)
