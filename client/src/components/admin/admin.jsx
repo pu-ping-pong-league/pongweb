@@ -5,21 +5,7 @@ import "./admin.css"
 import { Mutation, Query } from "react-apollo"
 import gql from "graphql-tag"
 import Matchinfo from "../matchinfo/matchinfo.jsx"
-import {
-  Jumbotron,
-  Nav,
-  NavItem,
-  NavLink,
-  TabContent,
-  TabPane,
-  Col,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  FormText,
-  Table
-} from "reactstrap"
+import { Col, Form, FormGroup, Input, Table } from "reactstrap"
 
 const UPDATECURRENT = gql`
   mutation updatecurrent($round: Int!, $season: Int!, $timer: String!) {
@@ -65,6 +51,45 @@ const UNPLAYEDMATCHES = gql`
     }
   }
 `
+const SETNULLSCORETOZERO = gql`
+  mutation setnullscoretozero($round: Int!, $season: Int!) {
+    setnullscoretozero(round: $round, season: $season) {
+      fixture {
+        round
+      }
+      season {
+        season
+      }
+      player1 {
+        stats {
+          wins
+          losts
+          totalsetwon
+          totalsetlost
+          rating
+          netwins
+        }
+        email
+        name
+      }
+      player2 {
+        stats {
+          wins
+          losts
+          totalsetwon
+          totalsetlost
+          rating
+          netwins
+        }
+        email
+        name
+      }
+      player1set
+      player2set
+      id
+    }
+  }
+`
 
 class AdminPage extends React.Component {
   constructor(props) {
@@ -102,8 +127,7 @@ class AdminPage extends React.Component {
             const fixture1 = data.getcurrent[0].fixture
             const timer1 = data.getcurrent[0].timer
             const unplayedmatches = []
-            console.log("season", season1)
-            console.log("fixture", fixture1)
+
             if (data.getcurrent.length !== 0) {
               return (
                 <Query
@@ -154,6 +178,46 @@ class AdminPage extends React.Component {
                       <div>
                         <h1> Unplayed Matches This Round </h1>
                         {unplayedmatches}
+                        {(() => {
+                          console.log(unplayedmatches.length)
+                          if (unplayedmatches.length != 0)
+                            return (
+                              <Mutation mutation={SETNULLSCORETOZERO}>
+                                {setnullscoretozero => {
+                                  return (
+                                    <Form
+                                      horizontal
+                                      onSubmit={async e => {
+                                        e.preventDefault()
+
+                                        try {
+                                          const {
+                                            data
+                                          } = await setnullscoretozero({
+                                            variables: {
+                                              season: this.state.season,
+                                              round: this.state.round
+                                            }
+                                          })
+                                          this.props.history.push("/admin")
+                                          location.reload()
+                                        } catch (error) {
+                                          this.setState({
+                                            error: "Oops! Something went wrong."
+                                          })
+                                        }
+                                      }}
+                                    >
+                                      {" "}
+                                      <button type="submit">
+                                        Set Null Score to Zero
+                                      </button>
+                                    </Form>
+                                  )
+                                }}
+                              </Mutation>
+                            )
+                        })()}
                         <h1> Current Round </h1>
                         <Table className="statstable">
                           <tr>
@@ -167,6 +231,7 @@ class AdminPage extends React.Component {
                             <th>{timer1}</th>
                           </tr>
                         </Table>
+
                         <Mutation mutation={UPDATECURRENT}>
                           {updatecurrent => {
                             return (

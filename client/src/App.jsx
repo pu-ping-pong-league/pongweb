@@ -28,6 +28,7 @@ import screen7 from "./Wilsoncollege.png"
 import AdminLoginPage from "./components/adminlogin/adminlogin.jsx"
 import VerifyPage from "./components/verify/verify.jsx"
 import Signupthankyou from "./components/signupthankyou/signupthankyou.jsx"
+import Passwordreset from "./components/passwordreset/passwordreset"
 
 const item = [screen, screen2, screen3, screen4, screen5, screen6, screen7]
 const token = localStorage.getItem("admintoken")
@@ -198,6 +199,11 @@ class App extends React.Component {
             <Route exact={true} path="/adminlogin" render={Adminlogin} />
             <PrivateRoute exact={true} path="/admin" component={AdminPage} />
             <Route exact={true} path="/leaderboard" component={Leaderboard} />
+            <Route
+              exact={true}
+              path="/passwordreset"
+              component={Passwordreset}
+            />
             <Route
               exact={true}
               path="/signupthankyou"
