@@ -6,7 +6,8 @@ export default {
         where: {
           player1: { email: args.player1 },
           player2: { email: args.player2 },
-          season: { season: args.season, round: args.round }
+          season: { season: args.season },
+          round: args.round
         }
       },
       info

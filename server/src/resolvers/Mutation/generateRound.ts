@@ -20,14 +20,16 @@ export default {
       users_array.push([users[i], net_wins, net_sets]);
     }
     // sort user data in order required for matchmaking
+    console.log("sort");
     function user_comparator(a, b) {
-      if (a[1] > b[1]) return 1;
-      if (a[1] == b[1] && a[2] > b[2]) return 1;
+      if (a[1] < b[1]) return 1;
+      if (a[1] == b[1] && a[2] < b[2]) return 1;
       return 0;
     }
     users_array.sort(user_comparator);
 
     // matchmaking function
+    console.log("matchmaking function");
     async function match_em(players, unmatched_player, args) {
       // handle unmatched player
       if (unmatched_player != null) {
@@ -36,15 +38,15 @@ export default {
       }
 
       /* Generate matches using "cut in the middle -> parallel fold". */
-
+      console.log("function");
       // find middle cut and next unmatched player (if any)
       var middle = 0;
       var top_middle = 0;
       if (players.length % 2 == 0) {
-        middle = players.length / 2;
+        middle = Math.floor(players.length / 2);
         top_middle = middle;
       } else {
-        middle = players.length / 2 + 1;
+        middle = Math.floor(players.length / 2 + 1);
         top_middle = middle - 1;
         unmatched_player = players[middle - 1];
       }
@@ -53,9 +55,7 @@ export default {
       for (var i = 0; i < top_middle; i++) {
         console.log(i);
         console.log(i + middle);
-        console.log(players);
-        console.log(players[i].email);
-        console.log(players[i + middle].email);
+
         await ctx.db.mutation.createMatch({
           data: {
             player1: {
@@ -74,8 +74,12 @@ export default {
     }
 
     // do the matching
+    console.log("dothematching");
     var unmatched_player = null;
     const min_wins = users_array[users.length - 1][1];
+    console.log("min_wins");
+    console.log(min_wins);
+    console.log(users_array[0][1]);
     for (var ref_wins = users_array[0][1]; ref_wins >= min_wins; ref_wins--) {
       // collect players to next get matched
       var current_players = [];
