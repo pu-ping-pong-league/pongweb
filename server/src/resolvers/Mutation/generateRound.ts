@@ -12,8 +12,12 @@ export default {
     // format user data for matchmaking
     var users_array = [];
     for (var i = 0; i < users.length; i = i + 2) {
-      const net_wins = users[i].stats[0].wins - users[i].stats[0].losts;
-      const net_sets = users[i].stats[0].totalsetwon - users[i].stats[0].totalsetlost;
+      const stats = await ctx.db.query.statses({
+        where: { player: { id: users[i].id } }
+      })[0];
+      console.log(stats);
+      const net_wins = stats.wins - stats.losts;
+      const net_sets = stats.totalsetwon - stats.totalsetlost;
       users_array.push([users[i], net_wins, net_sets]);
     }
 

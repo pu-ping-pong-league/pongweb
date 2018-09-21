@@ -11,6 +11,7 @@ const UPDATECURRENT = gql`
   mutation updatecurrent($round: Int!, $season: Int!, $timer: String!) {
     updatecurrent(round: $round, season: $season, timer: $timer) {
       season
+      round
       timer
     }
   }
@@ -19,6 +20,7 @@ const CREATECURRENT = gql`
   mutation createcurrent($round: Int!, $season: Int!, $timer: String!) {
     createcurrent(round: $round, season: $season, timer: $timer) {
       season
+      round
       timer
     }
   }
@@ -28,6 +30,7 @@ const GETCURRENT = gql`
   query {
     getcurrent {
       season
+      round
       timer
     }
   }
