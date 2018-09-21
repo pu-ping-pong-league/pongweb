@@ -95,7 +95,7 @@ class VerifyPage extends React.Component {
 
                               this.props.history.push("/")
                               location.reload()
-                            } catch (error) { }
+                            } catch (error) {}
                           }}
                         >
                           <button type="submit">Verify</button>

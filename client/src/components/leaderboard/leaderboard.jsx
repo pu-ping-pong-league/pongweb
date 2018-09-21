@@ -30,22 +30,23 @@ const GET_STATS = gql`
 const GET_MATCHES = gql`
   query matches($where: MatchWhereInput) {
     matches(where: $where) {
-            player1 {
-          email
-          name
-        }
-        player2 {
-          email
-          name
-        }
-        player1set
-        player2set
+      player1 {
+        email
+        name
       }
+      player2 {
+        email
+        name
+      }
+      player1set
+      player2set
+    }
   }
 `
 const GETCURRENT = gql`
   query {
     getcurrent {
+      round
       season
       round
       timer
