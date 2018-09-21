@@ -11,7 +11,6 @@ export default {
       info
     );
     console.log(users);
-
     // format user data for matchmaking
     var users_array = [];
     for (var i = 0; i < users.length; i++) {
@@ -20,7 +19,6 @@ export default {
         users[i].stats[0].totalsetwon - users[i].stats[0].totalsetlost;
       users_array.push([users[i], net_wins, net_sets]);
     }
-    console.log("formant");
     // sort user data in order required for matchmaking
     function user_comparator(a, b) {
       if (a[1] > b[1]) return 1;
@@ -30,7 +28,7 @@ export default {
     users_array.sort(user_comparator);
 
     // matchmaking function
-    function match_em(players, unmatched_player, args) {
+    async function match_em(players, unmatched_player, args) {
       // handle unmatched player
       if (unmatched_player != null) {
         players.unshift(unmatched_player);
@@ -53,15 +51,21 @@ export default {
 
       // perform parallel fold matching
       for (var i = 0; i < top_middle; i++) {
-        ctx.db.mutation.createMatch({
+        console.log(i);
+        console.log(i + middle);
+        console.log(players);
+        console.log(players[i].email);
+        console.log(players[i + middle].email);
+        await ctx.db.mutation.createMatch({
           data: {
             player1: {
-              connect: { email: players[i].playeremail }
+              connect: { email: players[i][0].email }
             },
             player2: {
-              connect: { email: players[i + middle].playeremail }
+              connect: { email: players[i + middle][0].email }
             },
-            season: { connect: { season: args.season } }
+            season: { connect: { season: args.season } },
+            round: args.round
           }
         });
       }
@@ -82,19 +86,27 @@ export default {
           break;
         }
       }
+      console.log("current");
+      console.log(current_players);
       if (current_players.length > 0) {
-        unmatched_player = match_em(current_players, unmatched_player, args);
+        unmatched_player = await match_em(
+          current_players,
+          unmatched_player,
+          args
+        );
       }
     }
-    console.log("bad");
+
     // form 'Bye' match if odd number of players
+
     if (unmatched_player != null) {
       await ctx.db.mutation.createMatch({
         data: {
           player1: {
-            connect: { email: unmatched_player.playeremail }
+            connect: { email: unmatched_player[0].playeremail }
           },
-          season: { connect: { season: args.season } }
+          season: { connect: { season: args.season } },
+          round: args.round
         }
       });
     }

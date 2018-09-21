@@ -659,6 +659,7 @@ type Match implements Node {
   player1set: Int
   player2set: Int
   season(where: SeasonWhereInput): Season!
+  round: Int!
   sumbit: Boolean!
 }
 
@@ -675,6 +676,7 @@ type MatchConnection {
 input MatchCreateInput {
   player1set: Int
   player2set: Int
+  round: Int!
   sumbit: Boolean
   player1: UserCreateOneInput!
   player2: UserCreateOneInput
@@ -702,6 +704,8 @@ enum MatchOrderByInput {
   player1set_DESC
   player2set_ASC
   player2set_DESC
+  round_ASC
+  round_DESC
   sumbit_ASC
   sumbit_DESC
   updatedAt_ASC
@@ -714,6 +718,7 @@ type MatchPreviousValues {
   id: ID!
   player1set: Int
   player2set: Int
+  round: Int!
   sumbit: Boolean!
 }
 
@@ -759,6 +764,7 @@ input MatchSubscriptionWhereInput {
 input MatchUpdateDataInput {
   player1set: Int
   player2set: Int
+  round: Int
   sumbit: Boolean
   player1: UserUpdateOneInput
   player2: UserUpdateOneInput
@@ -768,6 +774,7 @@ input MatchUpdateDataInput {
 input MatchUpdateInput {
   player1set: Int
   player2set: Int
+  round: Int
   sumbit: Boolean
   player1: UserUpdateOneInput
   player2: UserUpdateOneInput
@@ -887,6 +894,28 @@ input MatchWhereInput {
 
   """All values greater than or equal the given value."""
   player2set_gte: Int
+  round: Int
+
+  """All values that are not equal to given value."""
+  round_not: Int
+
+  """All values that are contained in given list."""
+  round_in: [Int!]
+
+  """All values that are not contained in given list."""
+  round_not_in: [Int!]
+
+  """All values less than the given value."""
+  round_lt: Int
+
+  """All values less than or equal the given value."""
+  round_lte: Int
+
+  """All values greater than the given value."""
+  round_gt: Int
+
+  """All values greater than or equal the given value."""
+  round_gte: Int
   sumbit: Boolean
 
   """All values that are not equal to given value."""
@@ -1256,6 +1285,7 @@ type Stats implements Node {
   totalsetlost: Int
   rating: Float
   season(where: SeasonWhereInput): Season!
+  round: Int!
 }
 
 """A connection to a list of items."""
@@ -1276,6 +1306,7 @@ input StatsCreateInput {
   totalsetwon: Int
   totalsetlost: Int
   rating: Float
+  round: Int!
   player: UserCreateOneWithoutStatsInput!
   season: SeasonCreateOneInput!
 }
@@ -1293,6 +1324,7 @@ input StatsCreateWithoutPlayerInput {
   totalsetwon: Int
   totalsetlost: Int
   rating: Float
+  round: Int!
   season: SeasonCreateOneInput!
 }
 
@@ -1322,6 +1354,8 @@ enum StatsOrderByInput {
   totalsetlost_DESC
   rating_ASC
   rating_DESC
+  round_ASC
+  round_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -1337,6 +1371,7 @@ type StatsPreviousValues {
   totalsetwon: Int
   totalsetlost: Int
   rating: Float
+  round: Int!
 }
 
 type StatsSubscriptionPayload {
@@ -1386,6 +1421,7 @@ input StatsUpdateInput {
   totalsetwon: Int
   totalsetlost: Int
   rating: Float
+  round: Int
   player: UserUpdateOneWithoutStatsInput
   season: SeasonUpdateOneInput
 }
@@ -1407,6 +1443,7 @@ input StatsUpdateWithoutPlayerDataInput {
   totalsetwon: Int
   totalsetlost: Int
   rating: Float
+  round: Int
   season: SeasonUpdateOneInput
 }
 
@@ -1642,6 +1679,28 @@ input StatsWhereInput {
 
   """All values greater than or equal the given value."""
   rating_gte: Float
+  round: Int
+
+  """All values that are not equal to given value."""
+  round_not: Int
+
+  """All values that are contained in given list."""
+  round_in: [Int!]
+
+  """All values that are not contained in given list."""
+  round_not_in: [Int!]
+
+  """All values less than the given value."""
+  round_lt: Int
+
+  """All values less than or equal the given value."""
+  round_lte: Int
+
+  """All values greater than the given value."""
+  round_gt: Int
+
+  """All values greater than or equal the given value."""
+  round_gte: Int
   player: UserWhereInput
   season: SeasonWhereInput
 }
@@ -2271,6 +2330,8 @@ export type StatsOrderByInput =   'id_ASC' |
   'totalsetlost_DESC' |
   'rating_ASC' |
   'rating_DESC' |
+  'round_ASC' |
+  'round_DESC' |
   'updatedAt_ASC' |
   'updatedAt_DESC' |
   'createdAt_ASC' |
@@ -2282,6 +2343,8 @@ export type MatchOrderByInput =   'id_ASC' |
   'player1set_DESC' |
   'player2set_ASC' |
   'player2set_DESC' |
+  'round_ASC' |
+  'round_DESC' |
   'sumbit_ASC' |
   'sumbit_DESC' |
   'updatedAt_ASC' |
@@ -2419,6 +2482,7 @@ export interface UserUpdateManyWithoutSeasonInput {
 export interface MatchUpdateDataInput {
   player1set?: Int
   player2set?: Int
+  round?: Int
   sumbit?: Boolean
   player1?: UserUpdateOneInput
   player2?: UserUpdateOneInput
@@ -2575,6 +2639,7 @@ export interface StatsUpdateWithoutPlayerDataInput {
   totalsetwon?: Int
   totalsetlost?: Int
   rating?: Float
+  round?: Int
   season?: SeasonUpdateOneInput
 }
 
@@ -2612,6 +2677,14 @@ export interface MatchWhereInput {
   player2set_lte?: Int
   player2set_gt?: Int
   player2set_gte?: Int
+  round?: Int
+  round_not?: Int
+  round_in?: Int[] | Int
+  round_not_in?: Int[] | Int
+  round_lt?: Int
+  round_lte?: Int
+  round_gt?: Int
+  round_gte?: Int
   sumbit?: Boolean
   sumbit_not?: Boolean
   player1?: UserWhereInput
@@ -2758,6 +2831,7 @@ export interface StatsCreateInput {
   totalsetwon?: Int
   totalsetlost?: Int
   rating?: Float
+  round: Int
   player: UserCreateOneWithoutStatsInput
   season: SeasonCreateOneInput
 }
@@ -2792,6 +2866,7 @@ export interface UserCreateWithoutStatsInput {
 export interface MatchUpdateInput {
   player1set?: Int
   player2set?: Int
+  round?: Int
   sumbit?: Boolean
   player1?: UserUpdateOneInput
   player2?: UserUpdateOneInput
@@ -2812,6 +2887,7 @@ export interface MatchUpsertWithWhereUniqueNestedInput {
 export interface MatchCreateInput {
   player1set?: Int
   player2set?: Int
+  round: Int
   sumbit?: Boolean
   player1: UserCreateOneInput
   player2?: UserCreateOneInput
@@ -2885,6 +2961,7 @@ export interface StatsCreateWithoutPlayerInput {
   totalsetwon?: Int
   totalsetlost?: Int
   rating?: Float
+  round: Int
   season: SeasonCreateOneInput
 }
 
@@ -3044,6 +3121,14 @@ export interface StatsWhereInput {
   rating_lte?: Float
   rating_gt?: Float
   rating_gte?: Float
+  round?: Int
+  round_not?: Int
+  round_in?: Int[] | Int
+  round_not_in?: Int[] | Int
+  round_lt?: Int
+  round_lte?: Int
+  round_gt?: Int
+  round_gte?: Int
   player?: UserWhereInput
   season?: SeasonWhereInput
 }
@@ -3116,6 +3201,7 @@ export interface StatsUpdateInput {
   totalsetwon?: Int
   totalsetlost?: Int
   rating?: Float
+  round?: Int
   player?: UserUpdateOneWithoutStatsInput
   season?: SeasonUpdateOneInput
 }
@@ -3343,6 +3429,7 @@ export interface Match extends Node {
   player1set?: Int
   player2set?: Int
   season: Season
+  round: Int
   sumbit: Boolean
 }
 
@@ -3439,6 +3526,7 @@ export interface MatchPreviousValues {
   id: ID_Output
   player1set?: Int
   player2set?: Int
+  round: Int
   sumbit: Boolean
 }
 
@@ -3460,6 +3548,7 @@ export interface Stats extends Node {
   totalsetlost?: Int
   rating?: Float
   season: Season
+  round: Int
 }
 
 export interface StatsPreviousValues {
@@ -3471,6 +3560,7 @@ export interface StatsPreviousValues {
   totalsetwon?: Int
   totalsetlost?: Int
   rating?: Float
+  round: Int
 }
 
 export interface UserSubscriptionPayload {

@@ -5,7 +5,7 @@ type User {
   name: String!
   stats: [Stats!]!
   matches: [Match!]! @relation(name: "UserMatches")
-  season: Season 
+  season: Season
   residentialcollege: String
   bio: String
   location: String
@@ -33,6 +33,7 @@ type Match {
   player1set: Int
   player2set: Int
   season: Season!
+  round: Int!
   sumbit: Boolean! @default(value: false)
 }
 
@@ -54,4 +55,5 @@ type Stats {
   totalsetlost: Int
   rating: Float @default(value: "1000")
   season: Season!
+  round: Int!
 }

@@ -15,14 +15,16 @@ export default {
     const stats1 = await ctx.db.query.statses({
       where: {
         playeremail: args.player1,
-        season: { season: 1, round: 0 }
+        season: { season: 1 },
+        round: 0
       }
     });
 
     const stats2 = await ctx.db.query.statses({
       where: {
         playeremail: args.player2,
-        season: { season: 1, round: 0 }
+        season: { season: 1 },
+        round: 0
       }
     });
     console.log(match);
@@ -43,17 +45,20 @@ export default {
                 rating:
                   match.player1.stats[0].rating +
                   (args.player1set - args.player2set + 1) *
-                  10 *
-                  Math.exp(
-                    1 -
-                    match.player1.stats[0].rating /
-                    match.player2.stats[0].rating
-                  ),
+                    10 *
+                    Math.exp(
+                      1 -
+                        match.player1.stats[0].rating /
+                          match.player2.stats[0].rating
+                    ),
                 netwins:
                   match.player1.stats[0].netwins +
                   1 +
                   0.01 * (args.player1set - args.player2set),
-                season: { connect: { season: args.season } }
+                round: args.round,
+                season: {
+                  connect: { season: args.season }
+                }
               }
             ],
             update: [
@@ -67,12 +72,12 @@ export default {
                   rating:
                     match.player1.stats[0].rating +
                     (args.player1set - args.player2set + 1) *
-                    10 *
-                    Math.exp(
-                      1 -
-                      match.player1.stats[0].rating /
-                      match.player2.stats[0].rating
-                    ),
+                      10 *
+                      Math.exp(
+                        1 -
+                          match.player1.stats[0].rating /
+                            match.player2.stats[0].rating
+                      ),
                   netwins:
                     match.player1.stats[0].netwins +
                     1 +
@@ -104,16 +109,17 @@ export default {
                 rating:
                   match.player2.stats[0].rating -
                   (args.player1set - args.player2set + 1) *
-                  10 *
-                  Math.exp(
-                    1 -
-                    match.player1.stats[0].rating /
-                    match.player2.stats[0].rating
-                  ),
+                    10 *
+                    Math.exp(
+                      1 -
+                        match.player1.stats[0].rating /
+                          match.player2.stats[0].rating
+                    ),
                 netwins:
                   match.player2.stats[0].netwins -
                   1 +
                   0.01 * (args.player2set - args.player1set),
+                round: args.round,
                 season: { connect: { season: args.season } }
               }
             ],
@@ -129,12 +135,12 @@ export default {
                   rating:
                     match.player2.stats[0].rating -
                     (args.player1set - args.player2set + 1) *
-                    10 *
-                    Math.exp(
-                      1 -
-                      match.player1.stats[0].rating /
-                      match.player2.stats[0].rating
-                    ),
+                      10 *
+                      Math.exp(
+                        1 -
+                          match.player1.stats[0].rating /
+                            match.player2.stats[0].rating
+                      ),
                   netwins:
                     match.player2.stats[0].netwins -
                     1 +
@@ -167,16 +173,17 @@ export default {
                   rating:
                     match.player2.stats[0].rating +
                     (args.player2set - args.player1set + 1) *
-                    10 *
-                    Math.exp(
-                      1 -
-                      match.player2.stats[0].rating /
-                      match.player1.stats[0].rating
-                    ),
+                      10 *
+                      Math.exp(
+                        1 -
+                          match.player2.stats[0].rating /
+                            match.player1.stats[0].rating
+                      ),
                   netwins:
                     match.player1.stats[0].netwins +
                     1 +
                     0.01 * (args.player2set - args.player1set),
+                  round: args.round,
                   season: { connect: { season: args.season } }
                 }
               ],
@@ -191,12 +198,12 @@ export default {
                     rating:
                       match.player2.stats[0].rating +
                       (args.player2set - args.player1set + 1) *
-                      10 *
-                      Math.exp(
-                        1 -
-                        match.player2.stats[0].rating /
-                        match.player1.stats[0].rating
-                      ),
+                        10 *
+                        Math.exp(
+                          1 -
+                            match.player2.stats[0].rating /
+                              match.player1.stats[0].rating
+                        ),
                     netwins:
                       match.player1.stats[0].netwins +
                       1 +
@@ -230,16 +237,17 @@ export default {
                     rating:
                       match.player1.stats[0].rating -
                       (args.player2set - args.player1set + 1) *
-                      10 *
-                      Math.exp(
-                        1 -
-                        match.player2.stats[0].rating /
-                        match.player1.stats[0].rating
-                      ),
+                        10 *
+                        Math.exp(
+                          1 -
+                            match.player2.stats[0].rating /
+                              match.player1.stats[0].rating
+                        ),
                     netwins:
                       match.player1.stats[0].netwins -
                       1 +
-                      0.01 * (args.player1set - args.player2set)
+                      0.01 * (args.player1set - args.player2set),
+                    round: args.round
                   }
                 ],
                 update: [
@@ -253,12 +261,12 @@ export default {
                       rating:
                         match.player1.stats[0].rating -
                         (args.player2set - args.player1set + 1) *
-                        10 *
-                        Math.exp(
-                          1 -
-                          match.player2.stats[0].rating /
-                          match.player1.stats[0].rating
-                        ),
+                          10 *
+                          Math.exp(
+                            1 -
+                              match.player2.stats[0].rating /
+                                match.player1.stats[0].rating
+                          ),
                       netwins:
                         match.player1.stats[0].netwins -
                         1 +

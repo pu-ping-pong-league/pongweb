@@ -18,7 +18,8 @@ export default {
             rating: 1000,
             player: { connect: { email: users[i].email } },
             season: { connect: { season: args.season } },
-            playeremail: users[i].email
+            playeremail: users[i].email,
+            round: args.round
           }
         },
         info
@@ -35,7 +36,8 @@ export default {
           rating: 1000,
           player: { connect: { email: users[0].email } },
           season: { connect: { season: args.season } },
-          playeremail: users[0].email
+          playeremail: users[0].email,
+          round: args.round
         }
       },
       info

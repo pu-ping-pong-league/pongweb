@@ -34,6 +34,7 @@ const GET_MATCHES = gql`
         email
         name
       }
+      round
       player2 {
         email
         name
@@ -46,7 +47,6 @@ const GET_MATCHES = gql`
 const GETCURRENT = gql`
   query {
     getcurrent {
-      round
       season
       round
       timer
@@ -121,11 +121,12 @@ class Leaderboard extends React.Component {
                     <Query
                       variables={{
                         where: {
-                          season: { season: 1, round: i },
+                          season: { season: 1 },
                           player: {
                             confirmed: true,
                             deactivated: false
-                          }
+                          },
+                          round: i
                         }
                       }}
                       query={GET_STATS}
@@ -138,6 +139,7 @@ class Leaderboard extends React.Component {
                           console.log(error)
                           return "OOps, somehing blew up."
                         }
+                        console.log("stat")
                         console.log(data.statses)
                         return (
                           <Table>
@@ -221,7 +223,7 @@ class Leaderboard extends React.Component {
                   <TabPane tabId={i}>
                     <Query
                       variables={{
-                        where: { round: i, season: { season: 1 } }
+                        where: { season: { season: 1 }, round: i }
                       }}
                       query={GET_MATCHES}
                     >
