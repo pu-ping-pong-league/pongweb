@@ -344,6 +344,9 @@ class Navigation extends React.Component {
                                   Log in
                                 </button>
                               </DropdownItem>
+                              <a className="forgot" href="/forgotpassword">
+                                forgot password?
+                              </a>
                             </form>
                           </div>
                         )

@@ -22,23 +22,29 @@ export const auth = {
     // validate input length
     var maxLength = 50;
     if (args.email.length > maxLength)
-      throw new Error('Email exceeds max length of 50 characters.');
+      throw new Error("Email exceeds max length of 50 characters.");
     if (args.password.length > maxLength)
-      throw new Error('Password exceeds max length of 50 characters.');
+      throw new Error("Password exceeds max length of 50 characters.");
     if (args.name.length > maxLength)
-      throw new Error('Full name exceeds max length of 50 characters.');
+      throw new Error("Full name exceeds max length of 50 characters.");
 
     // validate email
     if (!EmailValidator.validate(args.email))
       throw new Error(`${args.email} is not a valid email.`);
-    var email_split = args.email.split("@")
+    var email_split = args.email.split("@");
     if (email_split[email_split.length - 1] != "princeton.edu")
-      throw new Error('Emails is not a valid princeton email.');
+      throw new Error("Emails is not a valid princeton email.");
     const users = await ctx.db.query.users({
       where: { email: args.email }
     });
-    if (users.length != 0)
-      throw new Error(`${args.email} is already used.`);
+    if (users.length != 0) throw new Error(`${args.email} is already used.`);
+
+    const [current] = await ctx.db.query.currents({
+      where: {}
+    });
+    const fixtures = await ctx.db.query.fixtures({
+      where: { season: { season: 1 } }
+    });
 
     const password = await bcrypt.hash(args.password, 10);
     const user = await ctx.db.mutation.createUser({
@@ -66,6 +72,35 @@ export const auth = {
         fixture: { connect: { id: "cjl6wcei8000l0807p8tcm3bu" } }
       }
     });
+    console.log(current);
+    console.log(user);
+    console.log(fixtures);
+    for (var i = 1; i < current.fixture + 1; i++) {
+      ctx.db.mutation.updateUser({
+        data: {
+          stats: {
+            create: [
+              {
+                playeremail: args.email,
+                wins: 0,
+                losts: 0,
+                totalsetlost: 0,
+                totalsetwon: 0,
+                netwins: 0,
+                rating: 1000,
+                fixture: { connect: { id: fixtures[i].id } },
+                season: { connect: { season: 1 } }
+              }
+            ]
+          },
+          season: { connect: { season: 1 } },
+          fixture: { connect: { id: "cjl6wcei8000l0807p8tcm3bu" } }
+        },
+        where: {
+          email: args.email
+        }
+      });
+    }
     const emailtoken = jwt.sign({ userId: user.id }, EMAIL_SECRET, {
       expiresIn: "1d"
     });

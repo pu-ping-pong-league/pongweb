@@ -43,6 +43,10 @@ type Query {
 }
 
 type Mutation {
+  deactivate(email: String!, deactivated: Boolean!): User!
+  setnullscoretozero(round: Int!, season: Int!): Match!
+  resetpassword(email: String!, password: String!): User!
+  forgotpassword(email: String!): User!
   signup(
     email: String!
     password: String!

@@ -15,7 +15,7 @@ export default {
     });
 
     console.log(fixture);
-    for (var i = 0; i < users.length; i = i + 2) {
+    for (var i = 0; i < users.length; i++) {
       for (var j = 1; j < users.length; j++) {
         if (i != j) {
           await ctx.db.mutation.createMatch({

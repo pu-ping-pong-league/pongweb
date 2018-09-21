@@ -35,6 +35,7 @@ const GET_MY_PROFILE = gql`
         totalsetlost
         rating
       }
+      deactivated
       location
       bio
       residentialcollege
@@ -134,6 +135,14 @@ const UPDATE_INFO = gql`
         losts
         totalsetlost
       }
+    }
+  }
+`
+const DEACTIVATE = gql`
+  mutation deactivate($email: String!, $deactivated: Boolean!) {
+    deactivate(email: $email, deactivated: $deactivated) {
+      name
+      email
     }
   }
 `
@@ -292,6 +301,18 @@ class MyProfile extends React.Component {
                               }}
                             >
                               Submit Result
+                            </NavLink>
+                          </NavItem>
+                          <NavItem>
+                            <NavLink
+                              className={classnames({
+                                active: this.state.activeTab === "4"
+                              })}
+                              onClick={() => {
+                                this.toggle("4")
+                              }}
+                            >
+                              Deactivate Account
                             </NavLink>
                           </NavItem>
                         </Nav>
@@ -672,6 +693,100 @@ class MyProfile extends React.Component {
                                 }
                               }}
                             </Query>
+                          </TabPane>
+                          <TabPane tabId="4">
+                            <div className="usernameprofile">
+                              {(() => {
+                                if (data.me.deactivated) {
+                                  return (
+                                    <div>
+                                      <h1>
+                                        Your account is currently deactivated
+                                      </h1>
+                                      <Mutation mutation={DEACTIVATE}>
+                                        {deactivate => {
+                                          return (
+                                            <div>
+                                              <Form
+                                                onSubmit={async e => {
+                                                  e.preventDefault()
+                                                  try {
+                                                    const {
+                                                      data
+                                                    } = await deactivate({
+                                                      variables: {
+                                                        email: localStorage.getItem(
+                                                          "email"
+                                                        ),
+                                                        deactivated: false
+                                                      }
+                                                    })
+                                                    this.props.history.push(
+                                                      "/myprofile"
+                                                    )
+                                                    location.reload()
+                                                  } catch (error) {}
+                                                }}
+                                              >
+                                                <button type="submit">
+                                                  Activate
+                                                </button>
+                                              </Form>
+                                            </div>
+                                          )
+                                        }}
+                                      </Mutation>
+                                    </div>
+                                  )
+                                } else {
+                                  return (
+                                    <div>
+                                      <h1>
+                                        Are you sure you want to deactivate your
+                                        account?
+                                      </h1>
+
+                                      <Mutation mutation={DEACTIVATE}>
+                                        {deactivate => {
+                                          return (
+                                            <div>
+                                              <Form
+                                                onSubmit={async e => {
+                                                  console.log("player1email")
+                                                  e.preventDefault()
+                                                  try {
+                                                    const {
+                                                      data
+                                                    } = await deactivate({
+                                                      variables: {
+                                                        email: localStorage.getItem(
+                                                          "email"
+                                                        ),
+                                                        deactivated: true
+                                                      }
+                                                    })
+                                                    this.props.history.push(
+                                                      "/myprofile"
+                                                    )
+                                                    location.reload()
+                                                  } catch (error) {
+                                                    console.log(error)
+                                                  }
+                                                }}
+                                              >
+                                                <button type="submit">
+                                                  Deactivate
+                                                </button>
+                                              </Form>
+                                            </div>
+                                          )
+                                        }}
+                                      </Mutation>
+                                    </div>
+                                  )
+                                }
+                              })()}
+                            </div>
                           </TabPane>
                         </TabContent>
                       </div>

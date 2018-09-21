@@ -7,7 +7,8 @@ export default {
           player1: { email: args.player1 },
           player2: { email: args.player2 },
           season: { season: args.season },
-          fixture: { round: args.round }
+          fixture: { round: args.round },
+          sumbit: false
         }
       },
       info
@@ -33,6 +34,53 @@ export default {
       }
     });
     console.log(match);
+    if (args.player1set == 0 && args.player2set == 0) {
+      await ctx.db.mutation.updateUser({
+        data: {
+          stats: {
+            create: [
+              {
+                playeremail: args.player1,
+
+                wins: match.player1.stats[0].wins,
+                totalsetwon: match.player1.stats[0].totalsetwon,
+                totalsetlost: match.player1.stats[0].totalsetlost,
+                losts: match.player1.stats[0].losts,
+                rating: match.player1.stats[0].rating,
+                netwins: match.player1.stats[0].netwins,
+                fixture: { connect: { id: fixture[0].id } },
+                season: { connect: { season: args.season } }
+              }
+            ]
+          }
+        },
+        where: {
+          email: args.player1
+        }
+      });
+      await ctx.db.mutation.updateUser({
+        data: {
+          stats: {
+            create: [
+              {
+                playeremail: args.player2,
+                wins: match.player2.stats[0].wins,
+                totalsetwon: match.player2.stats[0].totalsetwon,
+                totalsetlost: match.player2.stats[0].totalsetlost,
+                losts: match.player2.stats[0].losts,
+                rating: match.player2.stats[0].rating,
+                netwins: match.player2.stats[0].netwins,
+                fixture: { connect: { id: fixture[0].id } },
+                season: { connect: { season: args.season } }
+              }
+            ]
+          }
+        },
+        where: {
+          email: args.player2
+        }
+      });
+    }
     if (args.player1set == 2) {
       await ctx.db.mutation.updateUser({
         data: {
@@ -292,7 +340,8 @@ export default {
       {
         data: {
           player1set: args.player1set,
-          player2set: args.player2set
+          player2set: args.player2set,
+          sumbit: true
         },
         where: {
           id: match.id

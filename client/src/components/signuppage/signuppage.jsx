@@ -50,7 +50,8 @@ class SignupPage extends React.Component {
     email: "",
     name: "",
     password: "",
-    residentialcollege: null
+    residentialcollege: null,
+    error: null
   }
   componentDidMount() {
     var element = document.getElementById("center")
