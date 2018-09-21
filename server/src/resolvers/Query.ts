@@ -18,8 +18,7 @@ export const Query = {
     return ctx.db.query.matches(
       {
         where: {
-          season: { season: args.season },
-          fixture: { round: args.fixture },
+          season: { season: args.season, round: args.round },
           player1set: null
         }
       },
@@ -68,14 +67,6 @@ export const Query = {
   },
   statses: async (parent, args, ctx: Context, info) => {
     return ctx.db.query.statses(
-      {
-        ...args
-      },
-      info
-    );
-  },
-  fixtures: async (parent, args, ctx: Context, info) => {
-    return ctx.db.query.fixtures(
       {
         ...args
       },

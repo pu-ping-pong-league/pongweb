@@ -57,13 +57,11 @@ export const auth = {
               totalsetwon: 0,
               netwins: 0,
               rating: 1000,
-              fixture: { connect: { id: "cjl6wcei8000l0807p8tcm3bu" } },
               season: { connect: { season: 1 } }
             }
           ]
         },
-        season: { connect: { season: 1 } },
-        fixture: { connect: { id: "cjl6wcei8000l0807p8tcm3bu" } }
+        season: { connect: { season: 1 } }
       }
     });
     const emailtoken = jwt.sign({ userId: user.id }, EMAIL_SECRET, {

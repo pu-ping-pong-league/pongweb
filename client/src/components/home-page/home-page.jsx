@@ -12,8 +12,7 @@ import gql from "graphql-tag"
 const GETCURRENT = gql`
   query {
     getcurrent {
-      season
-      fixture
+      season      
       timer
     }
   }

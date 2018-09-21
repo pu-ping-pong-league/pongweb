@@ -49,7 +49,7 @@ export default {
 
       // perform parallel fold matching
       for (var i = 0; i < top_middle; i++) {
-        await ctx.db.mutation.createMatch({
+        ctx.db.mutation.createMatch({
           data: {
             player1: {
               connect: { email: players[i].playeremail }
@@ -90,9 +90,6 @@ export default {
           player1: {
             connect: { email: unmatched_player.playeremail }
           },
-          player2: {
-            nulls
-          },
           season: { connect: { season: args.season } }
         }
       });
@@ -101,9 +98,10 @@ export default {
     // fetch matches we just created (useful for debugging)
     const matches = await ctx.db.query.matches({
       where: {
-        season: { season: args.season },
-        fixture: { round: args.round }
+        season: { season: args.season, round: args.round }
       }
     });
+
+    return matches;
   }
 };

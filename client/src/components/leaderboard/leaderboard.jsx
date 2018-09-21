@@ -47,7 +47,6 @@ const GETCURRENT = gql`
   query {
     getcurrent {
       season
-      fixture
       timer
     }
   }
@@ -100,7 +99,7 @@ class Leaderboard extends React.Component {
             const leaderboardcontent = []
 
             if (data.getcurrent.length !== 0) {
-              for (let i = 0; i < data.getcurrent[0].fixture + 1; i++) {
+              for (let i = 0; i < data.getcurrent[0].season.round + 1; i++) {
                 leaderboard.push(
                   <NavItem>
                     <NavLink
@@ -120,7 +119,7 @@ class Leaderboard extends React.Component {
                     <Query
                       variables={{
                         where: {
-                          fixture: { round: i },
+                          round: { round: i },
                           season: { season: 1 },
                           player: {
                             confirmed: true,
@@ -202,7 +201,7 @@ class Leaderboard extends React.Component {
             const leaderboard1 = []
             const leaderboardcontent1 = []
             if (data.getcurrent.length !== 0) {
-              for (let i = 1; i < data.getcurrent[0].fixture + 1; i++) {
+              for (let i = 1; i < data.getcurrent[0].season.round + 1; i++) {
                 leaderboard1.push(
                   <NavItem>
                     <NavLink

@@ -45,7 +45,6 @@ const GETCURRENT = gql`
   query {
     getcurrent {
       season
-      fixture
       timer
     }
   }
@@ -63,11 +62,9 @@ const MATCHES = gql`
       }
       player1set
       player2set
-      fixture {
-        round
-      }
       season {
         season
+        round
       }
     }
   }
@@ -360,7 +357,7 @@ class MyProfile extends React.Component {
                                           )
                                           this.props.history.push("/myprofile")
                                           location.reload()
-                                        } catch (error) {}
+                                        } catch (error) { }
                                       }}
                                     >
                                       <FormGroup row>
@@ -453,7 +450,7 @@ class MyProfile extends React.Component {
                                 if (
                                   error &&
                                   error.message ===
-                                    "GraphQL error: Not authorized"
+                                  "GraphQL error: Not authorized"
                                 ) {
                                   return "You must login."
                                 }
@@ -461,7 +458,7 @@ class MyProfile extends React.Component {
                                   return "OOps, somehing blew up."
                                 }
                                 console.log(data.getcurrent)
-                                const currentround = data.getcurrent[0].fixture
+                                const currentround = data.getcurrent[0].round
                                 const currentseason = data.getcurrent[0].season
                                 if (data.getcurrent.length !== 0) {
                                   return (
@@ -475,7 +472,7 @@ class MyProfile extends React.Component {
                                                   "email"
                                                 )
                                               },
-                                              fixture: {
+                                              season: {
                                                 round: currentround
                                               }
                                             },
@@ -485,7 +482,7 @@ class MyProfile extends React.Component {
                                                   "email"
                                                 )
                                               },
-                                              fixture: {
+                                              season: {
                                                 round: currentround
                                               }
                                             }
@@ -505,9 +502,9 @@ class MyProfile extends React.Component {
                                         console.log(data.matches)
                                         if (
                                           localStorage.getItem("location") ==
-                                            "null" ||
+                                          "null" ||
                                           localStorage.getItem("location") ==
-                                            null
+                                          null
                                         ) {
                                           document
                                             .getElementById("hometown1")
@@ -515,7 +512,7 @@ class MyProfile extends React.Component {
                                         }
                                         if (
                                           localStorage.getItem("bio") ==
-                                            "null" ||
+                                          "null" ||
                                           localStorage.getItem("bio") == null
                                         ) {
                                           document
@@ -525,9 +522,9 @@ class MyProfile extends React.Component {
 
                                         if (
                                           localStorage.getItem("location") !==
-                                            null &&
+                                          null &&
                                           localStorage.getItem("location") !==
-                                            "null"
+                                          "null"
                                         ) {
                                           document
                                             .getElementById("hometown1")
@@ -535,7 +532,7 @@ class MyProfile extends React.Component {
                                         }
                                         if (
                                           localStorage.getItem("bio") !==
-                                            null &&
+                                          null &&
                                           localStorage.getItem("bio") !== "null"
                                         ) {
                                           document
@@ -573,26 +570,26 @@ class MyProfile extends React.Component {
                                                             const {
                                                               data
                                                             } = await submitmatch(
-                                                              {
-                                                                variables: {
-                                                                  player1set: this
-                                                                    .state
-                                                                    .player1set,
-                                                                  player2set: this
-                                                                    .state
-                                                                    .player2set,
-                                                                  round: currentround,
-                                                                  season: currentseason,
-                                                                  player1: player1email,
-                                                                  player2: player2email
+                                                                {
+                                                                  variables: {
+                                                                    player1set: this
+                                                                      .state
+                                                                      .player1set,
+                                                                    player2set: this
+                                                                      .state
+                                                                      .player2set,
+                                                                    round: currentround,
+                                                                    season: currentseason,
+                                                                    player1: player1email,
+                                                                    player2: player2email
+                                                                  }
                                                                 }
-                                                              }
-                                                            )
+                                                              )
                                                             this.props.history.push(
                                                               "/myprofile"
                                                             )
                                                             location.reload()
-                                                          } catch (error) {}
+                                                          } catch (error) { }
                                                         }}
                                                       >
                                                         <FormGroup>
@@ -709,7 +706,7 @@ class MyProfile extends React.Component {
                               expandOnHover={true}
                               expandSize={3}
                               viewBoxSize={30}
-                              // onSectorHover={}
+                            // onSectorHover={}
                             />
                             <ReactSvgPieChart
                               strokeLinejoin="round"
@@ -719,7 +716,7 @@ class MyProfile extends React.Component {
                               expandOnHover={true}
                               expandSize={3}
                               viewBoxSize={30}
-                              // onSectorHover={}
+                            // onSectorHover={}
                             />
                           </div>
                         </div>
@@ -776,7 +773,7 @@ class MyProfile extends React.Component {
                                       player2={user.player2}
                                       player1set={user.player1set}
                                       player2set={user.player2set}
-                                      round={user.fixture.round}
+                                      round={user.season.round}
                                       season={user.season.season}
                                     />
                                   )

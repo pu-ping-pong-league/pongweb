@@ -31,7 +31,7 @@ const GET_USER = gql`
         }
         player1set
         player2set
-        fixture {
+        season {
           round
         }
       }
@@ -119,7 +119,7 @@ class VerifyPage extends React.Component {
 
                               this.props.history.push("/")
                               location.reload()
-                            } catch (error) {}
+                            } catch (error) { }
                           }}
                         >
                           <button type="submit">Verify</button>

@@ -2,7 +2,6 @@ import { extractFragmentReplacements } from "prisma-binding";
 import { Query } from "./Query";
 import { auth } from "./Mutation/auth";
 import { AuthPayload } from "./AuthPayload";
-import generateFixture from "./Mutation/generateFixture";
 import submitmatch from "./Mutation/submitmatch";
 import generateRound from "./Mutation/generateRound";
 import generateSeason from "./Mutation/generateSeason";
@@ -14,7 +13,6 @@ export const resolvers = {
   Query,
   Mutation: {
     ...auth,
-    ...generateFixture,
     ...generateRound,
     ...generateSeason,
     ...submitmatch,

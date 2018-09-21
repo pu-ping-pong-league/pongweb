@@ -1,5 +1,5 @@
 # source: http://159.203.171.56:4466/pongleague/dev
-# timestamp: Sat Sep 15 2018 15:18:36 GMT-0400 (Eastern Daylight Time)
+# timestamp: Thu Sep 20 2018 22:29:24 GMT-0400 (Eastern Daylight Time)
 
 type Admin implements Node {
   id: ID!
@@ -284,10 +284,6 @@ type AggregateCurrent {
   count: Int!
 }
 
-type AggregateFixture {
-  count: Int!
-}
-
 type AggregateMatch {
   count: Int!
 }
@@ -312,7 +308,7 @@ type BatchPayload {
 type Current implements Node {
   id: ID!
   season: Int!
-  fixture: Int!
+  round: Int!
   timer: String
 }
 
@@ -328,7 +324,7 @@ type CurrentConnection {
 
 input CurrentCreateInput {
   season: Int!
-  fixture: Int!
+  round: Int!
   timer: String
 }
 
@@ -346,8 +342,8 @@ enum CurrentOrderByInput {
   id_DESC
   season_ASC
   season_DESC
-  fixture_ASC
-  fixture_DESC
+  round_ASC
+  round_DESC
   timer_ASC
   timer_DESC
   updatedAt_ASC
@@ -359,7 +355,7 @@ enum CurrentOrderByInput {
 type CurrentPreviousValues {
   id: ID!
   season: Int!
-  fixture: Int!
+  round: Int!
   timer: String
 }
 
@@ -404,7 +400,7 @@ input CurrentSubscriptionWhereInput {
 
 input CurrentUpdateInput {
   season: Int
-  fixture: Int
+  round: Int
   timer: String
 }
 
@@ -479,28 +475,28 @@ input CurrentWhereInput {
 
   """All values greater than or equal the given value."""
   season_gte: Int
-  fixture: Int
+  round: Int
 
   """All values that are not equal to given value."""
-  fixture_not: Int
+  round_not: Int
 
   """All values that are contained in given list."""
-  fixture_in: [Int!]
+  round_in: [Int!]
 
   """All values that are not contained in given list."""
-  fixture_not_in: [Int!]
+  round_not_in: [Int!]
 
   """All values less than the given value."""
-  fixture_lt: Int
+  round_lt: Int
 
   """All values less than or equal the given value."""
-  fixture_lte: Int
+  round_lte: Int
 
   """All values greater than the given value."""
-  fixture_gt: Int
+  round_gt: Int
 
   """All values greater than or equal the given value."""
-  fixture_gte: Int
+  round_gte: Int
   timer: String
 
   """All values that are not equal to given value."""
@@ -547,315 +543,6 @@ input CurrentWhereUniqueInput {
   id: ID
 }
 
-type Fixture implements Node {
-  id: ID!
-  round: Int!
-  players(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
-  matches(where: MatchWhereInput, orderBy: MatchOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Match!]
-  season(where: SeasonWhereInput): Season!
-}
-
-"""A connection to a list of items."""
-type FixtureConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [FixtureEdge]!
-  aggregate: AggregateFixture!
-}
-
-input FixtureCreateInput {
-  round: Int!
-  players: UserCreateManyWithoutFixtureInput
-  matches: MatchCreateManyWithoutFixtureInput
-  season: SeasonCreateOneWithoutFixturesInput!
-}
-
-input FixtureCreateManyWithoutPlayersInput {
-  create: [FixtureCreateWithoutPlayersInput!]
-  connect: [FixtureWhereUniqueInput!]
-}
-
-input FixtureCreateManyWithoutSeasonInput {
-  create: [FixtureCreateWithoutSeasonInput!]
-  connect: [FixtureWhereUniqueInput!]
-}
-
-input FixtureCreateOneInput {
-  create: FixtureCreateInput
-  connect: FixtureWhereUniqueInput
-}
-
-input FixtureCreateOneWithoutMatchesInput {
-  create: FixtureCreateWithoutMatchesInput
-  connect: FixtureWhereUniqueInput
-}
-
-input FixtureCreateWithoutMatchesInput {
-  round: Int!
-  players: UserCreateManyWithoutFixtureInput
-  season: SeasonCreateOneWithoutFixturesInput!
-}
-
-input FixtureCreateWithoutPlayersInput {
-  round: Int!
-  matches: MatchCreateManyWithoutFixtureInput
-  season: SeasonCreateOneWithoutFixturesInput!
-}
-
-input FixtureCreateWithoutSeasonInput {
-  round: Int!
-  players: UserCreateManyWithoutFixtureInput
-  matches: MatchCreateManyWithoutFixtureInput
-}
-
-"""An edge in a connection."""
-type FixtureEdge {
-  """The item at the end of the edge."""
-  node: Fixture!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum FixtureOrderByInput {
-  id_ASC
-  id_DESC
-  round_ASC
-  round_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type FixturePreviousValues {
-  id: ID!
-  round: Int!
-}
-
-type FixtureSubscriptionPayload {
-  mutation: MutationType!
-  node: Fixture
-  updatedFields: [String!]
-  previousValues: FixturePreviousValues
-}
-
-input FixtureSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [FixtureSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [FixtureSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [FixtureSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: FixtureWhereInput
-}
-
-input FixtureUpdateDataInput {
-  round: Int
-  players: UserUpdateManyWithoutFixtureInput
-  matches: MatchUpdateManyWithoutFixtureInput
-  season: SeasonUpdateOneWithoutFixturesInput
-}
-
-input FixtureUpdateInput {
-  round: Int
-  players: UserUpdateManyWithoutFixtureInput
-  matches: MatchUpdateManyWithoutFixtureInput
-  season: SeasonUpdateOneWithoutFixturesInput
-}
-
-input FixtureUpdateManyWithoutPlayersInput {
-  create: [FixtureCreateWithoutPlayersInput!]
-  connect: [FixtureWhereUniqueInput!]
-  disconnect: [FixtureWhereUniqueInput!]
-  delete: [FixtureWhereUniqueInput!]
-  update: [FixtureUpdateWithWhereUniqueWithoutPlayersInput!]
-  upsert: [FixtureUpsertWithWhereUniqueWithoutPlayersInput!]
-}
-
-input FixtureUpdateManyWithoutSeasonInput {
-  create: [FixtureCreateWithoutSeasonInput!]
-  connect: [FixtureWhereUniqueInput!]
-  disconnect: [FixtureWhereUniqueInput!]
-  delete: [FixtureWhereUniqueInput!]
-  update: [FixtureUpdateWithWhereUniqueWithoutSeasonInput!]
-  upsert: [FixtureUpsertWithWhereUniqueWithoutSeasonInput!]
-}
-
-input FixtureUpdateOneInput {
-  create: FixtureCreateInput
-  connect: FixtureWhereUniqueInput
-  delete: Boolean
-  update: FixtureUpdateDataInput
-  upsert: FixtureUpsertNestedInput
-}
-
-input FixtureUpdateOneWithoutMatchesInput {
-  create: FixtureCreateWithoutMatchesInput
-  connect: FixtureWhereUniqueInput
-  delete: Boolean
-  update: FixtureUpdateWithoutMatchesDataInput
-  upsert: FixtureUpsertWithoutMatchesInput
-}
-
-input FixtureUpdateWithoutMatchesDataInput {
-  round: Int
-  players: UserUpdateManyWithoutFixtureInput
-  season: SeasonUpdateOneWithoutFixturesInput
-}
-
-input FixtureUpdateWithoutPlayersDataInput {
-  round: Int
-  matches: MatchUpdateManyWithoutFixtureInput
-  season: SeasonUpdateOneWithoutFixturesInput
-}
-
-input FixtureUpdateWithoutSeasonDataInput {
-  round: Int
-  players: UserUpdateManyWithoutFixtureInput
-  matches: MatchUpdateManyWithoutFixtureInput
-}
-
-input FixtureUpdateWithWhereUniqueWithoutPlayersInput {
-  where: FixtureWhereUniqueInput!
-  data: FixtureUpdateWithoutPlayersDataInput!
-}
-
-input FixtureUpdateWithWhereUniqueWithoutSeasonInput {
-  where: FixtureWhereUniqueInput!
-  data: FixtureUpdateWithoutSeasonDataInput!
-}
-
-input FixtureUpsertNestedInput {
-  update: FixtureUpdateDataInput!
-  create: FixtureCreateInput!
-}
-
-input FixtureUpsertWithoutMatchesInput {
-  update: FixtureUpdateWithoutMatchesDataInput!
-  create: FixtureCreateWithoutMatchesInput!
-}
-
-input FixtureUpsertWithWhereUniqueWithoutPlayersInput {
-  where: FixtureWhereUniqueInput!
-  update: FixtureUpdateWithoutPlayersDataInput!
-  create: FixtureCreateWithoutPlayersInput!
-}
-
-input FixtureUpsertWithWhereUniqueWithoutSeasonInput {
-  where: FixtureWhereUniqueInput!
-  update: FixtureUpdateWithoutSeasonDataInput!
-  create: FixtureCreateWithoutSeasonInput!
-}
-
-input FixtureWhereInput {
-  """Logical AND on all given filters."""
-  AND: [FixtureWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [FixtureWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [FixtureWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  round: Int
-
-  """All values that are not equal to given value."""
-  round_not: Int
-
-  """All values that are contained in given list."""
-  round_in: [Int!]
-
-  """All values that are not contained in given list."""
-  round_not_in: [Int!]
-
-  """All values less than the given value."""
-  round_lt: Int
-
-  """All values less than or equal the given value."""
-  round_lte: Int
-
-  """All values greater than the given value."""
-  round_gt: Int
-
-  """All values greater than or equal the given value."""
-  round_gte: Int
-  players_every: UserWhereInput
-  players_some: UserWhereInput
-  players_none: UserWhereInput
-  matches_every: MatchWhereInput
-  matches_some: MatchWhereInput
-  matches_none: MatchWhereInput
-  season: SeasonWhereInput
-}
-
-input FixtureWhereUniqueInput {
-  id: ID
-}
-
 """
 The `Long` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -865,10 +552,9 @@ scalar Long
 type Match implements Node {
   id: ID!
   player1(where: UserWhereInput): User!
-  player2(where: UserWhereInput): User!
+  player2(where: UserWhereInput): User
   player1set: Int
   player2set: Int
-  fixture(where: FixtureWhereInput): Fixture!
   season(where: SeasonWhereInput): Season!
   sumbit: Boolean!
 }
@@ -888,28 +574,13 @@ input MatchCreateInput {
   player2set: Int
   sumbit: Boolean
   player1: UserCreateOneInput!
-  player2: UserCreateOneInput!
-  fixture: FixtureCreateOneWithoutMatchesInput!
+  player2: UserCreateOneInput
   season: SeasonCreateOneInput!
 }
 
 input MatchCreateManyInput {
   create: [MatchCreateInput!]
   connect: [MatchWhereUniqueInput!]
-}
-
-input MatchCreateManyWithoutFixtureInput {
-  create: [MatchCreateWithoutFixtureInput!]
-  connect: [MatchWhereUniqueInput!]
-}
-
-input MatchCreateWithoutFixtureInput {
-  player1set: Int
-  player2set: Int
-  sumbit: Boolean
-  player1: UserCreateOneInput!
-  player2: UserCreateOneInput!
-  season: SeasonCreateOneInput!
 }
 
 """An edge in a connection."""
@@ -988,7 +659,6 @@ input MatchUpdateDataInput {
   sumbit: Boolean
   player1: UserUpdateOneInput
   player2: UserUpdateOneInput
-  fixture: FixtureUpdateOneWithoutMatchesInput
   season: SeasonUpdateOneInput
 }
 
@@ -998,7 +668,6 @@ input MatchUpdateInput {
   sumbit: Boolean
   player1: UserUpdateOneInput
   player2: UserUpdateOneInput
-  fixture: FixtureUpdateOneWithoutMatchesInput
   season: SeasonUpdateOneInput
 }
 
@@ -1011,44 +680,15 @@ input MatchUpdateManyInput {
   upsert: [MatchUpsertWithWhereUniqueNestedInput!]
 }
 
-input MatchUpdateManyWithoutFixtureInput {
-  create: [MatchCreateWithoutFixtureInput!]
-  connect: [MatchWhereUniqueInput!]
-  disconnect: [MatchWhereUniqueInput!]
-  delete: [MatchWhereUniqueInput!]
-  update: [MatchUpdateWithWhereUniqueWithoutFixtureInput!]
-  upsert: [MatchUpsertWithWhereUniqueWithoutFixtureInput!]
-}
-
-input MatchUpdateWithoutFixtureDataInput {
-  player1set: Int
-  player2set: Int
-  sumbit: Boolean
-  player1: UserUpdateOneInput
-  player2: UserUpdateOneInput
-  season: SeasonUpdateOneInput
-}
-
 input MatchUpdateWithWhereUniqueNestedInput {
   where: MatchWhereUniqueInput!
   data: MatchUpdateDataInput!
-}
-
-input MatchUpdateWithWhereUniqueWithoutFixtureInput {
-  where: MatchWhereUniqueInput!
-  data: MatchUpdateWithoutFixtureDataInput!
 }
 
 input MatchUpsertWithWhereUniqueNestedInput {
   where: MatchWhereUniqueInput!
   update: MatchUpdateDataInput!
   create: MatchCreateInput!
-}
-
-input MatchUpsertWithWhereUniqueWithoutFixtureInput {
-  where: MatchWhereUniqueInput!
-  update: MatchUpdateWithoutFixtureDataInput!
-  create: MatchCreateWithoutFixtureInput!
 }
 
 input MatchWhereInput {
@@ -1150,7 +790,6 @@ input MatchWhereInput {
   sumbit_not: Boolean
   player1: UserWhereInput
   player2: UserWhereInput
-  fixture: FixtureWhereInput
   season: SeasonWhereInput
 }
 
@@ -1165,42 +804,36 @@ type Mutation {
   createMatch(data: MatchCreateInput!): Match!
   createSeason(data: SeasonCreateInput!): Season!
   createUser(data: UserCreateInput!): User!
-  createFixture(data: FixtureCreateInput!): Fixture!
   updateAdmin(data: AdminUpdateInput!, where: AdminWhereUniqueInput!): Admin
   updateCurrent(data: CurrentUpdateInput!, where: CurrentWhereUniqueInput!): Current
   updateStats(data: StatsUpdateInput!, where: StatsWhereUniqueInput!): Stats
   updateMatch(data: MatchUpdateInput!, where: MatchWhereUniqueInput!): Match
   updateSeason(data: SeasonUpdateInput!, where: SeasonWhereUniqueInput!): Season
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  updateFixture(data: FixtureUpdateInput!, where: FixtureWhereUniqueInput!): Fixture
   deleteAdmin(where: AdminWhereUniqueInput!): Admin
   deleteCurrent(where: CurrentWhereUniqueInput!): Current
   deleteStats(where: StatsWhereUniqueInput!): Stats
   deleteMatch(where: MatchWhereUniqueInput!): Match
   deleteSeason(where: SeasonWhereUniqueInput!): Season
   deleteUser(where: UserWhereUniqueInput!): User
-  deleteFixture(where: FixtureWhereUniqueInput!): Fixture
   upsertAdmin(where: AdminWhereUniqueInput!, create: AdminCreateInput!, update: AdminUpdateInput!): Admin!
   upsertCurrent(where: CurrentWhereUniqueInput!, create: CurrentCreateInput!, update: CurrentUpdateInput!): Current!
   upsertStats(where: StatsWhereUniqueInput!, create: StatsCreateInput!, update: StatsUpdateInput!): Stats!
   upsertMatch(where: MatchWhereUniqueInput!, create: MatchCreateInput!, update: MatchUpdateInput!): Match!
   upsertSeason(where: SeasonWhereUniqueInput!, create: SeasonCreateInput!, update: SeasonUpdateInput!): Season!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  upsertFixture(where: FixtureWhereUniqueInput!, create: FixtureCreateInput!, update: FixtureUpdateInput!): Fixture!
   updateManyAdmins(data: AdminUpdateInput!, where: AdminWhereInput): BatchPayload!
   updateManyCurrents(data: CurrentUpdateInput!, where: CurrentWhereInput): BatchPayload!
   updateManyStatses(data: StatsUpdateInput!, where: StatsWhereInput): BatchPayload!
   updateManyMatches(data: MatchUpdateInput!, where: MatchWhereInput): BatchPayload!
   updateManySeasons(data: SeasonUpdateInput!, where: SeasonWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
-  updateManyFixtures(data: FixtureUpdateInput!, where: FixtureWhereInput): BatchPayload!
   deleteManyAdmins(where: AdminWhereInput): BatchPayload!
   deleteManyCurrents(where: CurrentWhereInput): BatchPayload!
   deleteManyStatses(where: StatsWhereInput): BatchPayload!
   deleteManyMatches(where: MatchWhereInput): BatchPayload!
   deleteManySeasons(where: SeasonWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
-  deleteManyFixtures(where: FixtureWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -1237,21 +870,18 @@ type Query {
   matches(where: MatchWhereInput, orderBy: MatchOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Match]!
   seasons(where: SeasonWhereInput, orderBy: SeasonOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Season]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
-  fixtures(where: FixtureWhereInput, orderBy: FixtureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Fixture]!
   admin(where: AdminWhereUniqueInput!): Admin
   current(where: CurrentWhereUniqueInput!): Current
   stats(where: StatsWhereUniqueInput!): Stats
   match(where: MatchWhereUniqueInput!): Match
   season(where: SeasonWhereUniqueInput!): Season
   user(where: UserWhereUniqueInput!): User
-  fixture(where: FixtureWhereUniqueInput!): Fixture
   adminsConnection(where: AdminWhereInput, orderBy: AdminOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AdminConnection!
   currentsConnection(where: CurrentWhereInput, orderBy: CurrentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CurrentConnection!
   statsesConnection(where: StatsWhereInput, orderBy: StatsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StatsConnection!
   matchesConnection(where: MatchWhereInput, orderBy: MatchOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MatchConnection!
   seasonsConnection(where: SeasonWhereInput, orderBy: SeasonOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SeasonConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
-  fixturesConnection(where: FixtureWhereInput, orderBy: FixtureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FixtureConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -1264,7 +894,7 @@ type Season implements Node {
   id: ID!
   season: Int!
   players(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
-  fixtures(where: FixtureWhereInput, orderBy: FixtureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Fixture!]
+  round: Int!
 }
 
 """A connection to a list of items."""
@@ -1279,17 +909,12 @@ type SeasonConnection {
 
 input SeasonCreateInput {
   season: Int!
+  round: Int
   players: UserCreateManyWithoutSeasonInput
-  fixtures: FixtureCreateManyWithoutSeasonInput
 }
 
 input SeasonCreateOneInput {
   create: SeasonCreateInput
-  connect: SeasonWhereUniqueInput
-}
-
-input SeasonCreateOneWithoutFixturesInput {
-  create: SeasonCreateWithoutFixturesInput
   connect: SeasonWhereUniqueInput
 }
 
@@ -1298,14 +923,9 @@ input SeasonCreateOneWithoutPlayersInput {
   connect: SeasonWhereUniqueInput
 }
 
-input SeasonCreateWithoutFixturesInput {
-  season: Int!
-  players: UserCreateManyWithoutSeasonInput
-}
-
 input SeasonCreateWithoutPlayersInput {
   season: Int!
-  fixtures: FixtureCreateManyWithoutSeasonInput
+  round: Int
 }
 
 """An edge in a connection."""
@@ -1322,6 +942,8 @@ enum SeasonOrderByInput {
   id_DESC
   season_ASC
   season_DESC
+  round_ASC
+  round_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -1331,6 +953,7 @@ enum SeasonOrderByInput {
 type SeasonPreviousValues {
   id: ID!
   season: Int!
+  round: Int!
 }
 
 type SeasonSubscriptionPayload {
@@ -1374,14 +997,14 @@ input SeasonSubscriptionWhereInput {
 
 input SeasonUpdateDataInput {
   season: Int
+  round: Int
   players: UserUpdateManyWithoutSeasonInput
-  fixtures: FixtureUpdateManyWithoutSeasonInput
 }
 
 input SeasonUpdateInput {
   season: Int
+  round: Int
   players: UserUpdateManyWithoutSeasonInput
-  fixtures: FixtureUpdateManyWithoutSeasonInput
 }
 
 input SeasonUpdateOneInput {
@@ -1390,14 +1013,6 @@ input SeasonUpdateOneInput {
   delete: Boolean
   update: SeasonUpdateDataInput
   upsert: SeasonUpsertNestedInput
-}
-
-input SeasonUpdateOneWithoutFixturesInput {
-  create: SeasonCreateWithoutFixturesInput
-  connect: SeasonWhereUniqueInput
-  delete: Boolean
-  update: SeasonUpdateWithoutFixturesDataInput
-  upsert: SeasonUpsertWithoutFixturesInput
 }
 
 input SeasonUpdateOneWithoutPlayersInput {
@@ -1409,24 +1024,14 @@ input SeasonUpdateOneWithoutPlayersInput {
   upsert: SeasonUpsertWithoutPlayersInput
 }
 
-input SeasonUpdateWithoutFixturesDataInput {
-  season: Int
-  players: UserUpdateManyWithoutSeasonInput
-}
-
 input SeasonUpdateWithoutPlayersDataInput {
   season: Int
-  fixtures: FixtureUpdateManyWithoutSeasonInput
+  round: Int
 }
 
 input SeasonUpsertNestedInput {
   update: SeasonUpdateDataInput!
   create: SeasonCreateInput!
-}
-
-input SeasonUpsertWithoutFixturesInput {
-  update: SeasonUpdateWithoutFixturesDataInput!
-  create: SeasonCreateWithoutFixturesInput!
 }
 
 input SeasonUpsertWithoutPlayersInput {
@@ -1505,12 +1110,31 @@ input SeasonWhereInput {
 
   """All values greater than or equal the given value."""
   season_gte: Int
+  round: Int
+
+  """All values that are not equal to given value."""
+  round_not: Int
+
+  """All values that are contained in given list."""
+  round_in: [Int!]
+
+  """All values that are not contained in given list."""
+  round_not_in: [Int!]
+
+  """All values less than the given value."""
+  round_lt: Int
+
+  """All values less than or equal the given value."""
+  round_lte: Int
+
+  """All values greater than the given value."""
+  round_gt: Int
+
+  """All values greater than or equal the given value."""
+  round_gte: Int
   players_every: UserWhereInput
   players_some: UserWhereInput
   players_none: UserWhereInput
-  fixtures_every: FixtureWhereInput
-  fixtures_some: FixtureWhereInput
-  fixtures_none: FixtureWhereInput
 }
 
 input SeasonWhereUniqueInput {
@@ -1528,7 +1152,6 @@ type Stats implements Node {
   totalsetwon: Int
   totalsetlost: Int
   rating: Float
-  fixture(where: FixtureWhereInput): Fixture!
   season(where: SeasonWhereInput): Season!
 }
 
@@ -1551,7 +1174,6 @@ input StatsCreateInput {
   totalsetlost: Int
   rating: Float
   player: UserCreateOneWithoutStatsInput!
-  fixture: FixtureCreateOneInput!
   season: SeasonCreateOneInput!
 }
 
@@ -1568,7 +1190,6 @@ input StatsCreateWithoutPlayerInput {
   totalsetwon: Int
   totalsetlost: Int
   rating: Float
-  fixture: FixtureCreateOneInput!
   season: SeasonCreateOneInput!
 }
 
@@ -1663,7 +1284,6 @@ input StatsUpdateInput {
   totalsetlost: Int
   rating: Float
   player: UserUpdateOneWithoutStatsInput
-  fixture: FixtureUpdateOneInput
   season: SeasonUpdateOneInput
 }
 
@@ -1684,7 +1304,6 @@ input StatsUpdateWithoutPlayerDataInput {
   totalsetwon: Int
   totalsetlost: Int
   rating: Float
-  fixture: FixtureUpdateOneInput
   season: SeasonUpdateOneInput
 }
 
@@ -1921,7 +1540,6 @@ input StatsWhereInput {
   """All values greater than or equal the given value."""
   rating_gte: Float
   player: UserWhereInput
-  fixture: FixtureWhereInput
   season: SeasonWhereInput
 }
 
@@ -1936,7 +1554,6 @@ type Subscription {
   match(where: MatchSubscriptionWhereInput): MatchSubscriptionPayload
   season(where: SeasonSubscriptionWhereInput): SeasonSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
-  fixture(where: FixtureSubscriptionWhereInput): FixtureSubscriptionPayload
 }
 
 type User implements Node {
@@ -1947,7 +1564,6 @@ type User implements Node {
   stats(where: StatsWhereInput, orderBy: StatsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Stats!]
   matches(where: MatchWhereInput, orderBy: MatchOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Match!]
   season(where: SeasonWhereInput): Season
-  fixture(where: FixtureWhereInput, orderBy: FixtureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Fixture!]
   residentialcollege: String
   bio: String
   location: String
@@ -1977,12 +1593,6 @@ input UserCreateInput {
   stats: StatsCreateManyWithoutPlayerInput
   matches: MatchCreateManyInput
   season: SeasonCreateOneWithoutPlayersInput
-  fixture: FixtureCreateManyWithoutPlayersInput
-}
-
-input UserCreateManyWithoutFixtureInput {
-  create: [UserCreateWithoutFixtureInput!]
-  connect: [UserWhereUniqueInput!]
 }
 
 input UserCreateManyWithoutSeasonInput {
@@ -2000,20 +1610,6 @@ input UserCreateOneWithoutStatsInput {
   connect: UserWhereUniqueInput
 }
 
-input UserCreateWithoutFixtureInput {
-  email: String!
-  password: String!
-  name: String!
-  residentialcollege: String
-  bio: String
-  location: String
-  confirmed: Boolean
-  deactivated: Boolean
-  stats: StatsCreateManyWithoutPlayerInput
-  matches: MatchCreateManyInput
-  season: SeasonCreateOneWithoutPlayersInput
-}
-
 input UserCreateWithoutSeasonInput {
   email: String!
   password: String!
@@ -2025,7 +1621,6 @@ input UserCreateWithoutSeasonInput {
   deactivated: Boolean
   stats: StatsCreateManyWithoutPlayerInput
   matches: MatchCreateManyInput
-  fixture: FixtureCreateManyWithoutPlayersInput
 }
 
 input UserCreateWithoutStatsInput {
@@ -2039,7 +1634,6 @@ input UserCreateWithoutStatsInput {
   deactivated: Boolean
   matches: MatchCreateManyInput
   season: SeasonCreateOneWithoutPlayersInput
-  fixture: FixtureCreateManyWithoutPlayersInput
 }
 
 """An edge in a connection."""
@@ -2139,7 +1733,6 @@ input UserUpdateDataInput {
   stats: StatsUpdateManyWithoutPlayerInput
   matches: MatchUpdateManyInput
   season: SeasonUpdateOneWithoutPlayersInput
-  fixture: FixtureUpdateManyWithoutPlayersInput
 }
 
 input UserUpdateInput {
@@ -2154,16 +1747,6 @@ input UserUpdateInput {
   stats: StatsUpdateManyWithoutPlayerInput
   matches: MatchUpdateManyInput
   season: SeasonUpdateOneWithoutPlayersInput
-  fixture: FixtureUpdateManyWithoutPlayersInput
-}
-
-input UserUpdateManyWithoutFixtureInput {
-  create: [UserCreateWithoutFixtureInput!]
-  connect: [UserWhereUniqueInput!]
-  disconnect: [UserWhereUniqueInput!]
-  delete: [UserWhereUniqueInput!]
-  update: [UserUpdateWithWhereUniqueWithoutFixtureInput!]
-  upsert: [UserUpsertWithWhereUniqueWithoutFixtureInput!]
 }
 
 input UserUpdateManyWithoutSeasonInput {
@@ -2191,20 +1774,6 @@ input UserUpdateOneWithoutStatsInput {
   upsert: UserUpsertWithoutStatsInput
 }
 
-input UserUpdateWithoutFixtureDataInput {
-  email: String
-  password: String
-  name: String
-  residentialcollege: String
-  bio: String
-  location: String
-  confirmed: Boolean
-  deactivated: Boolean
-  stats: StatsUpdateManyWithoutPlayerInput
-  matches: MatchUpdateManyInput
-  season: SeasonUpdateOneWithoutPlayersInput
-}
-
 input UserUpdateWithoutSeasonDataInput {
   email: String
   password: String
@@ -2216,7 +1785,6 @@ input UserUpdateWithoutSeasonDataInput {
   deactivated: Boolean
   stats: StatsUpdateManyWithoutPlayerInput
   matches: MatchUpdateManyInput
-  fixture: FixtureUpdateManyWithoutPlayersInput
 }
 
 input UserUpdateWithoutStatsDataInput {
@@ -2230,12 +1798,6 @@ input UserUpdateWithoutStatsDataInput {
   deactivated: Boolean
   matches: MatchUpdateManyInput
   season: SeasonUpdateOneWithoutPlayersInput
-  fixture: FixtureUpdateManyWithoutPlayersInput
-}
-
-input UserUpdateWithWhereUniqueWithoutFixtureInput {
-  where: UserWhereUniqueInput!
-  data: UserUpdateWithoutFixtureDataInput!
 }
 
 input UserUpdateWithWhereUniqueWithoutSeasonInput {
@@ -2251,12 +1813,6 @@ input UserUpsertNestedInput {
 input UserUpsertWithoutStatsInput {
   update: UserUpdateWithoutStatsDataInput!
   create: UserCreateWithoutStatsInput!
-}
-
-input UserUpsertWithWhereUniqueWithoutFixtureInput {
-  where: UserWhereUniqueInput!
-  update: UserUpdateWithoutFixtureDataInput!
-  create: UserCreateWithoutFixtureInput!
 }
 
 input UserUpsertWithWhereUniqueWithoutSeasonInput {
@@ -2569,9 +2125,6 @@ input UserWhereInput {
   matches_some: MatchWhereInput
   matches_none: MatchWhereInput
   season: SeasonWhereInput
-  fixture_every: FixtureWhereInput
-  fixture_some: FixtureWhereInput
-  fixture_none: FixtureWhereInput
 }
 
 input UserWhereUniqueInput {
