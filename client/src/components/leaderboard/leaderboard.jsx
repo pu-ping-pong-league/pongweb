@@ -27,11 +27,10 @@ const GET_STATS = gql`
     }
   }
 `
-const GET_FIXTURE = gql`
-  query fixtures($where: FixtureWhereInput) {
-    fixtures(where: $where) {
-      matches {
-        player1 {
+const GET_MATCHES = gql`
+  query matches($where: MatchWhereInput) {
+    matches(where: $where) {
+            player1 {
           email
           name
         }
@@ -42,7 +41,6 @@ const GET_FIXTURE = gql`
         player1set
         player2set
       }
-    }
   }
 `
 const GETCURRENT = gql`
@@ -225,7 +223,7 @@ class Leaderboard extends React.Component {
                       variables={{
                         where: { round: i, season: { season: 1 } }
                       }}
-                      query={GET_FIXTURE}
+                      query={GET_MATCHES}
                     >
                       {({ loading, error, data, refetch }) => {
                         if (loading) {
@@ -245,7 +243,7 @@ class Leaderboard extends React.Component {
                                 <th>Player2 Set</th>
                               </tr>
                             </thead>
-                            {data.fixtures[0].matches.map(match => {
+                            {data.matches.map(match => {
                               return (
                                 <Matchinfo
                                   key={this.props.id}
