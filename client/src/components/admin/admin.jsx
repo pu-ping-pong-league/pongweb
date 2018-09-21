@@ -29,6 +29,7 @@ const GETCURRENT = gql`
     getcurrent {
       season
       timer
+      round
     }
   }
 `
@@ -189,11 +190,11 @@ class AdminPage extends React.Component {
                                           const {
                                             data
                                           } = await setnullscoretozero({
-                                              variables: {
-                                                season: this.state.season,
-                                                round: this.state.round
-                                              }
-                                            })
+                                            variables: {
+                                              season: this.state.season,
+                                              round: this.state.round
+                                            }
+                                          })
                                           this.props.history.push("/admin")
                                           location.reload()
                                         } catch (error) {
@@ -476,7 +477,7 @@ class AdminPage extends React.Component {
                               console.log(this.state.timer)
                               this.props.history.push("/admin")
                               location.reload()
-                            } catch (error) { }
+                            } catch (error) {}
                           }}
                         >
                           <FormGroup row>

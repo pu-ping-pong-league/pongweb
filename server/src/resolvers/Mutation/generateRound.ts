@@ -2,21 +2,25 @@ import { Context, getUserId } from "../../utils";
 
 export default {
   generateRound: async (parent, args, ctx: Context, info) => {
-    const users = await ctx.db.query.users({
-      where: {
-        season: { season: args.season }
-      }
-    });
+    const users = await ctx.db.query.users(
+      {
+        where: {
+          season: { season: args.season }
+        }
+      },
+      info
+    );
     console.log(users);
 
     // format user data for matchmaking
     var users_array = [];
-    for (var i = 0; i < users.length; i = i + 2) {
+    for (var i = 0; i < users.length; i++) {
       const net_wins = users[i].stats[0].wins - users[i].stats[0].losts;
-      const net_sets = users[i].stats[0].totalsetwon - users[i].stats[0].totalsetlost;
+      const net_sets =
+        users[i].stats[0].totalsetwon - users[i].stats[0].totalsetlost;
       users_array.push([users[i], net_wins, net_sets]);
     }
-
+    console.log("formant");
     // sort user data in order required for matchmaking
     function user_comparator(a, b) {
       if (a[1] > b[1]) return 1;
@@ -62,7 +66,7 @@ export default {
         });
       }
 
-      return unmatched_player
+      return unmatched_player;
     }
 
     // do the matching
@@ -79,10 +83,10 @@ export default {
         }
       }
       if (current_players.length > 0) {
-        unmatched_player = match_em(current_players, unmatched_player, args)
+        unmatched_player = match_em(current_players, unmatched_player, args);
       }
     }
-
+    console.log("bad");
     // form 'Bye' match if odd number of players
     if (unmatched_player != null) {
       await ctx.db.mutation.createMatch({
@@ -102,6 +106,6 @@ export default {
       }
     });
 
-    return matches;
+    return users;
   }
 };
