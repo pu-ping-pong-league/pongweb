@@ -11,30 +11,6 @@ const GET_USER = gql`
     getUserbyID(where: $where) {
       name
       email
-      residentialcollege
-      location
-      bio
-      stats {
-        wins
-        losts
-        totalsetwon
-        totalsetlost
-        rating
-      }
-      confirmed
-      matches {
-        player1 {
-          name
-        }
-        player2 {
-          name
-        }
-        player1set
-        player2set
-        season {
-          round
-        }
-      }
     }
   }
 `

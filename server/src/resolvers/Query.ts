@@ -57,14 +57,6 @@ export const Query = {
       info
     );
   },
-  getPlayer1vsPlayer2Matches: async (parent, args, ctx: Context, info) => {
-    return ctx.db.query.matches(
-      {
-        ...args
-      },
-      info
-    );
-  },
   statses: async (parent, args, ctx: Context, info) => {
     return ctx.db.query.statses(
       {
@@ -87,25 +79,4 @@ export const Query = {
   getcurrent: async (parent, args, ctx: Context, info) => {
     return ctx.db.query.currents({ where: {} }, info);
   }
-  // feed(parent, args, ctx: Context, info) {
-  //   return ctx.db.query.matches(
-  //     {
-  //       ...args
-  //     },
-  //     info
-  //   );
-  // },
-  // match(parent, args, ctx: Context, info) {
-  //   return ctx.db.query.match({ where: { id: args.id } }, info);
-  // }
-  // getMatchId(parent, args, ctx: Context, info) {
-  //   return ctx.db.query.match(
-  //     {
-  //       where: {
-  //         id:
-  //       }
-  //     },
-  //     info
-  //   );
-  // }
 };

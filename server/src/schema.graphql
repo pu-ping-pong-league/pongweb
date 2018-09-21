@@ -30,7 +30,6 @@ type Query {
   getStats(email: String!): User!
   getMatches(email: String!): [Match]!
   getResult(player1: String!, player2: String!): [Match]!
-  getMatchId(player1: User!, player2: User!, league: String!, round: Int!): Id!
   getPlayerMatches(player: String!, round: Int!, season: Int!): [Match]!
   statses(where: StatsWhereInput, orderBy: StatsOrderByInput): [Stats]!
   getallplayers: [User!]!

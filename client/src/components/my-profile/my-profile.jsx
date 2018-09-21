@@ -45,6 +45,7 @@ const GETCURRENT = gql`
   query {
     getcurrent {
       season
+      round
       timer
     }
   }
