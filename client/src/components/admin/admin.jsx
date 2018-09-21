@@ -225,8 +225,8 @@ class AdminPage extends React.Component {
                             <th>Current Round Ends</th>
                           </tr>
                           <tr>
-                            <th>{season1}</th>
                             <th>{round1}</th>
+                            <th>{season1}</th>
                             <th>{timer1}</th>
                           </tr>
                         </Table>
