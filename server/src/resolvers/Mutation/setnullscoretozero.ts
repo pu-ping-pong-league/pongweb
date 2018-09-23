@@ -21,7 +21,6 @@ export default {
       },
       info
     );
-
     if (unplayedmatches.length != 0) {
       for (let i = 0; i < unplayedmatches.length; i++) {
         await ctx.db.mutation.updateMatch(
