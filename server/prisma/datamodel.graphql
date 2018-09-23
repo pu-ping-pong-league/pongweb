@@ -6,13 +6,13 @@ type User {
   stats: [Stats!]!
   matches: [Match!]! @relation(name: "UserMatches")
   season: Season
-  fixture: [Fixture!]!
   residentialcollege: String
   bio: String
   location: String
   confirmed: Boolean! @default(value: false)
   deactivated: Boolean! @default(value: false)
 }
+
 type Admin {
   id: ID! @unique
   email: String! @unique
@@ -22,34 +22,26 @@ type Admin {
 type Current {
   id: ID! @unique
   season: Int!
-  fixture: Int!
+  round: Int!
   timer: String
 }
 
 type Match {
   id: ID! @unique
   player1: User! @relation(name: "MatchPlayer1")
-  player2: User! @relation(name: "MatchPlayer2")
+  player2: User @relation(name: "MatchPlayer2")
   player1set: Int
   player2set: Int
-  fixture: Fixture!
   season: Season!
-  sumbit: Boolean! @default(value: false)
-}
-
-type Fixture {
-  id: ID! @unique
   round: Int!
-  players: [User!]!
-  matches: [Match!]!
-  season: Season!
+  sumbit: Boolean! @default(value: false)
 }
 
 type Season {
   id: ID! @unique
   season: Int! @unique
   players: [User!]!
-  fixtures: [Fixture!]!
+  round: Int! @default(value: 0)
 }
 
 type Stats {
@@ -62,6 +54,6 @@ type Stats {
   totalsetwon: Int
   totalsetlost: Int
   rating: Float @default(value: "1000")
-  fixture: Fixture!
   season: Season!
+  round: Int!
 }

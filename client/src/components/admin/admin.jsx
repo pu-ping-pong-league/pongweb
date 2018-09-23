@@ -11,7 +11,7 @@ const UPDATECURRENT = gql`
   mutation updatecurrent($round: Int!, $season: Int!, $timer: String!) {
     updatecurrent(round: $round, season: $season, timer: $timer) {
       season
-      fixture
+      round
       timer
     }
   }
@@ -20,7 +20,7 @@ const CREATECURRENT = gql`
   mutation createcurrent($round: Int!, $season: Int!, $timer: String!) {
     createcurrent(round: $round, season: $season, timer: $timer) {
       season
-      fixture
+      round
       timer
     }
   }
@@ -30,14 +30,15 @@ const GETCURRENT = gql`
   query {
     getcurrent {
       season
-      fixture
+      round
       timer
+      round
     }
   }
 `
 const UNPLAYEDMATCHES = gql`
-  query getunplayedmatches($season: Int!, $fixture: Int!) {
-    getunplayedmatches(season: $season, fixture: $fixture) {
+  query getunplayedmatches($season: Int!, $round: Int!) {
+    getunplayedmatches(season: $season, round: $round) {
       player1 {
         email
         name
@@ -54,11 +55,9 @@ const UNPLAYEDMATCHES = gql`
 const SETNULLSCORETOZERO = gql`
   mutation setnullscoretozero($round: Int!, $season: Int!) {
     setnullscoretozero(round: $round, season: $season) {
-      fixture {
-        round
-      }
       season {
         season
+        round
       }
       player1 {
         stats {
@@ -124,7 +123,7 @@ class AdminPage extends React.Component {
               return "OOps, somehing blew up."
             }
             const season1 = data.getcurrent[0].season
-            const fixture1 = data.getcurrent[0].fixture
+            const round1 = data.getcurrent[0].round
             const timer1 = data.getcurrent[0].timer
             const unplayedmatches = []
 
@@ -134,7 +133,7 @@ class AdminPage extends React.Component {
                   query={UNPLAYEDMATCHES}
                   variables={{
                     season: season1,
-                    fixture: fixture1
+                    round: round1
                   }}
                 >
                   {({ loading, error, data, refetch }) => {
@@ -226,8 +225,8 @@ class AdminPage extends React.Component {
                             <th>Current Round Ends</th>
                           </tr>
                           <tr>
+                            <th>{round1}</th>
                             <th>{season1}</th>
-                            <th>{fixture1}</th>
                             <th>{timer1}</th>
                           </tr>
                         </Table>

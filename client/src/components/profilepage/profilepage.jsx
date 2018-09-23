@@ -40,7 +40,7 @@ const GET_USER = gql`
         }
         player1set
         player2set
-        fixture {
+        season {
           round
         }
       }
@@ -60,7 +60,7 @@ const MATCHES = gql`
       }
       player1set
       player2set
-      fixture {
+      season {
         round
       }
       season {
@@ -226,7 +226,7 @@ class ProfilePage extends React.Component {
                             expandOnHover={true}
                             expandSize={3}
                             viewBoxSize={30}
-                            // onSectorHover={}
+                          // onSectorHover={}
                           />
                           <ReactSvgPieChart
                             strokeLinejoin="round"
@@ -236,7 +236,7 @@ class ProfilePage extends React.Component {
                             expandOnHover={true}
                             expandSize={3}
                             viewBoxSize={30}
-                            // onSectorHover={}
+                          // onSectorHover={}
                           />
                         </div>
                       </div>
@@ -314,7 +314,7 @@ class ProfilePage extends React.Component {
                                     player2={user.player2}
                                     player1set={user.player1set}
                                     player2set={user.player2set}
-                                    round={user.fixture.round}
+                                    round={user.season.round}
                                     season={user.season.season}
                                   />
                                 )

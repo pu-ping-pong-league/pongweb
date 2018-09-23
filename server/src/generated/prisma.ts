@@ -10,21 +10,18 @@ export interface Query {
     matches: <T = Match[]>(args: { where?: MatchWhereInput, orderBy?: MatchOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     seasons: <T = Season[]>(args: { where?: SeasonWhereInput, orderBy?: SeasonOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     users: <T = User[]>(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    fixtures: <T = Fixture[]>(args: { where?: FixtureWhereInput, orderBy?: FixtureOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     admin: <T = Admin | null>(args: { where: AdminWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     current: <T = Current | null>(args: { where: CurrentWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     stats: <T = Stats | null>(args: { where: StatsWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     match: <T = Match | null>(args: { where: MatchWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     season: <T = Season | null>(args: { where: SeasonWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     user: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    fixture: <T = Fixture | null>(args: { where: FixtureWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     adminsConnection: <T = AdminConnection>(args: { where?: AdminWhereInput, orderBy?: AdminOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     currentsConnection: <T = CurrentConnection>(args: { where?: CurrentWhereInput, orderBy?: CurrentOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     statsesConnection: <T = StatsConnection>(args: { where?: StatsWhereInput, orderBy?: StatsOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     matchesConnection: <T = MatchConnection>(args: { where?: MatchWhereInput, orderBy?: MatchOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     seasonsConnection: <T = SeasonConnection>(args: { where?: SeasonWhereInput, orderBy?: SeasonOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     usersConnection: <T = UserConnection>(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    fixturesConnection: <T = FixtureConnection>(args: { where?: FixtureWhereInput, orderBy?: FixtureOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     node: <T = Node | null>(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
   }
 
@@ -35,42 +32,36 @@ export interface Mutation {
     createMatch: <T = Match>(args: { data: MatchCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createSeason: <T = Season>(args: { data: SeasonCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createUser: <T = User>(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    createFixture: <T = Fixture>(args: { data: FixtureCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateAdmin: <T = Admin | null>(args: { data: AdminUpdateInput, where: AdminWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateCurrent: <T = Current | null>(args: { data: CurrentUpdateInput, where: CurrentWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateStats: <T = Stats | null>(args: { data: StatsUpdateInput, where: StatsWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateMatch: <T = Match | null>(args: { data: MatchUpdateInput, where: MatchWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateSeason: <T = Season | null>(args: { data: SeasonUpdateInput, where: SeasonWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateUser: <T = User | null>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateFixture: <T = Fixture | null>(args: { data: FixtureUpdateInput, where: FixtureWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteAdmin: <T = Admin | null>(args: { where: AdminWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteCurrent: <T = Current | null>(args: { where: CurrentWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteStats: <T = Stats | null>(args: { where: StatsWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteMatch: <T = Match | null>(args: { where: MatchWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteSeason: <T = Season | null>(args: { where: SeasonWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteUser: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteFixture: <T = Fixture | null>(args: { where: FixtureWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertAdmin: <T = Admin>(args: { where: AdminWhereUniqueInput, create: AdminCreateInput, update: AdminUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertCurrent: <T = Current>(args: { where: CurrentWhereUniqueInput, create: CurrentCreateInput, update: CurrentUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertStats: <T = Stats>(args: { where: StatsWhereUniqueInput, create: StatsCreateInput, update: StatsUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertMatch: <T = Match>(args: { where: MatchWhereUniqueInput, create: MatchCreateInput, update: MatchUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertSeason: <T = Season>(args: { where: SeasonWhereUniqueInput, create: SeasonCreateInput, update: SeasonUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertUser: <T = User>(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    upsertFixture: <T = Fixture>(args: { where: FixtureWhereUniqueInput, create: FixtureCreateInput, update: FixtureUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyAdmins: <T = BatchPayload>(args: { data: AdminUpdateInput, where?: AdminWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyCurrents: <T = BatchPayload>(args: { data: CurrentUpdateInput, where?: CurrentWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyStatses: <T = BatchPayload>(args: { data: StatsUpdateInput, where?: StatsWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyMatches: <T = BatchPayload>(args: { data: MatchUpdateInput, where?: MatchWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManySeasons: <T = BatchPayload>(args: { data: SeasonUpdateInput, where?: SeasonWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyUsers: <T = BatchPayload>(args: { data: UserUpdateInput, where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyFixtures: <T = BatchPayload>(args: { data: FixtureUpdateInput, where?: FixtureWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyAdmins: <T = BatchPayload>(args: { where?: AdminWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyCurrents: <T = BatchPayload>(args: { where?: CurrentWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyStatses: <T = BatchPayload>(args: { where?: StatsWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyMatches: <T = BatchPayload>(args: { where?: MatchWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManySeasons: <T = BatchPayload>(args: { where?: SeasonWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyFixtures: <T = BatchPayload>(args: { where?: FixtureWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
+    deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
   }
 
 export interface Subscription {
@@ -79,8 +70,7 @@ export interface Subscription {
     stats: <T = StatsSubscriptionPayload | null>(args: { where?: StatsSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
     match: <T = MatchSubscriptionPayload | null>(args: { where?: MatchSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
     season: <T = SeasonSubscriptionPayload | null>(args: { where?: SeasonSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
-    user: <T = UserSubscriptionPayload | null>(args: { where?: UserSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
-    fixture: <T = FixtureSubscriptionPayload | null>(args: { where?: FixtureSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> 
+    user: <T = UserSubscriptionPayload | null>(args: { where?: UserSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> 
   }
 
 export interface Exists {
@@ -90,7 +80,6 @@ export interface Exists {
   Match: (where?: MatchWhereInput) => Promise<boolean>
   Season: (where?: SeasonWhereInput) => Promise<boolean>
   User: (where?: UserWhereInput) => Promise<boolean>
-  Fixture: (where?: FixtureWhereInput) => Promise<boolean>
 }
 
 export interface Prisma {
@@ -398,10 +387,6 @@ type AggregateCurrent {
   count: Int!
 }
 
-type AggregateFixture {
-  count: Int!
-}
-
 type AggregateMatch {
   count: Int!
 }
@@ -426,7 +411,7 @@ type BatchPayload {
 type Current implements Node {
   id: ID!
   season: Int!
-  fixture: Int!
+  round: Int!
   timer: String
 }
 
@@ -442,7 +427,7 @@ type CurrentConnection {
 
 input CurrentCreateInput {
   season: Int!
-  fixture: Int!
+  round: Int!
   timer: String
 }
 
@@ -460,8 +445,8 @@ enum CurrentOrderByInput {
   id_DESC
   season_ASC
   season_DESC
-  fixture_ASC
-  fixture_DESC
+  round_ASC
+  round_DESC
   timer_ASC
   timer_DESC
   updatedAt_ASC
@@ -473,7 +458,7 @@ enum CurrentOrderByInput {
 type CurrentPreviousValues {
   id: ID!
   season: Int!
-  fixture: Int!
+  round: Int!
   timer: String
 }
 
@@ -518,7 +503,7 @@ input CurrentSubscriptionWhereInput {
 
 input CurrentUpdateInput {
   season: Int
-  fixture: Int
+  round: Int
   timer: String
 }
 
@@ -593,28 +578,28 @@ input CurrentWhereInput {
 
   """All values greater than or equal the given value."""
   season_gte: Int
-  fixture: Int
+  round: Int
 
   """All values that are not equal to given value."""
-  fixture_not: Int
+  round_not: Int
 
   """All values that are contained in given list."""
-  fixture_in: [Int!]
+  round_in: [Int!]
 
   """All values that are not contained in given list."""
-  fixture_not_in: [Int!]
+  round_not_in: [Int!]
 
   """All values less than the given value."""
-  fixture_lt: Int
+  round_lt: Int
 
   """All values less than or equal the given value."""
-  fixture_lte: Int
+  round_lte: Int
 
   """All values greater than the given value."""
-  fixture_gt: Int
+  round_gt: Int
 
   """All values greater than or equal the given value."""
-  fixture_gte: Int
+  round_gte: Int
   timer: String
 
   """All values that are not equal to given value."""
@@ -661,315 +646,6 @@ input CurrentWhereUniqueInput {
   id: ID
 }
 
-type Fixture implements Node {
-  id: ID!
-  round: Int!
-  players(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
-  matches(where: MatchWhereInput, orderBy: MatchOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Match!]
-  season(where: SeasonWhereInput): Season!
-}
-
-"""A connection to a list of items."""
-type FixtureConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [FixtureEdge]!
-  aggregate: AggregateFixture!
-}
-
-input FixtureCreateInput {
-  round: Int!
-  players: UserCreateManyWithoutFixtureInput
-  matches: MatchCreateManyWithoutFixtureInput
-  season: SeasonCreateOneWithoutFixturesInput!
-}
-
-input FixtureCreateManyWithoutPlayersInput {
-  create: [FixtureCreateWithoutPlayersInput!]
-  connect: [FixtureWhereUniqueInput!]
-}
-
-input FixtureCreateManyWithoutSeasonInput {
-  create: [FixtureCreateWithoutSeasonInput!]
-  connect: [FixtureWhereUniqueInput!]
-}
-
-input FixtureCreateOneInput {
-  create: FixtureCreateInput
-  connect: FixtureWhereUniqueInput
-}
-
-input FixtureCreateOneWithoutMatchesInput {
-  create: FixtureCreateWithoutMatchesInput
-  connect: FixtureWhereUniqueInput
-}
-
-input FixtureCreateWithoutMatchesInput {
-  round: Int!
-  players: UserCreateManyWithoutFixtureInput
-  season: SeasonCreateOneWithoutFixturesInput!
-}
-
-input FixtureCreateWithoutPlayersInput {
-  round: Int!
-  matches: MatchCreateManyWithoutFixtureInput
-  season: SeasonCreateOneWithoutFixturesInput!
-}
-
-input FixtureCreateWithoutSeasonInput {
-  round: Int!
-  players: UserCreateManyWithoutFixtureInput
-  matches: MatchCreateManyWithoutFixtureInput
-}
-
-"""An edge in a connection."""
-type FixtureEdge {
-  """The item at the end of the edge."""
-  node: Fixture!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum FixtureOrderByInput {
-  id_ASC
-  id_DESC
-  round_ASC
-  round_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type FixturePreviousValues {
-  id: ID!
-  round: Int!
-}
-
-type FixtureSubscriptionPayload {
-  mutation: MutationType!
-  node: Fixture
-  updatedFields: [String!]
-  previousValues: FixturePreviousValues
-}
-
-input FixtureSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [FixtureSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [FixtureSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [FixtureSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: FixtureWhereInput
-}
-
-input FixtureUpdateDataInput {
-  round: Int
-  players: UserUpdateManyWithoutFixtureInput
-  matches: MatchUpdateManyWithoutFixtureInput
-  season: SeasonUpdateOneWithoutFixturesInput
-}
-
-input FixtureUpdateInput {
-  round: Int
-  players: UserUpdateManyWithoutFixtureInput
-  matches: MatchUpdateManyWithoutFixtureInput
-  season: SeasonUpdateOneWithoutFixturesInput
-}
-
-input FixtureUpdateManyWithoutPlayersInput {
-  create: [FixtureCreateWithoutPlayersInput!]
-  connect: [FixtureWhereUniqueInput!]
-  disconnect: [FixtureWhereUniqueInput!]
-  delete: [FixtureWhereUniqueInput!]
-  update: [FixtureUpdateWithWhereUniqueWithoutPlayersInput!]
-  upsert: [FixtureUpsertWithWhereUniqueWithoutPlayersInput!]
-}
-
-input FixtureUpdateManyWithoutSeasonInput {
-  create: [FixtureCreateWithoutSeasonInput!]
-  connect: [FixtureWhereUniqueInput!]
-  disconnect: [FixtureWhereUniqueInput!]
-  delete: [FixtureWhereUniqueInput!]
-  update: [FixtureUpdateWithWhereUniqueWithoutSeasonInput!]
-  upsert: [FixtureUpsertWithWhereUniqueWithoutSeasonInput!]
-}
-
-input FixtureUpdateOneInput {
-  create: FixtureCreateInput
-  connect: FixtureWhereUniqueInput
-  delete: Boolean
-  update: FixtureUpdateDataInput
-  upsert: FixtureUpsertNestedInput
-}
-
-input FixtureUpdateOneWithoutMatchesInput {
-  create: FixtureCreateWithoutMatchesInput
-  connect: FixtureWhereUniqueInput
-  delete: Boolean
-  update: FixtureUpdateWithoutMatchesDataInput
-  upsert: FixtureUpsertWithoutMatchesInput
-}
-
-input FixtureUpdateWithoutMatchesDataInput {
-  round: Int
-  players: UserUpdateManyWithoutFixtureInput
-  season: SeasonUpdateOneWithoutFixturesInput
-}
-
-input FixtureUpdateWithoutPlayersDataInput {
-  round: Int
-  matches: MatchUpdateManyWithoutFixtureInput
-  season: SeasonUpdateOneWithoutFixturesInput
-}
-
-input FixtureUpdateWithoutSeasonDataInput {
-  round: Int
-  players: UserUpdateManyWithoutFixtureInput
-  matches: MatchUpdateManyWithoutFixtureInput
-}
-
-input FixtureUpdateWithWhereUniqueWithoutPlayersInput {
-  where: FixtureWhereUniqueInput!
-  data: FixtureUpdateWithoutPlayersDataInput!
-}
-
-input FixtureUpdateWithWhereUniqueWithoutSeasonInput {
-  where: FixtureWhereUniqueInput!
-  data: FixtureUpdateWithoutSeasonDataInput!
-}
-
-input FixtureUpsertNestedInput {
-  update: FixtureUpdateDataInput!
-  create: FixtureCreateInput!
-}
-
-input FixtureUpsertWithoutMatchesInput {
-  update: FixtureUpdateWithoutMatchesDataInput!
-  create: FixtureCreateWithoutMatchesInput!
-}
-
-input FixtureUpsertWithWhereUniqueWithoutPlayersInput {
-  where: FixtureWhereUniqueInput!
-  update: FixtureUpdateWithoutPlayersDataInput!
-  create: FixtureCreateWithoutPlayersInput!
-}
-
-input FixtureUpsertWithWhereUniqueWithoutSeasonInput {
-  where: FixtureWhereUniqueInput!
-  update: FixtureUpdateWithoutSeasonDataInput!
-  create: FixtureCreateWithoutSeasonInput!
-}
-
-input FixtureWhereInput {
-  """Logical AND on all given filters."""
-  AND: [FixtureWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [FixtureWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [FixtureWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  round: Int
-
-  """All values that are not equal to given value."""
-  round_not: Int
-
-  """All values that are contained in given list."""
-  round_in: [Int!]
-
-  """All values that are not contained in given list."""
-  round_not_in: [Int!]
-
-  """All values less than the given value."""
-  round_lt: Int
-
-  """All values less than or equal the given value."""
-  round_lte: Int
-
-  """All values greater than the given value."""
-  round_gt: Int
-
-  """All values greater than or equal the given value."""
-  round_gte: Int
-  players_every: UserWhereInput
-  players_some: UserWhereInput
-  players_none: UserWhereInput
-  matches_every: MatchWhereInput
-  matches_some: MatchWhereInput
-  matches_none: MatchWhereInput
-  season: SeasonWhereInput
-}
-
-input FixtureWhereUniqueInput {
-  id: ID
-}
-
 """
 The \`Long\` scalar type represents non-fractional signed whole numeric values.
 Long can represent values between -(2^63) and 2^63 - 1.
@@ -979,11 +655,11 @@ scalar Long
 type Match implements Node {
   id: ID!
   player1(where: UserWhereInput): User!
-  player2(where: UserWhereInput): User!
+  player2(where: UserWhereInput): User
   player1set: Int
   player2set: Int
-  fixture(where: FixtureWhereInput): Fixture!
   season(where: SeasonWhereInput): Season!
+  round: Int!
   sumbit: Boolean!
 }
 
@@ -1000,30 +676,16 @@ type MatchConnection {
 input MatchCreateInput {
   player1set: Int
   player2set: Int
+  round: Int!
   sumbit: Boolean
   player1: UserCreateOneInput!
-  player2: UserCreateOneInput!
-  fixture: FixtureCreateOneWithoutMatchesInput!
+  player2: UserCreateOneInput
   season: SeasonCreateOneInput!
 }
 
 input MatchCreateManyInput {
   create: [MatchCreateInput!]
   connect: [MatchWhereUniqueInput!]
-}
-
-input MatchCreateManyWithoutFixtureInput {
-  create: [MatchCreateWithoutFixtureInput!]
-  connect: [MatchWhereUniqueInput!]
-}
-
-input MatchCreateWithoutFixtureInput {
-  player1set: Int
-  player2set: Int
-  sumbit: Boolean
-  player1: UserCreateOneInput!
-  player2: UserCreateOneInput!
-  season: SeasonCreateOneInput!
 }
 
 """An edge in a connection."""
@@ -1042,6 +704,8 @@ enum MatchOrderByInput {
   player1set_DESC
   player2set_ASC
   player2set_DESC
+  round_ASC
+  round_DESC
   sumbit_ASC
   sumbit_DESC
   updatedAt_ASC
@@ -1054,6 +718,7 @@ type MatchPreviousValues {
   id: ID!
   player1set: Int
   player2set: Int
+  round: Int!
   sumbit: Boolean!
 }
 
@@ -1099,20 +764,20 @@ input MatchSubscriptionWhereInput {
 input MatchUpdateDataInput {
   player1set: Int
   player2set: Int
+  round: Int
   sumbit: Boolean
   player1: UserUpdateOneInput
   player2: UserUpdateOneInput
-  fixture: FixtureUpdateOneWithoutMatchesInput
   season: SeasonUpdateOneInput
 }
 
 input MatchUpdateInput {
   player1set: Int
   player2set: Int
+  round: Int
   sumbit: Boolean
   player1: UserUpdateOneInput
   player2: UserUpdateOneInput
-  fixture: FixtureUpdateOneWithoutMatchesInput
   season: SeasonUpdateOneInput
 }
 
@@ -1125,44 +790,15 @@ input MatchUpdateManyInput {
   upsert: [MatchUpsertWithWhereUniqueNestedInput!]
 }
 
-input MatchUpdateManyWithoutFixtureInput {
-  create: [MatchCreateWithoutFixtureInput!]
-  connect: [MatchWhereUniqueInput!]
-  disconnect: [MatchWhereUniqueInput!]
-  delete: [MatchWhereUniqueInput!]
-  update: [MatchUpdateWithWhereUniqueWithoutFixtureInput!]
-  upsert: [MatchUpsertWithWhereUniqueWithoutFixtureInput!]
-}
-
-input MatchUpdateWithoutFixtureDataInput {
-  player1set: Int
-  player2set: Int
-  sumbit: Boolean
-  player1: UserUpdateOneInput
-  player2: UserUpdateOneInput
-  season: SeasonUpdateOneInput
-}
-
 input MatchUpdateWithWhereUniqueNestedInput {
   where: MatchWhereUniqueInput!
   data: MatchUpdateDataInput!
-}
-
-input MatchUpdateWithWhereUniqueWithoutFixtureInput {
-  where: MatchWhereUniqueInput!
-  data: MatchUpdateWithoutFixtureDataInput!
 }
 
 input MatchUpsertWithWhereUniqueNestedInput {
   where: MatchWhereUniqueInput!
   update: MatchUpdateDataInput!
   create: MatchCreateInput!
-}
-
-input MatchUpsertWithWhereUniqueWithoutFixtureInput {
-  where: MatchWhereUniqueInput!
-  update: MatchUpdateWithoutFixtureDataInput!
-  create: MatchCreateWithoutFixtureInput!
 }
 
 input MatchWhereInput {
@@ -1258,13 +894,34 @@ input MatchWhereInput {
 
   """All values greater than or equal the given value."""
   player2set_gte: Int
+  round: Int
+
+  """All values that are not equal to given value."""
+  round_not: Int
+
+  """All values that are contained in given list."""
+  round_in: [Int!]
+
+  """All values that are not contained in given list."""
+  round_not_in: [Int!]
+
+  """All values less than the given value."""
+  round_lt: Int
+
+  """All values less than or equal the given value."""
+  round_lte: Int
+
+  """All values greater than the given value."""
+  round_gt: Int
+
+  """All values greater than or equal the given value."""
+  round_gte: Int
   sumbit: Boolean
 
   """All values that are not equal to given value."""
   sumbit_not: Boolean
   player1: UserWhereInput
   player2: UserWhereInput
-  fixture: FixtureWhereInput
   season: SeasonWhereInput
 }
 
@@ -1279,42 +936,36 @@ type Mutation {
   createMatch(data: MatchCreateInput!): Match!
   createSeason(data: SeasonCreateInput!): Season!
   createUser(data: UserCreateInput!): User!
-  createFixture(data: FixtureCreateInput!): Fixture!
   updateAdmin(data: AdminUpdateInput!, where: AdminWhereUniqueInput!): Admin
   updateCurrent(data: CurrentUpdateInput!, where: CurrentWhereUniqueInput!): Current
   updateStats(data: StatsUpdateInput!, where: StatsWhereUniqueInput!): Stats
   updateMatch(data: MatchUpdateInput!, where: MatchWhereUniqueInput!): Match
   updateSeason(data: SeasonUpdateInput!, where: SeasonWhereUniqueInput!): Season
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  updateFixture(data: FixtureUpdateInput!, where: FixtureWhereUniqueInput!): Fixture
   deleteAdmin(where: AdminWhereUniqueInput!): Admin
   deleteCurrent(where: CurrentWhereUniqueInput!): Current
   deleteStats(where: StatsWhereUniqueInput!): Stats
   deleteMatch(where: MatchWhereUniqueInput!): Match
   deleteSeason(where: SeasonWhereUniqueInput!): Season
   deleteUser(where: UserWhereUniqueInput!): User
-  deleteFixture(where: FixtureWhereUniqueInput!): Fixture
   upsertAdmin(where: AdminWhereUniqueInput!, create: AdminCreateInput!, update: AdminUpdateInput!): Admin!
   upsertCurrent(where: CurrentWhereUniqueInput!, create: CurrentCreateInput!, update: CurrentUpdateInput!): Current!
   upsertStats(where: StatsWhereUniqueInput!, create: StatsCreateInput!, update: StatsUpdateInput!): Stats!
   upsertMatch(where: MatchWhereUniqueInput!, create: MatchCreateInput!, update: MatchUpdateInput!): Match!
   upsertSeason(where: SeasonWhereUniqueInput!, create: SeasonCreateInput!, update: SeasonUpdateInput!): Season!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  upsertFixture(where: FixtureWhereUniqueInput!, create: FixtureCreateInput!, update: FixtureUpdateInput!): Fixture!
   updateManyAdmins(data: AdminUpdateInput!, where: AdminWhereInput): BatchPayload!
   updateManyCurrents(data: CurrentUpdateInput!, where: CurrentWhereInput): BatchPayload!
   updateManyStatses(data: StatsUpdateInput!, where: StatsWhereInput): BatchPayload!
   updateManyMatches(data: MatchUpdateInput!, where: MatchWhereInput): BatchPayload!
   updateManySeasons(data: SeasonUpdateInput!, where: SeasonWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
-  updateManyFixtures(data: FixtureUpdateInput!, where: FixtureWhereInput): BatchPayload!
   deleteManyAdmins(where: AdminWhereInput): BatchPayload!
   deleteManyCurrents(where: CurrentWhereInput): BatchPayload!
   deleteManyStatses(where: StatsWhereInput): BatchPayload!
   deleteManyMatches(where: MatchWhereInput): BatchPayload!
   deleteManySeasons(where: SeasonWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
-  deleteManyFixtures(where: FixtureWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -1351,21 +1002,18 @@ type Query {
   matches(where: MatchWhereInput, orderBy: MatchOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Match]!
   seasons(where: SeasonWhereInput, orderBy: SeasonOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Season]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
-  fixtures(where: FixtureWhereInput, orderBy: FixtureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Fixture]!
   admin(where: AdminWhereUniqueInput!): Admin
   current(where: CurrentWhereUniqueInput!): Current
   stats(where: StatsWhereUniqueInput!): Stats
   match(where: MatchWhereUniqueInput!): Match
   season(where: SeasonWhereUniqueInput!): Season
   user(where: UserWhereUniqueInput!): User
-  fixture(where: FixtureWhereUniqueInput!): Fixture
   adminsConnection(where: AdminWhereInput, orderBy: AdminOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AdminConnection!
   currentsConnection(where: CurrentWhereInput, orderBy: CurrentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CurrentConnection!
   statsesConnection(where: StatsWhereInput, orderBy: StatsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StatsConnection!
   matchesConnection(where: MatchWhereInput, orderBy: MatchOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MatchConnection!
   seasonsConnection(where: SeasonWhereInput, orderBy: SeasonOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SeasonConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
-  fixturesConnection(where: FixtureWhereInput, orderBy: FixtureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FixtureConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -1378,7 +1026,7 @@ type Season implements Node {
   id: ID!
   season: Int!
   players(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
-  fixtures(where: FixtureWhereInput, orderBy: FixtureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Fixture!]
+  round: Int!
 }
 
 """A connection to a list of items."""
@@ -1393,17 +1041,12 @@ type SeasonConnection {
 
 input SeasonCreateInput {
   season: Int!
+  round: Int
   players: UserCreateManyWithoutSeasonInput
-  fixtures: FixtureCreateManyWithoutSeasonInput
 }
 
 input SeasonCreateOneInput {
   create: SeasonCreateInput
-  connect: SeasonWhereUniqueInput
-}
-
-input SeasonCreateOneWithoutFixturesInput {
-  create: SeasonCreateWithoutFixturesInput
   connect: SeasonWhereUniqueInput
 }
 
@@ -1412,14 +1055,9 @@ input SeasonCreateOneWithoutPlayersInput {
   connect: SeasonWhereUniqueInput
 }
 
-input SeasonCreateWithoutFixturesInput {
-  season: Int!
-  players: UserCreateManyWithoutSeasonInput
-}
-
 input SeasonCreateWithoutPlayersInput {
   season: Int!
-  fixtures: FixtureCreateManyWithoutSeasonInput
+  round: Int
 }
 
 """An edge in a connection."""
@@ -1436,6 +1074,8 @@ enum SeasonOrderByInput {
   id_DESC
   season_ASC
   season_DESC
+  round_ASC
+  round_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -1445,6 +1085,7 @@ enum SeasonOrderByInput {
 type SeasonPreviousValues {
   id: ID!
   season: Int!
+  round: Int!
 }
 
 type SeasonSubscriptionPayload {
@@ -1488,14 +1129,14 @@ input SeasonSubscriptionWhereInput {
 
 input SeasonUpdateDataInput {
   season: Int
+  round: Int
   players: UserUpdateManyWithoutSeasonInput
-  fixtures: FixtureUpdateManyWithoutSeasonInput
 }
 
 input SeasonUpdateInput {
   season: Int
+  round: Int
   players: UserUpdateManyWithoutSeasonInput
-  fixtures: FixtureUpdateManyWithoutSeasonInput
 }
 
 input SeasonUpdateOneInput {
@@ -1504,14 +1145,6 @@ input SeasonUpdateOneInput {
   delete: Boolean
   update: SeasonUpdateDataInput
   upsert: SeasonUpsertNestedInput
-}
-
-input SeasonUpdateOneWithoutFixturesInput {
-  create: SeasonCreateWithoutFixturesInput
-  connect: SeasonWhereUniqueInput
-  delete: Boolean
-  update: SeasonUpdateWithoutFixturesDataInput
-  upsert: SeasonUpsertWithoutFixturesInput
 }
 
 input SeasonUpdateOneWithoutPlayersInput {
@@ -1523,24 +1156,14 @@ input SeasonUpdateOneWithoutPlayersInput {
   upsert: SeasonUpsertWithoutPlayersInput
 }
 
-input SeasonUpdateWithoutFixturesDataInput {
-  season: Int
-  players: UserUpdateManyWithoutSeasonInput
-}
-
 input SeasonUpdateWithoutPlayersDataInput {
   season: Int
-  fixtures: FixtureUpdateManyWithoutSeasonInput
+  round: Int
 }
 
 input SeasonUpsertNestedInput {
   update: SeasonUpdateDataInput!
   create: SeasonCreateInput!
-}
-
-input SeasonUpsertWithoutFixturesInput {
-  update: SeasonUpdateWithoutFixturesDataInput!
-  create: SeasonCreateWithoutFixturesInput!
 }
 
 input SeasonUpsertWithoutPlayersInput {
@@ -1619,12 +1242,31 @@ input SeasonWhereInput {
 
   """All values greater than or equal the given value."""
   season_gte: Int
+  round: Int
+
+  """All values that are not equal to given value."""
+  round_not: Int
+
+  """All values that are contained in given list."""
+  round_in: [Int!]
+
+  """All values that are not contained in given list."""
+  round_not_in: [Int!]
+
+  """All values less than the given value."""
+  round_lt: Int
+
+  """All values less than or equal the given value."""
+  round_lte: Int
+
+  """All values greater than the given value."""
+  round_gt: Int
+
+  """All values greater than or equal the given value."""
+  round_gte: Int
   players_every: UserWhereInput
   players_some: UserWhereInput
   players_none: UserWhereInput
-  fixtures_every: FixtureWhereInput
-  fixtures_some: FixtureWhereInput
-  fixtures_none: FixtureWhereInput
 }
 
 input SeasonWhereUniqueInput {
@@ -1642,8 +1284,8 @@ type Stats implements Node {
   totalsetwon: Int
   totalsetlost: Int
   rating: Float
-  fixture(where: FixtureWhereInput): Fixture!
   season(where: SeasonWhereInput): Season!
+  round: Int!
 }
 
 """A connection to a list of items."""
@@ -1664,8 +1306,8 @@ input StatsCreateInput {
   totalsetwon: Int
   totalsetlost: Int
   rating: Float
+  round: Int!
   player: UserCreateOneWithoutStatsInput!
-  fixture: FixtureCreateOneInput!
   season: SeasonCreateOneInput!
 }
 
@@ -1682,7 +1324,7 @@ input StatsCreateWithoutPlayerInput {
   totalsetwon: Int
   totalsetlost: Int
   rating: Float
-  fixture: FixtureCreateOneInput!
+  round: Int!
   season: SeasonCreateOneInput!
 }
 
@@ -1712,6 +1354,8 @@ enum StatsOrderByInput {
   totalsetlost_DESC
   rating_ASC
   rating_DESC
+  round_ASC
+  round_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -1727,6 +1371,7 @@ type StatsPreviousValues {
   totalsetwon: Int
   totalsetlost: Int
   rating: Float
+  round: Int!
 }
 
 type StatsSubscriptionPayload {
@@ -1776,8 +1421,8 @@ input StatsUpdateInput {
   totalsetwon: Int
   totalsetlost: Int
   rating: Float
+  round: Int
   player: UserUpdateOneWithoutStatsInput
-  fixture: FixtureUpdateOneInput
   season: SeasonUpdateOneInput
 }
 
@@ -1798,7 +1443,7 @@ input StatsUpdateWithoutPlayerDataInput {
   totalsetwon: Int
   totalsetlost: Int
   rating: Float
-  fixture: FixtureUpdateOneInput
+  round: Int
   season: SeasonUpdateOneInput
 }
 
@@ -2034,8 +1679,29 @@ input StatsWhereInput {
 
   """All values greater than or equal the given value."""
   rating_gte: Float
+  round: Int
+
+  """All values that are not equal to given value."""
+  round_not: Int
+
+  """All values that are contained in given list."""
+  round_in: [Int!]
+
+  """All values that are not contained in given list."""
+  round_not_in: [Int!]
+
+  """All values less than the given value."""
+  round_lt: Int
+
+  """All values less than or equal the given value."""
+  round_lte: Int
+
+  """All values greater than the given value."""
+  round_gt: Int
+
+  """All values greater than or equal the given value."""
+  round_gte: Int
   player: UserWhereInput
-  fixture: FixtureWhereInput
   season: SeasonWhereInput
 }
 
@@ -2050,7 +1716,6 @@ type Subscription {
   match(where: MatchSubscriptionWhereInput): MatchSubscriptionPayload
   season(where: SeasonSubscriptionWhereInput): SeasonSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
-  fixture(where: FixtureSubscriptionWhereInput): FixtureSubscriptionPayload
 }
 
 type User implements Node {
@@ -2061,7 +1726,6 @@ type User implements Node {
   stats(where: StatsWhereInput, orderBy: StatsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Stats!]
   matches(where: MatchWhereInput, orderBy: MatchOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Match!]
   season(where: SeasonWhereInput): Season
-  fixture(where: FixtureWhereInput, orderBy: FixtureOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Fixture!]
   residentialcollege: String
   bio: String
   location: String
@@ -2091,12 +1755,6 @@ input UserCreateInput {
   stats: StatsCreateManyWithoutPlayerInput
   matches: MatchCreateManyInput
   season: SeasonCreateOneWithoutPlayersInput
-  fixture: FixtureCreateManyWithoutPlayersInput
-}
-
-input UserCreateManyWithoutFixtureInput {
-  create: [UserCreateWithoutFixtureInput!]
-  connect: [UserWhereUniqueInput!]
 }
 
 input UserCreateManyWithoutSeasonInput {
@@ -2114,20 +1772,6 @@ input UserCreateOneWithoutStatsInput {
   connect: UserWhereUniqueInput
 }
 
-input UserCreateWithoutFixtureInput {
-  email: String!
-  password: String!
-  name: String!
-  residentialcollege: String
-  bio: String
-  location: String
-  confirmed: Boolean
-  deactivated: Boolean
-  stats: StatsCreateManyWithoutPlayerInput
-  matches: MatchCreateManyInput
-  season: SeasonCreateOneWithoutPlayersInput
-}
-
 input UserCreateWithoutSeasonInput {
   email: String!
   password: String!
@@ -2139,7 +1783,6 @@ input UserCreateWithoutSeasonInput {
   deactivated: Boolean
   stats: StatsCreateManyWithoutPlayerInput
   matches: MatchCreateManyInput
-  fixture: FixtureCreateManyWithoutPlayersInput
 }
 
 input UserCreateWithoutStatsInput {
@@ -2153,7 +1796,6 @@ input UserCreateWithoutStatsInput {
   deactivated: Boolean
   matches: MatchCreateManyInput
   season: SeasonCreateOneWithoutPlayersInput
-  fixture: FixtureCreateManyWithoutPlayersInput
 }
 
 """An edge in a connection."""
@@ -2253,7 +1895,6 @@ input UserUpdateDataInput {
   stats: StatsUpdateManyWithoutPlayerInput
   matches: MatchUpdateManyInput
   season: SeasonUpdateOneWithoutPlayersInput
-  fixture: FixtureUpdateManyWithoutPlayersInput
 }
 
 input UserUpdateInput {
@@ -2268,16 +1909,6 @@ input UserUpdateInput {
   stats: StatsUpdateManyWithoutPlayerInput
   matches: MatchUpdateManyInput
   season: SeasonUpdateOneWithoutPlayersInput
-  fixture: FixtureUpdateManyWithoutPlayersInput
-}
-
-input UserUpdateManyWithoutFixtureInput {
-  create: [UserCreateWithoutFixtureInput!]
-  connect: [UserWhereUniqueInput!]
-  disconnect: [UserWhereUniqueInput!]
-  delete: [UserWhereUniqueInput!]
-  update: [UserUpdateWithWhereUniqueWithoutFixtureInput!]
-  upsert: [UserUpsertWithWhereUniqueWithoutFixtureInput!]
 }
 
 input UserUpdateManyWithoutSeasonInput {
@@ -2305,20 +1936,6 @@ input UserUpdateOneWithoutStatsInput {
   upsert: UserUpsertWithoutStatsInput
 }
 
-input UserUpdateWithoutFixtureDataInput {
-  email: String
-  password: String
-  name: String
-  residentialcollege: String
-  bio: String
-  location: String
-  confirmed: Boolean
-  deactivated: Boolean
-  stats: StatsUpdateManyWithoutPlayerInput
-  matches: MatchUpdateManyInput
-  season: SeasonUpdateOneWithoutPlayersInput
-}
-
 input UserUpdateWithoutSeasonDataInput {
   email: String
   password: String
@@ -2330,7 +1947,6 @@ input UserUpdateWithoutSeasonDataInput {
   deactivated: Boolean
   stats: StatsUpdateManyWithoutPlayerInput
   matches: MatchUpdateManyInput
-  fixture: FixtureUpdateManyWithoutPlayersInput
 }
 
 input UserUpdateWithoutStatsDataInput {
@@ -2344,12 +1960,6 @@ input UserUpdateWithoutStatsDataInput {
   deactivated: Boolean
   matches: MatchUpdateManyInput
   season: SeasonUpdateOneWithoutPlayersInput
-  fixture: FixtureUpdateManyWithoutPlayersInput
-}
-
-input UserUpdateWithWhereUniqueWithoutFixtureInput {
-  where: UserWhereUniqueInput!
-  data: UserUpdateWithoutFixtureDataInput!
 }
 
 input UserUpdateWithWhereUniqueWithoutSeasonInput {
@@ -2365,12 +1975,6 @@ input UserUpsertNestedInput {
 input UserUpsertWithoutStatsInput {
   update: UserUpdateWithoutStatsDataInput!
   create: UserCreateWithoutStatsInput!
-}
-
-input UserUpsertWithWhereUniqueWithoutFixtureInput {
-  where: UserWhereUniqueInput!
-  update: UserUpdateWithoutFixtureDataInput!
-  create: UserCreateWithoutFixtureInput!
 }
 
 input UserUpsertWithWhereUniqueWithoutSeasonInput {
@@ -2683,9 +2287,6 @@ input UserWhereInput {
   matches_some: MatchWhereInput
   matches_none: MatchWhereInput
   season: SeasonWhereInput
-  fixture_every: FixtureWhereInput
-  fixture_some: FixtureWhereInput
-  fixture_none: FixtureWhereInput
 }
 
 input UserWhereUniqueInput {
@@ -2699,6 +2300,19 @@ export const Prisma = makePrismaBindingClass<BindingConstructor<Prisma>>({typeDe
 /**
  * Types
 */
+
+export type CurrentOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'season_ASC' |
+  'season_DESC' |
+  'round_ASC' |
+  'round_DESC' |
+  'timer_ASC' |
+  'timer_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC'
 
 export type StatsOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -2716,19 +2330,8 @@ export type StatsOrderByInput =   'id_ASC' |
   'totalsetlost_DESC' |
   'rating_ASC' |
   'rating_DESC' |
-  'updatedAt_ASC' |
-  'updatedAt_DESC' |
-  'createdAt_ASC' |
-  'createdAt_DESC'
-
-export type CurrentOrderByInput =   'id_ASC' |
-  'id_DESC' |
-  'season_ASC' |
-  'season_DESC' |
-  'fixture_ASC' |
-  'fixture_DESC' |
-  'timer_ASC' |
-  'timer_DESC' |
+  'round_ASC' |
+  'round_DESC' |
   'updatedAt_ASC' |
   'updatedAt_DESC' |
   'createdAt_ASC' |
@@ -2740,6 +2343,8 @@ export type MatchOrderByInput =   'id_ASC' |
   'player1set_DESC' |
   'player2set_ASC' |
   'player2set_DESC' |
+  'round_ASC' |
+  'round_DESC' |
   'sumbit_ASC' |
   'sumbit_DESC' |
   'updatedAt_ASC' |
@@ -2770,19 +2375,12 @@ export type UserOrderByInput =   'id_ASC' |
   'createdAt_ASC' |
   'createdAt_DESC'
 
-export type FixtureOrderByInput =   'id_ASC' |
-  'id_DESC' |
-  'round_ASC' |
-  'round_DESC' |
-  'updatedAt_ASC' |
-  'updatedAt_DESC' |
-  'createdAt_ASC' |
-  'createdAt_DESC'
-
 export type SeasonOrderByInput =   'id_ASC' |
   'id_DESC' |
   'season_ASC' |
   'season_DESC' |
+  'round_ASC' |
+  'round_DESC' |
   'updatedAt_ASC' |
   'updatedAt_DESC' |
   'createdAt_ASC' |
@@ -2805,9 +2403,9 @@ export type MutationType =   'CREATED' |
   'UPDATED' |
   'DELETED'
 
-export interface SeasonCreateOneWithoutFixturesInput {
-  create?: SeasonCreateWithoutFixturesInput
-  connect?: SeasonWhereUniqueInput
+export interface StatsCreateManyWithoutPlayerInput {
+  create?: StatsCreateWithoutPlayerInput[] | StatsCreateWithoutPlayerInput
+  connect?: StatsWhereUniqueInput[] | StatsWhereUniqueInput
 }
 
 export interface AdminWhereInput {
@@ -2872,108 +2470,50 @@ export interface AdminWhereInput {
   name_not_ends_with?: String
 }
 
-export interface CurrentUpdateInput {
-  season?: Int
-  fixture?: Int
-  timer?: String
+export interface UserUpdateManyWithoutSeasonInput {
+  create?: UserCreateWithoutSeasonInput[] | UserCreateWithoutSeasonInput
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
+  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput
+  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput
+  update?: UserUpdateWithWhereUniqueWithoutSeasonInput[] | UserUpdateWithWhereUniqueWithoutSeasonInput
+  upsert?: UserUpsertWithWhereUniqueWithoutSeasonInput[] | UserUpsertWithWhereUniqueWithoutSeasonInput
 }
 
-export interface StatsWhereInput {
-  AND?: StatsWhereInput[] | StatsWhereInput
-  OR?: StatsWhereInput[] | StatsWhereInput
-  NOT?: StatsWhereInput[] | StatsWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  playeremail?: String
-  playeremail_not?: String
-  playeremail_in?: String[] | String
-  playeremail_not_in?: String[] | String
-  playeremail_lt?: String
-  playeremail_lte?: String
-  playeremail_gt?: String
-  playeremail_gte?: String
-  playeremail_contains?: String
-  playeremail_not_contains?: String
-  playeremail_starts_with?: String
-  playeremail_not_starts_with?: String
-  playeremail_ends_with?: String
-  playeremail_not_ends_with?: String
-  wins?: Int
-  wins_not?: Int
-  wins_in?: Int[] | Int
-  wins_not_in?: Int[] | Int
-  wins_lt?: Int
-  wins_lte?: Int
-  wins_gt?: Int
-  wins_gte?: Int
-  netwins?: Float
-  netwins_not?: Float
-  netwins_in?: Float[] | Float
-  netwins_not_in?: Float[] | Float
-  netwins_lt?: Float
-  netwins_lte?: Float
-  netwins_gt?: Float
-  netwins_gte?: Float
-  losts?: Int
-  losts_not?: Int
-  losts_in?: Int[] | Int
-  losts_not_in?: Int[] | Int
-  losts_lt?: Int
-  losts_lte?: Int
-  losts_gt?: Int
-  losts_gte?: Int
-  totalsetwon?: Int
-  totalsetwon_not?: Int
-  totalsetwon_in?: Int[] | Int
-  totalsetwon_not_in?: Int[] | Int
-  totalsetwon_lt?: Int
-  totalsetwon_lte?: Int
-  totalsetwon_gt?: Int
-  totalsetwon_gte?: Int
-  totalsetlost?: Int
-  totalsetlost_not?: Int
-  totalsetlost_in?: Int[] | Int
-  totalsetlost_not_in?: Int[] | Int
-  totalsetlost_lt?: Int
-  totalsetlost_lte?: Int
-  totalsetlost_gt?: Int
-  totalsetlost_gte?: Int
-  rating?: Float
-  rating_not?: Float
-  rating_in?: Float[] | Float
-  rating_not_in?: Float[] | Float
-  rating_lt?: Float
-  rating_lte?: Float
-  rating_gt?: Float
-  rating_gte?: Float
-  player?: UserWhereInput
-  fixture?: FixtureWhereInput
-  season?: SeasonWhereInput
-}
-
-export interface StatsUpdateInput {
-  playeremail?: String
-  wins?: Int
-  netwins?: Float
-  losts?: Int
-  totalsetwon?: Int
-  totalsetlost?: Int
-  rating?: Float
-  player?: UserUpdateOneWithoutStatsInput
-  fixture?: FixtureUpdateOneInput
+export interface MatchUpdateDataInput {
+  player1set?: Int
+  player2set?: Int
+  round?: Int
+  sumbit?: Boolean
+  player1?: UserUpdateOneInput
+  player2?: UserUpdateOneInput
   season?: SeasonUpdateOneInput
+}
+
+export interface SeasonUpdateDataInput {
+  season?: Int
+  round?: Int
+  players?: UserUpdateManyWithoutSeasonInput
+}
+
+export interface UserCreateWithoutSeasonInput {
+  email: String
+  password: String
+  name: String
+  residentialcollege?: String
+  bio?: String
+  location?: String
+  confirmed?: Boolean
+  deactivated?: Boolean
+  stats?: StatsCreateManyWithoutPlayerInput
+  matches?: MatchCreateManyInput
+}
+
+export interface SeasonUpdateOneInput {
+  create?: SeasonCreateInput
+  connect?: SeasonWhereUniqueInput
+  delete?: Boolean
+  update?: SeasonUpdateDataInput
+  upsert?: SeasonUpsertNestedInput
 }
 
 export interface UserWhereInput {
@@ -3089,17 +2629,18 @@ export interface UserWhereInput {
   matches_some?: MatchWhereInput
   matches_none?: MatchWhereInput
   season?: SeasonWhereInput
-  fixture_every?: FixtureWhereInput
-  fixture_some?: FixtureWhereInput
-  fixture_none?: FixtureWhereInput
 }
 
-export interface UserUpdateOneWithoutStatsInput {
-  create?: UserCreateWithoutStatsInput
-  connect?: UserWhereUniqueInput
-  delete?: Boolean
-  update?: UserUpdateWithoutStatsDataInput
-  upsert?: UserUpsertWithoutStatsInput
+export interface StatsUpdateWithoutPlayerDataInput {
+  playeremail?: String
+  wins?: Int
+  netwins?: Float
+  losts?: Int
+  totalsetwon?: Int
+  totalsetlost?: Int
+  rating?: Float
+  round?: Int
+  season?: SeasonUpdateOneInput
 }
 
 export interface MatchWhereInput {
@@ -3136,382 +2677,6 @@ export interface MatchWhereInput {
   player2set_lte?: Int
   player2set_gt?: Int
   player2set_gte?: Int
-  sumbit?: Boolean
-  sumbit_not?: Boolean
-  player1?: UserWhereInput
-  player2?: UserWhereInput
-  fixture?: FixtureWhereInput
-  season?: SeasonWhereInput
-}
-
-export interface UserUpdateWithoutStatsDataInput {
-  email?: String
-  password?: String
-  name?: String
-  residentialcollege?: String
-  bio?: String
-  location?: String
-  confirmed?: Boolean
-  deactivated?: Boolean
-  matches?: MatchUpdateManyInput
-  season?: SeasonUpdateOneWithoutPlayersInput
-  fixture?: FixtureUpdateManyWithoutPlayersInput
-}
-
-export interface SeasonWhereInput {
-  AND?: SeasonWhereInput[] | SeasonWhereInput
-  OR?: SeasonWhereInput[] | SeasonWhereInput
-  NOT?: SeasonWhereInput[] | SeasonWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  season?: Int
-  season_not?: Int
-  season_in?: Int[] | Int
-  season_not_in?: Int[] | Int
-  season_lt?: Int
-  season_lte?: Int
-  season_gt?: Int
-  season_gte?: Int
-  players_every?: UserWhereInput
-  players_some?: UserWhereInput
-  players_none?: UserWhereInput
-  fixtures_every?: FixtureWhereInput
-  fixtures_some?: FixtureWhereInput
-  fixtures_none?: FixtureWhereInput
-}
-
-export interface FixtureCreateInput {
-  round: Int
-  players?: UserCreateManyWithoutFixtureInput
-  matches?: MatchCreateManyWithoutFixtureInput
-  season: SeasonCreateOneWithoutFixturesInput
-}
-
-export interface UserUpdateWithoutSeasonDataInput {
-  email?: String
-  password?: String
-  name?: String
-  residentialcollege?: String
-  bio?: String
-  location?: String
-  confirmed?: Boolean
-  deactivated?: Boolean
-  stats?: StatsUpdateManyWithoutPlayerInput
-  matches?: MatchUpdateManyInput
-  fixture?: FixtureUpdateManyWithoutPlayersInput
-}
-
-export interface UserCreateManyWithoutFixtureInput {
-  create?: UserCreateWithoutFixtureInput[] | UserCreateWithoutFixtureInput
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-}
-
-export interface MatchUpdateManyInput {
-  create?: MatchCreateInput[] | MatchCreateInput
-  connect?: MatchWhereUniqueInput[] | MatchWhereUniqueInput
-  disconnect?: MatchWhereUniqueInput[] | MatchWhereUniqueInput
-  delete?: MatchWhereUniqueInput[] | MatchWhereUniqueInput
-  update?: MatchUpdateWithWhereUniqueNestedInput[] | MatchUpdateWithWhereUniqueNestedInput
-  upsert?: MatchUpsertWithWhereUniqueNestedInput[] | MatchUpsertWithWhereUniqueNestedInput
-}
-
-export interface UserCreateWithoutFixtureInput {
-  email: String
-  password: String
-  name: String
-  residentialcollege?: String
-  bio?: String
-  location?: String
-  confirmed?: Boolean
-  deactivated?: Boolean
-  stats?: StatsCreateManyWithoutPlayerInput
-  matches?: MatchCreateManyInput
-  season?: SeasonCreateOneWithoutPlayersInput
-}
-
-export interface FixtureSubscriptionWhereInput {
-  AND?: FixtureSubscriptionWhereInput[] | FixtureSubscriptionWhereInput
-  OR?: FixtureSubscriptionWhereInput[] | FixtureSubscriptionWhereInput
-  NOT?: FixtureSubscriptionWhereInput[] | FixtureSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: FixtureWhereInput
-}
-
-export interface SeasonCreateOneWithoutPlayersInput {
-  create?: SeasonCreateWithoutPlayersInput
-  connect?: SeasonWhereUniqueInput
-}
-
-export interface MatchSubscriptionWhereInput {
-  AND?: MatchSubscriptionWhereInput[] | MatchSubscriptionWhereInput
-  OR?: MatchSubscriptionWhereInput[] | MatchSubscriptionWhereInput
-  NOT?: MatchSubscriptionWhereInput[] | MatchSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: MatchWhereInput
-}
-
-export interface SeasonCreateWithoutPlayersInput {
-  season: Int
-  fixtures?: FixtureCreateManyWithoutSeasonInput
-}
-
-export interface AdminWhereUniqueInput {
-  id?: ID_Input
-  email?: String
-}
-
-export interface FixtureCreateManyWithoutSeasonInput {
-  create?: FixtureCreateWithoutSeasonInput[] | FixtureCreateWithoutSeasonInput
-  connect?: FixtureWhereUniqueInput[] | FixtureWhereUniqueInput
-}
-
-export interface StatsWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface FixtureCreateWithoutSeasonInput {
-  round: Int
-  players?: UserCreateManyWithoutFixtureInput
-  matches?: MatchCreateManyWithoutFixtureInput
-}
-
-export interface SeasonWhereUniqueInput {
-  id?: ID_Input
-  season?: Int
-}
-
-export interface MatchCreateManyWithoutFixtureInput {
-  create?: MatchCreateWithoutFixtureInput[] | MatchCreateWithoutFixtureInput
-  connect?: MatchWhereUniqueInput[] | MatchWhereUniqueInput
-}
-
-export interface FixtureWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface MatchCreateWithoutFixtureInput {
-  player1set?: Int
-  player2set?: Int
-  sumbit?: Boolean
-  player1: UserCreateOneInput
-  player2: UserCreateOneInput
-  season: SeasonCreateOneInput
-}
-
-export interface AdminSubscriptionWhereInput {
-  AND?: AdminSubscriptionWhereInput[] | AdminSubscriptionWhereInput
-  OR?: AdminSubscriptionWhereInput[] | AdminSubscriptionWhereInput
-  NOT?: AdminSubscriptionWhereInput[] | AdminSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: AdminWhereInput
-}
-
-export interface SeasonCreateOneInput {
-  create?: SeasonCreateInput
-  connect?: SeasonWhereUniqueInput
-}
-
-export interface UserUpdateInput {
-  email?: String
-  password?: String
-  name?: String
-  residentialcollege?: String
-  bio?: String
-  location?: String
-  confirmed?: Boolean
-  deactivated?: Boolean
-  stats?: StatsUpdateManyWithoutPlayerInput
-  matches?: MatchUpdateManyInput
-  season?: SeasonUpdateOneWithoutPlayersInput
-  fixture?: FixtureUpdateManyWithoutPlayersInput
-}
-
-export interface SeasonCreateInput {
-  season: Int
-  players?: UserCreateManyWithoutSeasonInput
-  fixtures?: FixtureCreateManyWithoutSeasonInput
-}
-
-export interface MatchUpdateInput {
-  player1set?: Int
-  player2set?: Int
-  sumbit?: Boolean
-  player1?: UserUpdateOneInput
-  player2?: UserUpdateOneInput
-  fixture?: FixtureUpdateOneWithoutMatchesInput
-  season?: SeasonUpdateOneInput
-}
-
-export interface UserCreateManyWithoutSeasonInput {
-  create?: UserCreateWithoutSeasonInput[] | UserCreateWithoutSeasonInput
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-}
-
-export interface MatchUpsertWithWhereUniqueNestedInput {
-  where: MatchWhereUniqueInput
-  update: MatchUpdateDataInput
-  create: MatchCreateInput
-}
-
-export interface UserCreateWithoutSeasonInput {
-  email: String
-  password: String
-  name: String
-  residentialcollege?: String
-  bio?: String
-  location?: String
-  confirmed?: Boolean
-  deactivated?: Boolean
-  stats?: StatsCreateManyWithoutPlayerInput
-  matches?: MatchCreateManyInput
-  fixture?: FixtureCreateManyWithoutPlayersInput
-}
-
-export interface FixtureUpdateWithoutMatchesDataInput {
-  round?: Int
-  players?: UserUpdateManyWithoutFixtureInput
-  season?: SeasonUpdateOneWithoutFixturesInput
-}
-
-export interface FixtureCreateManyWithoutPlayersInput {
-  create?: FixtureCreateWithoutPlayersInput[] | FixtureCreateWithoutPlayersInput
-  connect?: FixtureWhereUniqueInput[] | FixtureWhereUniqueInput
-}
-
-export interface UserUpsertNestedInput {
-  update: UserUpdateDataInput
-  create: UserCreateInput
-}
-
-export interface FixtureCreateWithoutPlayersInput {
-  round: Int
-  matches?: MatchCreateManyWithoutFixtureInput
-  season: SeasonCreateOneWithoutFixturesInput
-}
-
-export interface FixtureUpsertNestedInput {
-  update: FixtureUpdateDataInput
-  create: FixtureCreateInput
-}
-
-export interface SeasonUpdateWithoutFixturesDataInput {
-  season?: Int
-  players?: UserUpdateManyWithoutSeasonInput
-}
-
-export interface SeasonUpsertWithoutPlayersInput {
-  update: SeasonUpdateWithoutPlayersDataInput
-  create: SeasonCreateWithoutPlayersInput
-}
-
-export interface SeasonCreateWithoutFixturesInput {
-  season: Int
-  players?: UserCreateManyWithoutSeasonInput
-}
-
-export interface MatchUpsertWithWhereUniqueWithoutFixtureInput {
-  where: MatchWhereUniqueInput
-  update: MatchUpdateWithoutFixtureDataInput
-  create: MatchCreateWithoutFixtureInput
-}
-
-export interface FixtureCreateOneWithoutMatchesInput {
-  create?: FixtureCreateWithoutMatchesInput
-  connect?: FixtureWhereUniqueInput
-}
-
-export interface UserUpsertWithWhereUniqueWithoutSeasonInput {
-  where: UserWhereUniqueInput
-  update: UserUpdateWithoutSeasonDataInput
-  create: UserCreateWithoutSeasonInput
-}
-
-export interface FixtureCreateWithoutMatchesInput {
-  round: Int
-  players?: UserCreateManyWithoutFixtureInput
-  season: SeasonCreateOneWithoutFixturesInput
-}
-
-export interface SeasonUpsertWithoutFixturesInput {
-  update: SeasonUpdateWithoutFixturesDataInput
-  create: SeasonCreateWithoutFixturesInput
-}
-
-export interface AdminUpdateInput {
-  email?: String
-  password?: String
-  name?: String
-}
-
-export interface CurrentCreateInput {
-  season: Int
-  fixture: Int
-  timer?: String
-}
-
-export interface SeasonUpdateOneWithoutFixturesInput {
-  create?: SeasonCreateWithoutFixturesInput
-  connect?: SeasonWhereUniqueInput
-  delete?: Boolean
-  update?: SeasonUpdateWithoutFixturesDataInput
-  upsert?: SeasonUpsertWithoutFixturesInput
-}
-
-export interface UserCreateOneWithoutStatsInput {
-  create?: UserCreateWithoutStatsInput
-  connect?: UserWhereUniqueInput
-}
-
-export interface FixtureUpdateWithoutPlayersDataInput {
-  round?: Int
-  matches?: MatchUpdateManyWithoutFixtureInput
-  season?: SeasonUpdateOneWithoutFixturesInput
-}
-
-export interface MatchCreateManyInput {
-  create?: MatchCreateInput[] | MatchCreateInput
-  connect?: MatchWhereUniqueInput[] | MatchWhereUniqueInput
-}
-
-export interface FixtureWhereInput {
-  AND?: FixtureWhereInput[] | FixtureWhereInput
-  OR?: FixtureWhereInput[] | FixtureWhereInput
-  NOT?: FixtureWhereInput[] | FixtureWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
   round?: Int
   round_not?: Int
   round_in?: Int[] | Int
@@ -3520,407 +2685,16 @@ export interface FixtureWhereInput {
   round_lte?: Int
   round_gt?: Int
   round_gte?: Int
-  players_every?: UserWhereInput
-  players_some?: UserWhereInput
-  players_none?: UserWhereInput
-  matches_every?: MatchWhereInput
-  matches_some?: MatchWhereInput
-  matches_none?: MatchWhereInput
-  season?: SeasonWhereInput
-}
-
-export interface UserCreateOneInput {
-  create?: UserCreateInput
-  connect?: UserWhereUniqueInput
-}
-
-export interface FixtureUpdateWithWhereUniqueWithoutPlayersInput {
-  where: FixtureWhereUniqueInput
-  data: FixtureUpdateWithoutPlayersDataInput
-}
-
-export interface StatsCreateManyWithoutPlayerInput {
-  create?: StatsCreateWithoutPlayerInput[] | StatsCreateWithoutPlayerInput
-  connect?: StatsWhereUniqueInput[] | StatsWhereUniqueInput
-}
-
-export interface FixtureUpdateManyWithoutPlayersInput {
-  create?: FixtureCreateWithoutPlayersInput[] | FixtureCreateWithoutPlayersInput
-  connect?: FixtureWhereUniqueInput[] | FixtureWhereUniqueInput
-  disconnect?: FixtureWhereUniqueInput[] | FixtureWhereUniqueInput
-  delete?: FixtureWhereUniqueInput[] | FixtureWhereUniqueInput
-  update?: FixtureUpdateWithWhereUniqueWithoutPlayersInput[] | FixtureUpdateWithWhereUniqueWithoutPlayersInput
-  upsert?: FixtureUpsertWithWhereUniqueWithoutPlayersInput[] | FixtureUpsertWithWhereUniqueWithoutPlayersInput
-}
-
-export interface FixtureCreateOneInput {
-  create?: FixtureCreateInput
-  connect?: FixtureWhereUniqueInput
-}
-
-export interface MatchUpdateWithWhereUniqueNestedInput {
-  where: MatchWhereUniqueInput
-  data: MatchUpdateDataInput
-}
-
-export interface UserSubscriptionWhereInput {
-  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: UserWhereInput
-}
-
-export interface MatchUpdateDataInput {
-  player1set?: Int
-  player2set?: Int
   sumbit?: Boolean
-  player1?: UserUpdateOneInput
-  player2?: UserUpdateOneInput
-  fixture?: FixtureUpdateOneWithoutMatchesInput
-  season?: SeasonUpdateOneInput
-}
-
-export interface StatsSubscriptionWhereInput {
-  AND?: StatsSubscriptionWhereInput[] | StatsSubscriptionWhereInput
-  OR?: StatsSubscriptionWhereInput[] | StatsSubscriptionWhereInput
-  NOT?: StatsSubscriptionWhereInput[] | StatsSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: StatsWhereInput
-}
-
-export interface UserUpdateOneInput {
-  create?: UserCreateInput
-  connect?: UserWhereUniqueInput
-  delete?: Boolean
-  update?: UserUpdateDataInput
-  upsert?: UserUpsertNestedInput
-}
-
-export interface MatchWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface UserUpdateDataInput {
-  email?: String
-  password?: String
-  name?: String
-  residentialcollege?: String
-  bio?: String
-  location?: String
-  confirmed?: Boolean
-  deactivated?: Boolean
-  stats?: StatsUpdateManyWithoutPlayerInput
-  matches?: MatchUpdateManyInput
-  season?: SeasonUpdateOneWithoutPlayersInput
-  fixture?: FixtureUpdateManyWithoutPlayersInput
-}
-
-export interface CurrentSubscriptionWhereInput {
-  AND?: CurrentSubscriptionWhereInput[] | CurrentSubscriptionWhereInput
-  OR?: CurrentSubscriptionWhereInput[] | CurrentSubscriptionWhereInput
-  NOT?: CurrentSubscriptionWhereInput[] | CurrentSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: CurrentWhereInput
-}
-
-export interface StatsUpdateManyWithoutPlayerInput {
-  create?: StatsCreateWithoutPlayerInput[] | StatsCreateWithoutPlayerInput
-  connect?: StatsWhereUniqueInput[] | StatsWhereUniqueInput
-  disconnect?: StatsWhereUniqueInput[] | StatsWhereUniqueInput
-  delete?: StatsWhereUniqueInput[] | StatsWhereUniqueInput
-  update?: StatsUpdateWithWhereUniqueWithoutPlayerInput[] | StatsUpdateWithWhereUniqueWithoutPlayerInput
-  upsert?: StatsUpsertWithWhereUniqueWithoutPlayerInput[] | StatsUpsertWithWhereUniqueWithoutPlayerInput
-}
-
-export interface SeasonUpdateInput {
-  season?: Int
-  players?: UserUpdateManyWithoutSeasonInput
-  fixtures?: FixtureUpdateManyWithoutSeasonInput
+  sumbit_not?: Boolean
+  player1?: UserWhereInput
+  player2?: UserWhereInput
+  season?: SeasonWhereInput
 }
 
 export interface StatsUpdateWithWhereUniqueWithoutPlayerInput {
   where: StatsWhereUniqueInput
   data: StatsUpdateWithoutPlayerDataInput
-}
-
-export interface FixtureUpsertWithoutMatchesInput {
-  update: FixtureUpdateWithoutMatchesDataInput
-  create: FixtureCreateWithoutMatchesInput
-}
-
-export interface StatsUpdateWithoutPlayerDataInput {
-  playeremail?: String
-  wins?: Int
-  netwins?: Float
-  losts?: Int
-  totalsetwon?: Int
-  totalsetlost?: Int
-  rating?: Float
-  fixture?: FixtureUpdateOneInput
-  season?: SeasonUpdateOneInput
-}
-
-export interface StatsUpsertWithWhereUniqueWithoutPlayerInput {
-  where: StatsWhereUniqueInput
-  update: StatsUpdateWithoutPlayerDataInput
-  create: StatsCreateWithoutPlayerInput
-}
-
-export interface FixtureUpdateOneInput {
-  create?: FixtureCreateInput
-  connect?: FixtureWhereUniqueInput
-  delete?: Boolean
-  update?: FixtureUpdateDataInput
-  upsert?: FixtureUpsertNestedInput
-}
-
-export interface FixtureUpsertWithWhereUniqueWithoutSeasonInput {
-  where: FixtureWhereUniqueInput
-  update: FixtureUpdateWithoutSeasonDataInput
-  create: FixtureCreateWithoutSeasonInput
-}
-
-export interface FixtureUpdateDataInput {
-  round?: Int
-  players?: UserUpdateManyWithoutFixtureInput
-  matches?: MatchUpdateManyWithoutFixtureInput
-  season?: SeasonUpdateOneWithoutFixturesInput
-}
-
-export interface FixtureUpsertWithWhereUniqueWithoutPlayersInput {
-  where: FixtureWhereUniqueInput
-  update: FixtureUpdateWithoutPlayersDataInput
-  create: FixtureCreateWithoutPlayersInput
-}
-
-export interface UserUpdateManyWithoutFixtureInput {
-  create?: UserCreateWithoutFixtureInput[] | UserCreateWithoutFixtureInput
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  update?: UserUpdateWithWhereUniqueWithoutFixtureInput[] | UserUpdateWithWhereUniqueWithoutFixtureInput
-  upsert?: UserUpsertWithWhereUniqueWithoutFixtureInput[] | UserUpsertWithWhereUniqueWithoutFixtureInput
-}
-
-export interface StatsCreateInput {
-  playeremail: String
-  wins?: Int
-  netwins?: Float
-  losts?: Int
-  totalsetwon?: Int
-  totalsetlost?: Int
-  rating?: Float
-  player: UserCreateOneWithoutStatsInput
-  fixture: FixtureCreateOneInput
-  season: SeasonCreateOneInput
-}
-
-export interface UserUpdateWithWhereUniqueWithoutFixtureInput {
-  where: UserWhereUniqueInput
-  data: UserUpdateWithoutFixtureDataInput
-}
-
-export interface MatchCreateInput {
-  player1set?: Int
-  player2set?: Int
-  sumbit?: Boolean
-  player1: UserCreateOneInput
-  player2: UserCreateOneInput
-  fixture: FixtureCreateOneWithoutMatchesInput
-  season: SeasonCreateOneInput
-}
-
-export interface UserUpdateWithoutFixtureDataInput {
-  email?: String
-  password?: String
-  name?: String
-  residentialcollege?: String
-  bio?: String
-  location?: String
-  confirmed?: Boolean
-  deactivated?: Boolean
-  stats?: StatsUpdateManyWithoutPlayerInput
-  matches?: MatchUpdateManyInput
-  season?: SeasonUpdateOneWithoutPlayersInput
-}
-
-export interface StatsCreateWithoutPlayerInput {
-  playeremail: String
-  wins?: Int
-  netwins?: Float
-  losts?: Int
-  totalsetwon?: Int
-  totalsetlost?: Int
-  rating?: Float
-  fixture: FixtureCreateOneInput
-  season: SeasonCreateOneInput
-}
-
-export interface SeasonUpdateOneWithoutPlayersInput {
-  create?: SeasonCreateWithoutPlayersInput
-  connect?: SeasonWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: SeasonUpdateWithoutPlayersDataInput
-  upsert?: SeasonUpsertWithoutPlayersInput
-}
-
-export interface SeasonSubscriptionWhereInput {
-  AND?: SeasonSubscriptionWhereInput[] | SeasonSubscriptionWhereInput
-  OR?: SeasonSubscriptionWhereInput[] | SeasonSubscriptionWhereInput
-  NOT?: SeasonSubscriptionWhereInput[] | SeasonSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: SeasonWhereInput
-}
-
-export interface SeasonUpdateWithoutPlayersDataInput {
-  season?: Int
-  fixtures?: FixtureUpdateManyWithoutSeasonInput
-}
-
-export interface UserWhereUniqueInput {
-  id?: ID_Input
-  email?: String
-}
-
-export interface FixtureUpdateManyWithoutSeasonInput {
-  create?: FixtureCreateWithoutSeasonInput[] | FixtureCreateWithoutSeasonInput
-  connect?: FixtureWhereUniqueInput[] | FixtureWhereUniqueInput
-  disconnect?: FixtureWhereUniqueInput[] | FixtureWhereUniqueInput
-  delete?: FixtureWhereUniqueInput[] | FixtureWhereUniqueInput
-  update?: FixtureUpdateWithWhereUniqueWithoutSeasonInput[] | FixtureUpdateWithWhereUniqueWithoutSeasonInput
-  upsert?: FixtureUpsertWithWhereUniqueWithoutSeasonInput[] | FixtureUpsertWithWhereUniqueWithoutSeasonInput
-}
-
-export interface UserUpsertWithoutStatsInput {
-  update: UserUpdateWithoutStatsDataInput
-  create: UserCreateWithoutStatsInput
-}
-
-export interface FixtureUpdateWithWhereUniqueWithoutSeasonInput {
-  where: FixtureWhereUniqueInput
-  data: FixtureUpdateWithoutSeasonDataInput
-}
-
-export interface UserUpsertWithWhereUniqueWithoutFixtureInput {
-  where: UserWhereUniqueInput
-  update: UserUpdateWithoutFixtureDataInput
-  create: UserCreateWithoutFixtureInput
-}
-
-export interface FixtureUpdateWithoutSeasonDataInput {
-  round?: Int
-  players?: UserUpdateManyWithoutFixtureInput
-  matches?: MatchUpdateManyWithoutFixtureInput
-}
-
-export interface AdminCreateInput {
-  email: String
-  password: String
-  name: String
-}
-
-export interface MatchUpdateManyWithoutFixtureInput {
-  create?: MatchCreateWithoutFixtureInput[] | MatchCreateWithoutFixtureInput
-  connect?: MatchWhereUniqueInput[] | MatchWhereUniqueInput
-  disconnect?: MatchWhereUniqueInput[] | MatchWhereUniqueInput
-  delete?: MatchWhereUniqueInput[] | MatchWhereUniqueInput
-  update?: MatchUpdateWithWhereUniqueWithoutFixtureInput[] | MatchUpdateWithWhereUniqueWithoutFixtureInput
-  upsert?: MatchUpsertWithWhereUniqueWithoutFixtureInput[] | MatchUpsertWithWhereUniqueWithoutFixtureInput
-}
-
-export interface UserCreateInput {
-  email: String
-  password: String
-  name: String
-  residentialcollege?: String
-  bio?: String
-  location?: String
-  confirmed?: Boolean
-  deactivated?: Boolean
-  stats?: StatsCreateManyWithoutPlayerInput
-  matches?: MatchCreateManyInput
-  season?: SeasonCreateOneWithoutPlayersInput
-  fixture?: FixtureCreateManyWithoutPlayersInput
-}
-
-export interface MatchUpdateWithWhereUniqueWithoutFixtureInput {
-  where: MatchWhereUniqueInput
-  data: MatchUpdateWithoutFixtureDataInput
-}
-
-export interface CurrentWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface MatchUpdateWithoutFixtureDataInput {
-  player1set?: Int
-  player2set?: Int
-  sumbit?: Boolean
-  player1?: UserUpdateOneInput
-  player2?: UserUpdateOneInput
-  season?: SeasonUpdateOneInput
-}
-
-export interface FixtureUpdateOneWithoutMatchesInput {
-  create?: FixtureCreateWithoutMatchesInput
-  connect?: FixtureWhereUniqueInput
-  delete?: Boolean
-  update?: FixtureUpdateWithoutMatchesDataInput
-  upsert?: FixtureUpsertWithoutMatchesInput
-}
-
-export interface UserUpdateWithWhereUniqueWithoutSeasonInput {
-  where: UserWhereUniqueInput
-  data: UserUpdateWithoutSeasonDataInput
-}
-
-export interface UserUpdateManyWithoutSeasonInput {
-  create?: UserCreateWithoutSeasonInput[] | UserCreateWithoutSeasonInput
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  disconnect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  delete?: UserWhereUniqueInput[] | UserWhereUniqueInput
-  update?: UserUpdateWithWhereUniqueWithoutSeasonInput[] | UserUpdateWithWhereUniqueWithoutSeasonInput
-  upsert?: UserUpsertWithWhereUniqueWithoutSeasonInput[] | UserUpsertWithWhereUniqueWithoutSeasonInput
-}
-
-export interface SeasonUpdateDataInput {
-  season?: Int
-  players?: UserUpdateManyWithoutSeasonInput
-  fixtures?: FixtureUpdateManyWithoutSeasonInput
-}
-
-export interface SeasonUpdateOneInput {
-  create?: SeasonCreateInput
-  connect?: SeasonWhereUniqueInput
-  delete?: Boolean
-  update?: SeasonUpdateDataInput
-  upsert?: SeasonUpsertNestedInput
-}
-
-export interface SeasonUpsertNestedInput {
-  update: SeasonUpdateDataInput
-  create: SeasonCreateInput
-}
-
-export interface FixtureUpdateInput {
-  round?: Int
-  players?: UserUpdateManyWithoutFixtureInput
-  matches?: MatchUpdateManyWithoutFixtureInput
-  season?: SeasonUpdateOneWithoutFixturesInput
 }
 
 export interface CurrentWhereInput {
@@ -3949,14 +2723,14 @@ export interface CurrentWhereInput {
   season_lte?: Int
   season_gt?: Int
   season_gte?: Int
-  fixture?: Int
-  fixture_not?: Int
-  fixture_in?: Int[] | Int
-  fixture_not_in?: Int[] | Int
-  fixture_lt?: Int
-  fixture_lte?: Int
-  fixture_gt?: Int
-  fixture_gte?: Int
+  round?: Int
+  round_not?: Int
+  round_in?: Int[] | Int
+  round_not_in?: Int[] | Int
+  round_lt?: Int
+  round_lte?: Int
+  round_gt?: Int
+  round_gte?: Int
   timer?: String
   timer_not?: String
   timer_in?: String[] | String
@@ -3973,6 +2747,109 @@ export interface CurrentWhereInput {
   timer_not_ends_with?: String
 }
 
+export interface StatsUpdateManyWithoutPlayerInput {
+  create?: StatsCreateWithoutPlayerInput[] | StatsCreateWithoutPlayerInput
+  connect?: StatsWhereUniqueInput[] | StatsWhereUniqueInput
+  disconnect?: StatsWhereUniqueInput[] | StatsWhereUniqueInput
+  delete?: StatsWhereUniqueInput[] | StatsWhereUniqueInput
+  update?: StatsUpdateWithWhereUniqueWithoutPlayerInput[] | StatsUpdateWithWhereUniqueWithoutPlayerInput
+  upsert?: StatsUpsertWithWhereUniqueWithoutPlayerInput[] | StatsUpsertWithWhereUniqueWithoutPlayerInput
+}
+
+export interface StatsSubscriptionWhereInput {
+  AND?: StatsSubscriptionWhereInput[] | StatsSubscriptionWhereInput
+  OR?: StatsSubscriptionWhereInput[] | StatsSubscriptionWhereInput
+  NOT?: StatsSubscriptionWhereInput[] | StatsSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: StatsWhereInput
+}
+
+export interface UserUpdateDataInput {
+  email?: String
+  password?: String
+  name?: String
+  residentialcollege?: String
+  bio?: String
+  location?: String
+  confirmed?: Boolean
+  deactivated?: Boolean
+  stats?: StatsUpdateManyWithoutPlayerInput
+  matches?: MatchUpdateManyInput
+  season?: SeasonUpdateOneWithoutPlayersInput
+}
+
+export interface CurrentSubscriptionWhereInput {
+  AND?: CurrentSubscriptionWhereInput[] | CurrentSubscriptionWhereInput
+  OR?: CurrentSubscriptionWhereInput[] | CurrentSubscriptionWhereInput
+  NOT?: CurrentSubscriptionWhereInput[] | CurrentSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: CurrentWhereInput
+}
+
+export interface AdminCreateInput {
+  email: String
+  password: String
+  name: String
+}
+
+export interface UserUpdateInput {
+  email?: String
+  password?: String
+  name?: String
+  residentialcollege?: String
+  bio?: String
+  location?: String
+  confirmed?: Boolean
+  deactivated?: Boolean
+  stats?: StatsUpdateManyWithoutPlayerInput
+  matches?: MatchUpdateManyInput
+  season?: SeasonUpdateOneWithoutPlayersInput
+}
+
+export interface CurrentCreateInput {
+  season: Int
+  round: Int
+  timer?: String
+}
+
+export interface AdminWhereUniqueInput {
+  id?: ID_Input
+  email?: String
+}
+
+export interface StatsCreateInput {
+  playeremail: String
+  wins?: Int
+  netwins?: Float
+  losts?: Int
+  totalsetwon?: Int
+  totalsetlost?: Int
+  rating?: Float
+  round: Int
+  player: UserCreateOneWithoutStatsInput
+  season: SeasonCreateOneInput
+}
+
+export interface StatsWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface UserCreateOneWithoutStatsInput {
+  create?: UserCreateWithoutStatsInput
+  connect?: UserWhereUniqueInput
+}
+
+export interface SeasonWhereUniqueInput {
+  id?: ID_Input
+  season?: Int
+}
+
 export interface UserCreateWithoutStatsInput {
   email: String
   password: String
@@ -3984,7 +2861,420 @@ export interface UserCreateWithoutStatsInput {
   deactivated?: Boolean
   matches?: MatchCreateManyInput
   season?: SeasonCreateOneWithoutPlayersInput
-  fixture?: FixtureCreateManyWithoutPlayersInput
+}
+
+export interface MatchUpdateInput {
+  player1set?: Int
+  player2set?: Int
+  round?: Int
+  sumbit?: Boolean
+  player1?: UserUpdateOneInput
+  player2?: UserUpdateOneInput
+  season?: SeasonUpdateOneInput
+}
+
+export interface MatchCreateManyInput {
+  create?: MatchCreateInput[] | MatchCreateInput
+  connect?: MatchWhereUniqueInput[] | MatchWhereUniqueInput
+}
+
+export interface MatchUpsertWithWhereUniqueNestedInput {
+  where: MatchWhereUniqueInput
+  update: MatchUpdateDataInput
+  create: MatchCreateInput
+}
+
+export interface MatchCreateInput {
+  player1set?: Int
+  player2set?: Int
+  round: Int
+  sumbit?: Boolean
+  player1: UserCreateOneInput
+  player2?: UserCreateOneInput
+  season: SeasonCreateOneInput
+}
+
+export interface SeasonUpsertWithoutPlayersInput {
+  update: SeasonUpdateWithoutPlayersDataInput
+  create: SeasonCreateWithoutPlayersInput
+}
+
+export interface UserCreateOneInput {
+  create?: UserCreateInput
+  connect?: UserWhereUniqueInput
+}
+
+export interface SeasonUpdateOneWithoutPlayersInput {
+  create?: SeasonCreateWithoutPlayersInput
+  connect?: SeasonWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: SeasonUpdateWithoutPlayersDataInput
+  upsert?: SeasonUpsertWithoutPlayersInput
+}
+
+export interface UserCreateInput {
+  email: String
+  password: String
+  name: String
+  residentialcollege?: String
+  bio?: String
+  location?: String
+  confirmed?: Boolean
+  deactivated?: Boolean
+  stats?: StatsCreateManyWithoutPlayerInput
+  matches?: MatchCreateManyInput
+  season?: SeasonCreateOneWithoutPlayersInput
+}
+
+export interface SeasonUpsertNestedInput {
+  update: SeasonUpdateDataInput
+  create: SeasonCreateInput
+}
+
+export interface UserUpdateOneInput {
+  create?: UserCreateInput
+  connect?: UserWhereUniqueInput
+  delete?: Boolean
+  update?: UserUpdateDataInput
+  upsert?: UserUpsertNestedInput
+}
+
+export interface UserUpdateWithoutSeasonDataInput {
+  email?: String
+  password?: String
+  name?: String
+  residentialcollege?: String
+  bio?: String
+  location?: String
+  confirmed?: Boolean
+  deactivated?: Boolean
+  stats?: StatsUpdateManyWithoutPlayerInput
+  matches?: MatchUpdateManyInput
+}
+
+export interface StatsCreateWithoutPlayerInput {
+  playeremail: String
+  wins?: Int
+  netwins?: Float
+  losts?: Int
+  totalsetwon?: Int
+  totalsetlost?: Int
+  rating?: Float
+  round: Int
+  season: SeasonCreateOneInput
+}
+
+export interface UserSubscriptionWhereInput {
+  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: UserWhereInput
+}
+
+export interface SeasonCreateOneInput {
+  create?: SeasonCreateInput
+  connect?: SeasonWhereUniqueInput
+}
+
+export interface SeasonWhereInput {
+  AND?: SeasonWhereInput[] | SeasonWhereInput
+  OR?: SeasonWhereInput[] | SeasonWhereInput
+  NOT?: SeasonWhereInput[] | SeasonWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  season?: Int
+  season_not?: Int
+  season_in?: Int[] | Int
+  season_not_in?: Int[] | Int
+  season_lt?: Int
+  season_lte?: Int
+  season_gt?: Int
+  season_gte?: Int
+  round?: Int
+  round_not?: Int
+  round_in?: Int[] | Int
+  round_not_in?: Int[] | Int
+  round_lt?: Int
+  round_lte?: Int
+  round_gt?: Int
+  round_gte?: Int
+  players_every?: UserWhereInput
+  players_some?: UserWhereInput
+  players_none?: UserWhereInput
+}
+
+export interface SeasonCreateInput {
+  season: Int
+  round?: Int
+  players?: UserCreateManyWithoutSeasonInput
+}
+
+export interface SeasonUpdateInput {
+  season?: Int
+  round?: Int
+  players?: UserUpdateManyWithoutSeasonInput
+}
+
+export interface UserCreateManyWithoutSeasonInput {
+  create?: UserCreateWithoutSeasonInput[] | UserCreateWithoutSeasonInput
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
+}
+
+export interface MatchWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface StatsWhereInput {
+  AND?: StatsWhereInput[] | StatsWhereInput
+  OR?: StatsWhereInput[] | StatsWhereInput
+  NOT?: StatsWhereInput[] | StatsWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  playeremail?: String
+  playeremail_not?: String
+  playeremail_in?: String[] | String
+  playeremail_not_in?: String[] | String
+  playeremail_lt?: String
+  playeremail_lte?: String
+  playeremail_gt?: String
+  playeremail_gte?: String
+  playeremail_contains?: String
+  playeremail_not_contains?: String
+  playeremail_starts_with?: String
+  playeremail_not_starts_with?: String
+  playeremail_ends_with?: String
+  playeremail_not_ends_with?: String
+  wins?: Int
+  wins_not?: Int
+  wins_in?: Int[] | Int
+  wins_not_in?: Int[] | Int
+  wins_lt?: Int
+  wins_lte?: Int
+  wins_gt?: Int
+  wins_gte?: Int
+  netwins?: Float
+  netwins_not?: Float
+  netwins_in?: Float[] | Float
+  netwins_not_in?: Float[] | Float
+  netwins_lt?: Float
+  netwins_lte?: Float
+  netwins_gt?: Float
+  netwins_gte?: Float
+  losts?: Int
+  losts_not?: Int
+  losts_in?: Int[] | Int
+  losts_not_in?: Int[] | Int
+  losts_lt?: Int
+  losts_lte?: Int
+  losts_gt?: Int
+  losts_gte?: Int
+  totalsetwon?: Int
+  totalsetwon_not?: Int
+  totalsetwon_in?: Int[] | Int
+  totalsetwon_not_in?: Int[] | Int
+  totalsetwon_lt?: Int
+  totalsetwon_lte?: Int
+  totalsetwon_gt?: Int
+  totalsetwon_gte?: Int
+  totalsetlost?: Int
+  totalsetlost_not?: Int
+  totalsetlost_in?: Int[] | Int
+  totalsetlost_not_in?: Int[] | Int
+  totalsetlost_lt?: Int
+  totalsetlost_lte?: Int
+  totalsetlost_gt?: Int
+  totalsetlost_gte?: Int
+  rating?: Float
+  rating_not?: Float
+  rating_in?: Float[] | Float
+  rating_not_in?: Float[] | Float
+  rating_lt?: Float
+  rating_lte?: Float
+  rating_gt?: Float
+  rating_gte?: Float
+  round?: Int
+  round_not?: Int
+  round_in?: Int[] | Int
+  round_not_in?: Int[] | Int
+  round_lt?: Int
+  round_lte?: Int
+  round_gt?: Int
+  round_gte?: Int
+  player?: UserWhereInput
+  season?: SeasonWhereInput
+}
+
+export interface UserUpsertWithoutStatsInput {
+  update: UserUpdateWithoutStatsDataInput
+  create: UserCreateWithoutStatsInput
+}
+
+export interface SeasonCreateOneWithoutPlayersInput {
+  create?: SeasonCreateWithoutPlayersInput
+  connect?: SeasonWhereUniqueInput
+}
+
+export interface SeasonUpdateWithoutPlayersDataInput {
+  season?: Int
+  round?: Int
+}
+
+export interface SeasonCreateWithoutPlayersInput {
+  season: Int
+  round?: Int
+}
+
+export interface UserUpsertWithWhereUniqueWithoutSeasonInput {
+  where: UserWhereUniqueInput
+  update: UserUpdateWithoutSeasonDataInput
+  create: UserCreateWithoutSeasonInput
+}
+
+export interface AdminUpdateInput {
+  email?: String
+  password?: String
+  name?: String
+}
+
+export interface SeasonSubscriptionWhereInput {
+  AND?: SeasonSubscriptionWhereInput[] | SeasonSubscriptionWhereInput
+  OR?: SeasonSubscriptionWhereInput[] | SeasonSubscriptionWhereInput
+  NOT?: SeasonSubscriptionWhereInput[] | SeasonSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: SeasonWhereInput
+}
+
+export interface CurrentUpdateInput {
+  season?: Int
+  round?: Int
+  timer?: String
+}
+
+export interface AdminSubscriptionWhereInput {
+  AND?: AdminSubscriptionWhereInput[] | AdminSubscriptionWhereInput
+  OR?: AdminSubscriptionWhereInput[] | AdminSubscriptionWhereInput
+  NOT?: AdminSubscriptionWhereInput[] | AdminSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: AdminWhereInput
+}
+
+export interface StatsUpdateInput {
+  playeremail?: String
+  wins?: Int
+  netwins?: Float
+  losts?: Int
+  totalsetwon?: Int
+  totalsetlost?: Int
+  rating?: Float
+  round?: Int
+  player?: UserUpdateOneWithoutStatsInput
+  season?: SeasonUpdateOneInput
+}
+
+export interface UserWhereUniqueInput {
+  id?: ID_Input
+  email?: String
+}
+
+export interface MatchUpdateWithWhereUniqueNestedInput {
+  where: MatchWhereUniqueInput
+  data: MatchUpdateDataInput
+}
+
+export interface MatchUpdateManyInput {
+  create?: MatchCreateInput[] | MatchCreateInput
+  connect?: MatchWhereUniqueInput[] | MatchWhereUniqueInput
+  disconnect?: MatchWhereUniqueInput[] | MatchWhereUniqueInput
+  delete?: MatchWhereUniqueInput[] | MatchWhereUniqueInput
+  update?: MatchUpdateWithWhereUniqueNestedInput[] | MatchUpdateWithWhereUniqueNestedInput
+  upsert?: MatchUpsertWithWhereUniqueNestedInput[] | MatchUpsertWithWhereUniqueNestedInput
+}
+
+export interface UserUpdateWithoutStatsDataInput {
+  email?: String
+  password?: String
+  name?: String
+  residentialcollege?: String
+  bio?: String
+  location?: String
+  confirmed?: Boolean
+  deactivated?: Boolean
+  matches?: MatchUpdateManyInput
+  season?: SeasonUpdateOneWithoutPlayersInput
+}
+
+export interface UserUpdateOneWithoutStatsInput {
+  create?: UserCreateWithoutStatsInput
+  connect?: UserWhereUniqueInput
+  delete?: Boolean
+  update?: UserUpdateWithoutStatsDataInput
+  upsert?: UserUpsertWithoutStatsInput
+}
+
+export interface UserUpsertNestedInput {
+  update: UserUpdateDataInput
+  create: UserCreateInput
+}
+
+export interface CurrentWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface MatchSubscriptionWhereInput {
+  AND?: MatchSubscriptionWhereInput[] | MatchSubscriptionWhereInput
+  OR?: MatchSubscriptionWhereInput[] | MatchSubscriptionWhereInput
+  NOT?: MatchSubscriptionWhereInput[] | MatchSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: MatchWhereInput
+}
+
+export interface UserUpdateWithWhereUniqueWithoutSeasonInput {
+  where: UserWhereUniqueInput
+  data: UserUpdateWithoutSeasonDataInput
+}
+
+export interface StatsUpsertWithWhereUniqueWithoutPlayerInput {
+  where: StatsWhereUniqueInput
+  update: StatsUpdateWithoutPlayerDataInput
+  create: StatsCreateWithoutPlayerInput
 }
 
 /*
@@ -3993,197 +3283,6 @@ export interface UserCreateWithoutStatsInput {
  */
 export interface Node {
   id: ID_Output
-}
-
-export interface FixturePreviousValues {
-  id: ID_Output
-  round: Int
-}
-
-/*
- * An edge in a connection.
-
- */
-export interface AdminEdge {
-  node: Admin
-  cursor: String
-}
-
-export interface Stats extends Node {
-  id: ID_Output
-  player: User
-  playeremail: String
-  wins?: Int
-  netwins?: Float
-  losts?: Int
-  totalsetwon?: Int
-  totalsetlost?: Int
-  rating?: Float
-  fixture: Fixture
-  season: Season
-}
-
-export interface BatchPayload {
-  count: Long
-}
-
-export interface User extends Node {
-  id: ID_Output
-  email: String
-  password: String
-  name: String
-  stats?: Stats[]
-  matches?: Match[]
-  season?: Season
-  fixture?: Fixture[]
-  residentialcollege?: String
-  bio?: String
-  location?: String
-  confirmed: Boolean
-  deactivated: Boolean
-}
-
-export interface FixtureSubscriptionPayload {
-  mutation: MutationType
-  node?: Fixture
-  updatedFields?: String[]
-  previousValues?: FixturePreviousValues
-}
-
-export interface UserSubscriptionPayload {
-  mutation: MutationType
-  node?: User
-  updatedFields?: String[]
-  previousValues?: UserPreviousValues
-}
-
-export interface AggregateFixture {
-  count: Int
-}
-
-/*
- * A connection to a list of items.
-
- */
-export interface FixtureConnection {
-  pageInfo: PageInfo
-  edges: FixtureEdge[]
-  aggregate: AggregateFixture
-}
-
-/*
- * Information about pagination in a connection.
-
- */
-export interface PageInfo {
-  hasNextPage: Boolean
-  hasPreviousPage: Boolean
-  startCursor?: String
-  endCursor?: String
-}
-
-/*
- * An edge in a connection.
-
- */
-export interface UserEdge {
-  node: User
-  cursor: String
-}
-
-export interface Match extends Node {
-  id: ID_Output
-  player1: User
-  player2: User
-  player1set?: Int
-  player2set?: Int
-  fixture: Fixture
-  season: Season
-  sumbit: Boolean
-}
-
-export interface AggregateSeason {
-  count: Int
-}
-
-export interface AdminSubscriptionPayload {
-  mutation: MutationType
-  node?: Admin
-  updatedFields?: String[]
-  previousValues?: AdminPreviousValues
-}
-
-/*
- * A connection to a list of items.
-
- */
-export interface SeasonConnection {
-  pageInfo: PageInfo
-  edges: SeasonEdge[]
-  aggregate: AggregateSeason
-}
-
-export interface AdminPreviousValues {
-  id: ID_Output
-  email: String
-  password: String
-  name: String
-}
-
-/*
- * An edge in a connection.
-
- */
-export interface MatchEdge {
-  node: Match
-  cursor: String
-}
-
-/*
- * A connection to a list of items.
-
- */
-export interface AdminConnection {
-  pageInfo: PageInfo
-  edges: AdminEdge[]
-  aggregate: AggregateAdmin
-}
-
-export interface AggregateStats {
-  count: Int
-}
-
-export interface CurrentSubscriptionPayload {
-  mutation: MutationType
-  node?: Current
-  updatedFields?: String[]
-  previousValues?: CurrentPreviousValues
-}
-
-/*
- * A connection to a list of items.
-
- */
-export interface StatsConnection {
-  pageInfo: PageInfo
-  edges: StatsEdge[]
-  aggregate: AggregateStats
-}
-
-export interface CurrentPreviousValues {
-  id: ID_Output
-  season: Int
-  fixture: Int
-  timer?: String
-}
-
-/*
- * An edge in a connection.
-
- */
-export interface CurrentEdge {
-  node: Current
-  cursor: String
 }
 
 export interface UserPreviousValues {
@@ -4198,7 +3297,201 @@ export interface UserPreviousValues {
   deactivated: Boolean
 }
 
-export interface AggregateAdmin {
+export interface Admin extends Node {
+  id: ID_Output
+  email: String
+  password: String
+  name: String
+}
+
+export interface Current extends Node {
+  id: ID_Output
+  season: Int
+  round: Int
+  timer?: String
+}
+
+export interface BatchPayload {
+  count: Long
+}
+
+/*
+ * An edge in a connection.
+
+ */
+export interface UserEdge {
+  node: User
+  cursor: String
+}
+
+export interface AggregateUser {
+  count: Int
+}
+
+export interface SeasonSubscriptionPayload {
+  mutation: MutationType
+  node?: Season
+  updatedFields?: String[]
+  previousValues?: SeasonPreviousValues
+}
+
+/*
+ * A connection to a list of items.
+
+ */
+export interface UserConnection {
+  pageInfo: PageInfo
+  edges: UserEdge[]
+  aggregate: AggregateUser
+}
+
+export interface AggregateSeason {
+  count: Int
+}
+
+/*
+ * An edge in a connection.
+
+ */
+export interface SeasonEdge {
+  node: Season
+  cursor: String
+}
+
+export interface AggregateMatch {
+  count: Int
+}
+
+export interface Season extends Node {
+  id: ID_Output
+  season: Int
+  players?: User[]
+  round: Int
+}
+
+/*
+ * A connection to a list of items.
+
+ */
+export interface MatchConnection {
+  pageInfo: PageInfo
+  edges: MatchEdge[]
+  aggregate: AggregateMatch
+}
+
+export interface SeasonPreviousValues {
+  id: ID_Output
+  season: Int
+  round: Int
+}
+
+/*
+ * An edge in a connection.
+
+ */
+export interface StatsEdge {
+  node: Stats
+  cursor: String
+}
+
+export interface AdminSubscriptionPayload {
+  mutation: MutationType
+  node?: Admin
+  updatedFields?: String[]
+  previousValues?: AdminPreviousValues
+}
+
+export interface AggregateCurrent {
+  count: Int
+}
+
+export interface AdminPreviousValues {
+  id: ID_Output
+  email: String
+  password: String
+  name: String
+}
+
+/*
+ * A connection to a list of items.
+
+ */
+export interface CurrentConnection {
+  pageInfo: PageInfo
+  edges: CurrentEdge[]
+  aggregate: AggregateCurrent
+}
+
+export interface Match extends Node {
+  id: ID_Output
+  player1: User
+  player2?: User
+  player1set?: Int
+  player2set?: Int
+  season: Season
+  round: Int
+  sumbit: Boolean
+}
+
+/*
+ * An edge in a connection.
+
+ */
+export interface AdminEdge {
+  node: Admin
+  cursor: String
+}
+
+export interface CurrentSubscriptionPayload {
+  mutation: MutationType
+  node?: Current
+  updatedFields?: String[]
+  previousValues?: CurrentPreviousValues
+}
+
+/*
+ * A connection to a list of items.
+
+ */
+export interface AdminConnection {
+  pageInfo: PageInfo
+  edges: AdminEdge[]
+  aggregate: AggregateAdmin
+}
+
+export interface CurrentPreviousValues {
+  id: ID_Output
+  season: Int
+  round: Int
+  timer?: String
+}
+
+/*
+ * A connection to a list of items.
+
+ */
+export interface SeasonConnection {
+  pageInfo: PageInfo
+  edges: SeasonEdge[]
+  aggregate: AggregateSeason
+}
+
+export interface User extends Node {
+  id: ID_Output
+  email: String
+  password: String
+  name: String
+  stats?: Stats[]
+  matches?: Match[]
+  season?: Season
+  residentialcollege?: String
+  bio?: String
+  location?: String
+  confirmed: Boolean
+  deactivated: Boolean
+}
+
+export interface AggregateStats {
   count: Int
 }
 
@@ -4213,9 +3506,49 @@ export interface StatsSubscriptionPayload {
  * An edge in a connection.
 
  */
-export interface FixtureEdge {
-  node: Fixture
+export interface CurrentEdge {
+  node: Current
   cursor: String
+}
+
+/*
+ * Information about pagination in a connection.
+
+ */
+export interface PageInfo {
+  hasNextPage: Boolean
+  hasPreviousPage: Boolean
+  startCursor?: String
+  endCursor?: String
+}
+
+export interface MatchPreviousValues {
+  id: ID_Output
+  player1set?: Int
+  player2set?: Int
+  round: Int
+  sumbit: Boolean
+}
+
+export interface MatchSubscriptionPayload {
+  mutation: MutationType
+  node?: Match
+  updatedFields?: String[]
+  previousValues?: MatchPreviousValues
+}
+
+export interface Stats extends Node {
+  id: ID_Output
+  player: User
+  playeremail: String
+  wins?: Int
+  netwins?: Float
+  losts?: Int
+  totalsetwon?: Int
+  totalsetlost?: Int
+  rating?: Float
+  season: Season
+  round: Int
 }
 
 export interface StatsPreviousValues {
@@ -4227,97 +3560,17 @@ export interface StatsPreviousValues {
   totalsetwon?: Int
   totalsetlost?: Int
   rating?: Float
-}
-
-/*
- * A connection to a list of items.
-
- */
-export interface UserConnection {
-  pageInfo: PageInfo
-  edges: UserEdge[]
-  aggregate: AggregateUser
-}
-
-export interface Admin extends Node {
-  id: ID_Output
-  email: String
-  password: String
-  name: String
-}
-
-export interface AggregateMatch {
-  count: Int
-}
-
-export interface MatchSubscriptionPayload {
-  mutation: MutationType
-  node?: Match
-  updatedFields?: String[]
-  previousValues?: MatchPreviousValues
-}
-
-/*
- * An edge in a connection.
-
- */
-export interface StatsEdge {
-  node: Stats
-  cursor: String
-}
-
-export interface MatchPreviousValues {
-  id: ID_Output
-  player1set?: Int
-  player2set?: Int
-  sumbit: Boolean
-}
-
-/*
- * A connection to a list of items.
-
- */
-export interface CurrentConnection {
-  pageInfo: PageInfo
-  edges: CurrentEdge[]
-  aggregate: AggregateCurrent
-}
-
-export interface Fixture extends Node {
-  id: ID_Output
   round: Int
-  players?: User[]
-  matches?: Match[]
-  season: Season
 }
 
-export interface SeasonPreviousValues {
-  id: ID_Output
-  season: Int
-}
-
-export interface SeasonSubscriptionPayload {
+export interface UserSubscriptionPayload {
   mutation: MutationType
-  node?: Season
+  node?: User
   updatedFields?: String[]
-  previousValues?: SeasonPreviousValues
+  previousValues?: UserPreviousValues
 }
 
-export interface Season extends Node {
-  id: ID_Output
-  season: Int
-  players?: User[]
-  fixtures?: Fixture[]
-}
-
-export interface Current extends Node {
-  id: ID_Output
-  season: Int
-  fixture: Int
-  timer?: String
-}
-
-export interface AggregateCurrent {
+export interface AggregateAdmin {
   count: Int
 }
 
@@ -4325,23 +3578,19 @@ export interface AggregateCurrent {
  * A connection to a list of items.
 
  */
-export interface MatchConnection {
+export interface StatsConnection {
   pageInfo: PageInfo
-  edges: MatchEdge[]
-  aggregate: AggregateMatch
+  edges: StatsEdge[]
+  aggregate: AggregateStats
 }
 
 /*
  * An edge in a connection.
 
  */
-export interface SeasonEdge {
-  node: Season
+export interface MatchEdge {
+  node: Match
   cursor: String
-}
-
-export interface AggregateUser {
-  count: Int
 }
 
 /*
@@ -4351,15 +3600,15 @@ Long can represent values between -(2^63) and 2^63 - 1.
 export type Long = string
 
 /*
-The `Boolean` scalar type represents `true` or `false`.
-*/
-export type Boolean = boolean
-
-/*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
 */
 export type ID_Input = string | number
 export type ID_Output = string
+
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
+*/
+export type Int = number
 
 /*
 The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](http://en.wikipedia.org/wiki/IEEE_floating_point). 
@@ -4372,6 +3621,6 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 export type String = string
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
+The `Boolean` scalar type represents `true` or `false`.
 */
-export type Int = number
+export type Boolean = boolean

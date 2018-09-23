@@ -107,7 +107,7 @@ class Navigation extends React.Component {
       <div>
         <Navbar className="Navbar" light expand="md">
           <NavbarBrand className="NavbarTitle" href="/">
-            <div>PrincetonPingPongLeague</div>
+            <div>Princeton Pong League</div>
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
@@ -228,10 +228,10 @@ class Navigation extends React.Component {
                       Log out
                     </Button>
                   ) : (
-                    <DropdownToggle onClick={this.toggleDropdown} caret>
-                      Login
+                      <DropdownToggle onClick={this.toggleDropdown} caret>
+                        Login
                     </DropdownToggle>
-                  )}
+                    )}
                 </div>
 
                 <Dropdown isOpen={this.state.isDropDownOpen} inNavbar>

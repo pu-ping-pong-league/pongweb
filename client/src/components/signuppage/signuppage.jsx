@@ -151,7 +151,7 @@ class SignupPage extends React.Component {
                 </FormGroup>
                 <button type="submit">SignUp</button>
                 <a href="/" class="button">
-                  LogIn
+                  Back
                 </a>
               </Form>
             )

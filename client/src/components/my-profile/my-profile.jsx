@@ -45,7 +45,7 @@ const GETCURRENT = gql`
   query {
     getcurrent {
       season
-      fixture
+      round
       timer
     }
   }
@@ -63,11 +63,9 @@ const MATCHES = gql`
       }
       player1set
       player2set
-      fixture {
-        round
-      }
       season {
         season
+        round
       }
     }
   }
@@ -461,7 +459,7 @@ class MyProfile extends React.Component {
                                   return "OOps, somehing blew up."
                                 }
                                 console.log(data.getcurrent)
-                                const currentround = data.getcurrent[0].fixture
+                                const currentround = data.getcurrent[0].round
                                 const currentseason = data.getcurrent[0].season
                                 if (data.getcurrent.length !== 0) {
                                   return (
@@ -475,9 +473,8 @@ class MyProfile extends React.Component {
                                                   "email"
                                                 )
                                               },
-                                              fixture: {
-                                                round: currentround
-                                              }
+
+                                              round: currentround
                                             },
                                             {
                                               player2: {
@@ -485,9 +482,8 @@ class MyProfile extends React.Component {
                                                   "email"
                                                 )
                                               },
-                                              fixture: {
-                                                round: currentround
-                                              }
+
+                                              round: currentround
                                             }
                                           ]
                                         }
@@ -776,7 +772,7 @@ class MyProfile extends React.Component {
                                       player2={user.player2}
                                       player1set={user.player1set}
                                       player2set={user.player2set}
-                                      round={user.fixture.round}
+                                      round={user.season.round}
                                       season={user.season.season}
                                     />
                                   )

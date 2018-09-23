@@ -7,7 +7,7 @@ export default {
 
     return await ctx.db.mutation.updateCurrent(
       {
-        data: { fixture: args.round, season: args.season, timer: args.timer },
+        data: { round: args.round, season: args.season, timer: args.timer },
         where: { id: current[0].id }
       },
       info

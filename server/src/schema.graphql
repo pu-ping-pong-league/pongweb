@@ -2,6 +2,7 @@
 
 type Query {
   me: User!
+
   getleaderboard(
     where: UserOrderByInput
     orderBy: UserOrderByInput
@@ -11,7 +12,9 @@ type Query {
     first: Int
     last: Int
   ): [User]!
-  getunplayedmatches(season: Int!, fixture: Int!): [Match!]!
+
+  getunplayedmatches(season: Int!, round: Int!): [Match!]!
+
   feed(
     where: MatchOrderByInput
     orderBy: MatchOrderByInput
@@ -21,22 +24,15 @@ type Query {
     first: Int
     last: Int
   ): [Match]!
+
   getUser(email: String!): User!
   getUsers(where: UserWhereInput!, orderBy: UserOrderByInput): [User]!
   getStats(email: String!): User!
   getMatches(email: String!): [Match]!
   getResult(player1: String!, player2: String!): [Match]!
-  # getMatchId(player1: User!, player2: User!, league: String!, round: Int!): Id!
-  getPlayerMatches(player: String!, fixture: Int!, season: Int!): [Match]!
-  getPlayer1vsPlayer2Matches(
-    player1: String!
-    player2: String!
-    fixture: Int!
-    season: Int!
-  ): [Match]!
+  getPlayerMatches(player: String!, round: Int!, season: Int!): [Match]!
   statses(where: StatsWhereInput, orderBy: StatsOrderByInput): [Stats]!
   getallplayers: [User!]!
-  fixtures(where: FixtureWhereInput): [Fixture!]!
   matches(where: MatchWhereInput): [Match!]!
   getcurrent: [Current!]!
   getUserbyID(where: UserWhereUniqueInput!): User!
@@ -49,8 +45,10 @@ type Mutation {
     name: String!
     residentialcollege: String
   ): AuthPayload!
+
   login(email: String!, password: String!): AuthPayload!
   adminlogin(email: String!, password: String!): AuthPayload1!
+
   submitmatch(
     player1: String!
     player2: String!
@@ -59,8 +57,8 @@ type Mutation {
     round: Int!
     season: Int!
   ): Match!
-  generateFixture(round: Int!, season: Int!): Fixture!
-  generateRound(round: Int!, season: Int!): Fixture!
+
+  generateRound(round: Int!, season: Int!): [User]!
   generateSeason(season: Int!): Season!
   addplayer(player: String!, season: Int!): User!
   deleteplayer(player: String!, season: Int!): User!

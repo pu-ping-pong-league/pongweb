@@ -7,12 +7,6 @@ export default {
       where: { stats_every: {} }
     });
 
-    const fixture = await ctx.db.query.fixtures({
-      where: { round: args.fixture, season: { season: args.season } }
-    });
-    console.log(users);
-    console.log(fixture);
-
     for (var i = 1; i < users.length; i++) {
       await ctx.db.mutation.createStats(
         {
@@ -23,9 +17,9 @@ export default {
             totalsetwon: 0,
             rating: 1000,
             player: { connect: { email: users[i].email } },
-            fixture: { connect: { id: fixture[0].id } },
             season: { connect: { season: args.season } },
-            playeremail: users[i].email
+            playeremail: users[i].email,
+            round: args.round
           }
         },
         info
@@ -41,9 +35,9 @@ export default {
           totalsetwon: 0,
           rating: 1000,
           player: { connect: { email: users[0].email } },
-          fixture: { connect: { id: fixture[0].id } },
           season: { connect: { season: args.season } },
-          playeremail: users[0].email
+          playeremail: users[0].email,
+          round: args.round
         }
       },
       info

@@ -27,21 +27,20 @@ const GET_STATS = gql`
     }
   }
 `
-const GET_FIXTURE = gql`
-  query fixtures($where: FixtureWhereInput) {
-    fixtures(where: $where) {
-      matches {
-        player1 {
-          email
-          name
-        }
-        player2 {
-          email
-          name
-        }
-        player1set
-        player2set
+const GET_MATCHES = gql`
+  query matches($where: MatchWhereInput) {
+    matches(where: $where) {
+      player1 {
+        email
+        name
       }
+      round
+      player2 {
+        email
+        name
+      }
+      player1set
+      player2set
     }
   }
 `
@@ -49,7 +48,7 @@ const GETCURRENT = gql`
   query {
     getcurrent {
       season
-      fixture
+      round
       timer
     }
   }
@@ -102,7 +101,7 @@ class Leaderboard extends React.Component {
             const leaderboardcontent = []
 
             if (data.getcurrent.length !== 0) {
-              for (let i = 0; i < data.getcurrent[0].fixture + 1; i++) {
+              for (let i = 0; i < data.getcurrent[0].round + 1; i++) {
                 leaderboard.push(
                   <NavItem>
                     <NavLink
@@ -122,12 +121,12 @@ class Leaderboard extends React.Component {
                     <Query
                       variables={{
                         where: {
-                          fixture: { round: i },
                           season: { season: 1 },
                           player: {
                             confirmed: true,
                             deactivated: false
-                          }
+                          },
+                          round: i
                         }
                       }}
                       query={GET_STATS}
@@ -140,6 +139,7 @@ class Leaderboard extends React.Component {
                           console.log(error)
                           return "OOps, somehing blew up."
                         }
+                        console.log("stat")
                         console.log(data.statses)
                         return (
                           <Table>
@@ -204,7 +204,7 @@ class Leaderboard extends React.Component {
             const leaderboard1 = []
             const leaderboardcontent1 = []
             if (data.getcurrent.length !== 0) {
-              for (let i = 1; i < data.getcurrent[0].fixture + 1; i++) {
+              for (let i = 1; i < data.getcurrent[0].round + 1; i++) {
                 leaderboard1.push(
                   <NavItem>
                     <NavLink
@@ -223,9 +223,9 @@ class Leaderboard extends React.Component {
                   <TabPane tabId={i}>
                     <Query
                       variables={{
-                        where: { round: i, season: { season: 1 } }
+                        where: { season: { season: 1 }, round: i }
                       }}
-                      query={GET_FIXTURE}
+                      query={GET_MATCHES}
                     >
                       {({ loading, error, data, refetch }) => {
                         if (loading) {
@@ -245,7 +245,7 @@ class Leaderboard extends React.Component {
                                 <th>Player2 Set</th>
                               </tr>
                             </thead>
-                            {data.fixtures[0].matches.map(match => {
+                            {data.matches.map(match => {
                               return (
                                 <Matchinfo
                                   key={this.props.id}

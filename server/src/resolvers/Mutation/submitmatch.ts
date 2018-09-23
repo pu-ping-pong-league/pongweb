@@ -7,21 +7,17 @@ export default {
           player1: { email: args.player1 },
           player2: { email: args.player2 },
           season: { season: args.season },
-          fixture: { round: args.round }
+          round: args.round
         }
       },
       info
     );
 
-    const fixture = await ctx.db.query.fixtures({
-      where: { round: args.round, season: { season: args.season } }
-    });
-
     const stats1 = await ctx.db.query.statses({
       where: {
         playeremail: args.player1,
         season: { season: 1 },
-        fixture: { round: 0 }
+        round: 0
       }
     });
 
@@ -29,7 +25,7 @@ export default {
       where: {
         playeremail: args.player2,
         season: { season: 1 },
-        fixture: { round: 0 }
+        round: 0
       }
     });
     console.log(match);
@@ -60,8 +56,10 @@ export default {
                   match.player1.stats[0].netwins +
                   1 +
                   0.01 * (args.player1set - args.player2set),
-                fixture: { connect: { id: fixture[0].id } },
-                season: { connect: { season: args.season } }
+                round: args.round,
+                season: {
+                  connect: { season: args.season }
+                }
               }
             ],
             update: [
@@ -122,7 +120,7 @@ export default {
                   match.player2.stats[0].netwins -
                   1 +
                   0.01 * (args.player2set - args.player1set),
-                fixture: { connect: { id: fixture[0].id } },
+                round: args.round,
                 season: { connect: { season: args.season } }
               }
             ],
@@ -186,7 +184,7 @@ export default {
                     match.player1.stats[0].netwins +
                     1 +
                     0.01 * (args.player2set - args.player1set),
-                  fixture: { connect: { id: fixture[0].id } },
+                  round: args.round,
                   season: { connect: { season: args.season } }
                 }
               ],
@@ -236,7 +234,6 @@ export default {
                     totalsetlost:
                       match.player1.stats[0].totalsetlost + args.player2set,
                     losts: 1 + match.player1.stats[0].losts,
-                    fixture: { connect: { id: fixture[0].id } },
                     season: { connect: { season: args.season } },
                     rating:
                       match.player1.stats[0].rating -
@@ -250,7 +247,8 @@ export default {
                     netwins:
                       match.player1.stats[0].netwins -
                       1 +
-                      0.01 * (args.player1set - args.player2set)
+                      0.01 * (args.player1set - args.player2set),
+                    round: args.round
                   }
                 ],
                 update: [
