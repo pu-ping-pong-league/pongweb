@@ -104,13 +104,58 @@ export default {
     // form 'Bye' match if odd number of players
 
     if (unmatched_player != null) {
+      console.log(unmatched_player);
+      console.log(unmatched_player[0].stats[0]);
+      console.log(unmatched_player[0].stats[0].id);
       await ctx.db.mutation.createMatch({
         data: {
           player1: {
-            connect: { email: unmatched_player[0].playeremail }
+            connect: { email: unmatched_player[0].email }
           },
+          player1set: 2,
+          player2set: 0,
+          submit: true,
           season: { connect: { season: args.season } },
           round: args.round
+        }
+      });
+      await ctx.db.mutation.updateUser({
+        data: {
+          stats: {
+            create: [
+              {
+                playeremail: unmatched_player[0].email,
+
+                wins: 1 + unmatched_player[0].stats[0].wins,
+                totalsetwon: unmatched_player[0].stats[0].totalsetwon + 2,
+                totalsetlost: unmatched_player[0].stats[0].totalsetlost,
+                losts: unmatched_player[0].stats[0].losts,
+                rating: unmatched_player[0].stats[0].rating,
+                netwins: unmatched_player[0].stats[0].netwins + 1 + 0.01 * 2,
+                round: args.round,
+                season: {
+                  connect: { season: args.season }
+                }
+              }
+            ],
+            update: [
+              {
+                data: {
+                  totalsetwon: unmatched_player[0].stats[0].totalsetwon + 2,
+                  wins: 1 + unmatched_player[0].stats[0].wins,
+                  totalsetlost: unmatched_player[0].stats[0].totalsetlost,
+                  rating: unmatched_player[0].stats[0].rating,
+                  netwins: unmatched_player[0].stats[0].netwins + 1 + 0.01 * 2
+                },
+                where: {
+                  id: unmatched_player[0].stats[0].id
+                }
+              }
+            ]
+          }
+        },
+        where: {
+          email: unmatched_player[0].email
         }
       });
     }

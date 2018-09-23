@@ -11,6 +11,7 @@ type User {
   location: String
   confirmed: Boolean! @default(value: false)
   deactivated: Boolean! @default(value: false)
+  penaltypoints: Int! @default(value: 0)
 }
 
 type Admin {
@@ -34,7 +35,7 @@ type Match {
   player2set: Int
   season: Season!
   round: Int!
-  sumbit: Boolean! @default(value: false)
+  submit: Boolean! @default(value: false)
 }
 
 type Season {

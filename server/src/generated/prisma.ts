@@ -660,7 +660,7 @@ type Match implements Node {
   player2set: Int
   season(where: SeasonWhereInput): Season!
   round: Int!
-  sumbit: Boolean!
+  submit: Boolean!
 }
 
 """A connection to a list of items."""
@@ -677,7 +677,7 @@ input MatchCreateInput {
   player1set: Int
   player2set: Int
   round: Int!
-  sumbit: Boolean
+  submit: Boolean
   player1: UserCreateOneInput!
   player2: UserCreateOneInput
   season: SeasonCreateOneInput!
@@ -706,8 +706,8 @@ enum MatchOrderByInput {
   player2set_DESC
   round_ASC
   round_DESC
-  sumbit_ASC
-  sumbit_DESC
+  submit_ASC
+  submit_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -719,7 +719,7 @@ type MatchPreviousValues {
   player1set: Int
   player2set: Int
   round: Int!
-  sumbit: Boolean!
+  submit: Boolean!
 }
 
 type MatchSubscriptionPayload {
@@ -765,7 +765,7 @@ input MatchUpdateDataInput {
   player1set: Int
   player2set: Int
   round: Int
-  sumbit: Boolean
+  submit: Boolean
   player1: UserUpdateOneInput
   player2: UserUpdateOneInput
   season: SeasonUpdateOneInput
@@ -775,7 +775,7 @@ input MatchUpdateInput {
   player1set: Int
   player2set: Int
   round: Int
-  sumbit: Boolean
+  submit: Boolean
   player1: UserUpdateOneInput
   player2: UserUpdateOneInput
   season: SeasonUpdateOneInput
@@ -916,10 +916,10 @@ input MatchWhereInput {
 
   """All values greater than or equal the given value."""
   round_gte: Int
-  sumbit: Boolean
+  submit: Boolean
 
   """All values that are not equal to given value."""
-  sumbit_not: Boolean
+  submit_not: Boolean
   player1: UserWhereInput
   player2: UserWhereInput
   season: SeasonWhereInput
@@ -1731,6 +1731,7 @@ type User implements Node {
   location: String
   confirmed: Boolean!
   deactivated: Boolean!
+  penaltypoints: Int!
 }
 
 """A connection to a list of items."""
@@ -1752,6 +1753,7 @@ input UserCreateInput {
   location: String
   confirmed: Boolean
   deactivated: Boolean
+  penaltypoints: Int
   stats: StatsCreateManyWithoutPlayerInput
   matches: MatchCreateManyInput
   season: SeasonCreateOneWithoutPlayersInput
@@ -1781,6 +1783,7 @@ input UserCreateWithoutSeasonInput {
   location: String
   confirmed: Boolean
   deactivated: Boolean
+  penaltypoints: Int
   stats: StatsCreateManyWithoutPlayerInput
   matches: MatchCreateManyInput
 }
@@ -1794,6 +1797,7 @@ input UserCreateWithoutStatsInput {
   location: String
   confirmed: Boolean
   deactivated: Boolean
+  penaltypoints: Int
   matches: MatchCreateManyInput
   season: SeasonCreateOneWithoutPlayersInput
 }
@@ -1826,6 +1830,8 @@ enum UserOrderByInput {
   confirmed_DESC
   deactivated_ASC
   deactivated_DESC
+  penaltypoints_ASC
+  penaltypoints_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -1842,6 +1848,7 @@ type UserPreviousValues {
   location: String
   confirmed: Boolean!
   deactivated: Boolean!
+  penaltypoints: Int!
 }
 
 type UserSubscriptionPayload {
@@ -1892,6 +1899,7 @@ input UserUpdateDataInput {
   location: String
   confirmed: Boolean
   deactivated: Boolean
+  penaltypoints: Int
   stats: StatsUpdateManyWithoutPlayerInput
   matches: MatchUpdateManyInput
   season: SeasonUpdateOneWithoutPlayersInput
@@ -1906,6 +1914,7 @@ input UserUpdateInput {
   location: String
   confirmed: Boolean
   deactivated: Boolean
+  penaltypoints: Int
   stats: StatsUpdateManyWithoutPlayerInput
   matches: MatchUpdateManyInput
   season: SeasonUpdateOneWithoutPlayersInput
@@ -1945,6 +1954,7 @@ input UserUpdateWithoutSeasonDataInput {
   location: String
   confirmed: Boolean
   deactivated: Boolean
+  penaltypoints: Int
   stats: StatsUpdateManyWithoutPlayerInput
   matches: MatchUpdateManyInput
 }
@@ -1958,6 +1968,7 @@ input UserUpdateWithoutStatsDataInput {
   location: String
   confirmed: Boolean
   deactivated: Boolean
+  penaltypoints: Int
   matches: MatchUpdateManyInput
   season: SeasonUpdateOneWithoutPlayersInput
 }
@@ -2280,6 +2291,28 @@ input UserWhereInput {
 
   """All values that are not equal to given value."""
   deactivated_not: Boolean
+  penaltypoints: Int
+
+  """All values that are not equal to given value."""
+  penaltypoints_not: Int
+
+  """All values that are contained in given list."""
+  penaltypoints_in: [Int!]
+
+  """All values that are not contained in given list."""
+  penaltypoints_not_in: [Int!]
+
+  """All values less than the given value."""
+  penaltypoints_lt: Int
+
+  """All values less than or equal the given value."""
+  penaltypoints_lte: Int
+
+  """All values greater than the given value."""
+  penaltypoints_gt: Int
+
+  """All values greater than or equal the given value."""
+  penaltypoints_gte: Int
   stats_every: StatsWhereInput
   stats_some: StatsWhereInput
   stats_none: StatsWhereInput
@@ -2345,8 +2378,8 @@ export type MatchOrderByInput =   'id_ASC' |
   'player2set_DESC' |
   'round_ASC' |
   'round_DESC' |
-  'sumbit_ASC' |
-  'sumbit_DESC' |
+  'submit_ASC' |
+  'submit_DESC' |
   'updatedAt_ASC' |
   'updatedAt_DESC' |
   'createdAt_ASC' |
@@ -2370,6 +2403,8 @@ export type UserOrderByInput =   'id_ASC' |
   'confirmed_DESC' |
   'deactivated_ASC' |
   'deactivated_DESC' |
+  'penaltypoints_ASC' |
+  'penaltypoints_DESC' |
   'updatedAt_ASC' |
   'updatedAt_DESC' |
   'createdAt_ASC' |
@@ -2483,7 +2518,7 @@ export interface MatchUpdateDataInput {
   player1set?: Int
   player2set?: Int
   round?: Int
-  sumbit?: Boolean
+  submit?: Boolean
   player1?: UserUpdateOneInput
   player2?: UserUpdateOneInput
   season?: SeasonUpdateOneInput
@@ -2504,6 +2539,7 @@ export interface UserCreateWithoutSeasonInput {
   location?: String
   confirmed?: Boolean
   deactivated?: Boolean
+  penaltypoints?: Int
   stats?: StatsCreateManyWithoutPlayerInput
   matches?: MatchCreateManyInput
 }
@@ -2622,6 +2658,14 @@ export interface UserWhereInput {
   confirmed_not?: Boolean
   deactivated?: Boolean
   deactivated_not?: Boolean
+  penaltypoints?: Int
+  penaltypoints_not?: Int
+  penaltypoints_in?: Int[] | Int
+  penaltypoints_not_in?: Int[] | Int
+  penaltypoints_lt?: Int
+  penaltypoints_lte?: Int
+  penaltypoints_gt?: Int
+  penaltypoints_gte?: Int
   stats_every?: StatsWhereInput
   stats_some?: StatsWhereInput
   stats_none?: StatsWhereInput
@@ -2685,8 +2729,8 @@ export interface MatchWhereInput {
   round_lte?: Int
   round_gt?: Int
   round_gte?: Int
-  sumbit?: Boolean
-  sumbit_not?: Boolean
+  submit?: Boolean
+  submit_not?: Boolean
   player1?: UserWhereInput
   player2?: UserWhereInput
   season?: SeasonWhereInput
@@ -2776,6 +2820,7 @@ export interface UserUpdateDataInput {
   location?: String
   confirmed?: Boolean
   deactivated?: Boolean
+  penaltypoints?: Int
   stats?: StatsUpdateManyWithoutPlayerInput
   matches?: MatchUpdateManyInput
   season?: SeasonUpdateOneWithoutPlayersInput
@@ -2807,6 +2852,7 @@ export interface UserUpdateInput {
   location?: String
   confirmed?: Boolean
   deactivated?: Boolean
+  penaltypoints?: Int
   stats?: StatsUpdateManyWithoutPlayerInput
   matches?: MatchUpdateManyInput
   season?: SeasonUpdateOneWithoutPlayersInput
@@ -2859,6 +2905,7 @@ export interface UserCreateWithoutStatsInput {
   location?: String
   confirmed?: Boolean
   deactivated?: Boolean
+  penaltypoints?: Int
   matches?: MatchCreateManyInput
   season?: SeasonCreateOneWithoutPlayersInput
 }
@@ -2867,7 +2914,7 @@ export interface MatchUpdateInput {
   player1set?: Int
   player2set?: Int
   round?: Int
-  sumbit?: Boolean
+  submit?: Boolean
   player1?: UserUpdateOneInput
   player2?: UserUpdateOneInput
   season?: SeasonUpdateOneInput
@@ -2888,7 +2935,7 @@ export interface MatchCreateInput {
   player1set?: Int
   player2set?: Int
   round: Int
-  sumbit?: Boolean
+  submit?: Boolean
   player1: UserCreateOneInput
   player2?: UserCreateOneInput
   season: SeasonCreateOneInput
@@ -2922,6 +2969,7 @@ export interface UserCreateInput {
   location?: String
   confirmed?: Boolean
   deactivated?: Boolean
+  penaltypoints?: Int
   stats?: StatsCreateManyWithoutPlayerInput
   matches?: MatchCreateManyInput
   season?: SeasonCreateOneWithoutPlayersInput
@@ -2949,6 +2997,7 @@ export interface UserUpdateWithoutSeasonDataInput {
   location?: String
   confirmed?: Boolean
   deactivated?: Boolean
+  penaltypoints?: Int
   stats?: StatsUpdateManyWithoutPlayerInput
   matches?: MatchUpdateManyInput
 }
@@ -3234,6 +3283,7 @@ export interface UserUpdateWithoutStatsDataInput {
   location?: String
   confirmed?: Boolean
   deactivated?: Boolean
+  penaltypoints?: Int
   matches?: MatchUpdateManyInput
   season?: SeasonUpdateOneWithoutPlayersInput
 }
@@ -3295,6 +3345,7 @@ export interface UserPreviousValues {
   location?: String
   confirmed: Boolean
   deactivated: Boolean
+  penaltypoints: Int
 }
 
 export interface Admin extends Node {
@@ -3430,7 +3481,7 @@ export interface Match extends Node {
   player2set?: Int
   season: Season
   round: Int
-  sumbit: Boolean
+  submit: Boolean
 }
 
 /*
@@ -3489,6 +3540,7 @@ export interface User extends Node {
   location?: String
   confirmed: Boolean
   deactivated: Boolean
+  penaltypoints: Int
 }
 
 export interface AggregateStats {
@@ -3527,7 +3579,7 @@ export interface MatchPreviousValues {
   player1set?: Int
   player2set?: Int
   round: Int
-  sumbit: Boolean
+  submit: Boolean
 }
 
 export interface MatchSubscriptionPayload {

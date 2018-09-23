@@ -569,8 +569,19 @@ class MyProfile extends React.Component {
                                         } else {
                                           const player1email =
                                             data.matches[0].player1.email
-                                          const player2email =
-                                            data.matches[0].player2.email
+                                          var player2email = null
+                                          if (data.matches[0].player2 != null) {
+                                            player2email =
+                                              data.matches[0].player2.email
+                                          }
+                                          var player2name =
+                                            "Bye (Set score to zero)"
+                                          if (data.matches[0].player2 != null) {
+                                            player2name =
+                                              data.matches[0].player2.name +
+                                              "'s set score"
+                                          }
+
                                           if (
                                             data.matches[0].player1set == null
                                           ) {
@@ -618,8 +629,6 @@ class MyProfile extends React.Component {
                                                               data.matches[0]
                                                                 .player1.name
                                                             }
-                                                            {"'s "}
-                                                            set score
                                                           </Label>
                                                           <Input
                                                             type="select"
@@ -640,12 +649,7 @@ class MyProfile extends React.Component {
                                                         </FormGroup>
                                                         <FormGroup>
                                                           <Label for="exampleSelect">
-                                                            {
-                                                              data.matches[0]
-                                                                .player2.name
-                                                            }
-                                                            {"'s "}
-                                                            set score
+                                                            {player2name}
                                                           </Label>
                                                           <Input
                                                             type="select"
@@ -697,41 +701,10 @@ class MyProfile extends React.Component {
                                   return (
                                     <div>
                                       <h1>
-                                        Your account is currently deactivated
+                                        Your account is currently deactivated.
+                                        Please contact us if you want to
+                                        reactive it.
                                       </h1>
-                                      <Mutation mutation={DEACTIVATE}>
-                                        {deactivate => {
-                                          return (
-                                            <div>
-                                              <Form
-                                                onSubmit={async e => {
-                                                  e.preventDefault()
-                                                  try {
-                                                    const {
-                                                      data
-                                                    } = await deactivate({
-                                                      variables: {
-                                                        email: localStorage.getItem(
-                                                          "email"
-                                                        ),
-                                                        deactivated: false
-                                                      }
-                                                    })
-                                                    this.props.history.push(
-                                                      "/myprofile"
-                                                    )
-                                                    location.reload()
-                                                  } catch (error) {}
-                                                }}
-                                              >
-                                                <button type="submit">
-                                                  Activate
-                                                </button>
-                                              </Form>
-                                            </div>
-                                          )
-                                        }}
-                                      </Mutation>
                                     </div>
                                   )
                                 } else {

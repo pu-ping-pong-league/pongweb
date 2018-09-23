@@ -38,6 +38,7 @@ export default {
 
         await ctx.db.mutation.updateUser({
           data: {
+            penaltypoints: unplayedmatches[i].player1.penaltypoints + 1,
             stats: {
               create: [
                 {
@@ -62,6 +63,7 @@ export default {
         });
         await ctx.db.mutation.updateUser({
           data: {
+            penaltypoints: unplayedmatches[i].player2.penaltypoints + 1,
             stats: {
               create: [
                 {

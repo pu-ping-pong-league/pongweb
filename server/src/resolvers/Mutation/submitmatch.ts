@@ -8,7 +8,7 @@ export default {
           player2: { email: args.player2 },
           season: { season: args.season },
           round: args.round,
-          sumbit: false
+          submit: false
         }
       },
       info
@@ -339,7 +339,7 @@ export default {
         data: {
           player1set: args.player1set,
           player2set: args.player2set,
-          sumbit: true
+          submit: true
         },
         where: {
           id: match.id

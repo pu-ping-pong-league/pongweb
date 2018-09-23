@@ -59,6 +59,7 @@ const GENERATEROUND = gql`
       email
       name
       stats {
+        id
         wins
         netwins
         totalsetwon
@@ -96,6 +97,7 @@ const SETNULLSCORETOZERO = gql`
         }
         email
         name
+        penaltypoints
       }
       player2 {
         stats {
@@ -108,6 +110,7 @@ const SETNULLSCORETOZERO = gql`
         }
         email
         name
+        penaltypoints
       }
       player1set
       player2set

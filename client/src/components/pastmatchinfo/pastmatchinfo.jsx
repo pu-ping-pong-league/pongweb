@@ -12,13 +12,22 @@ class Pastmatchinfo extends React.Component {
             </a>
           </th>
           <th className="item">
-            <a className="email" href={"/" + this.props.player2.email}>
-              {this.props.player2.name}
-            </a>
+            {(() => {
+              if (this.props.player2 == null)
+                return <a className="email">Bye</a>
+              else {
+                return (
+                  <a className="email" href={"/" + this.props.player2.email}>
+                    {this.props.player2.name}
+                  </a>
+                )
+              }
+            })()}
           </th>
 
           <th className="item">{this.props.player1set}</th>
           <th className="item">{this.props.player2set}</th>
+
           <th className="item">{this.props.round}</th>
           <th className="item">{this.props.season}</th>
         </tr>

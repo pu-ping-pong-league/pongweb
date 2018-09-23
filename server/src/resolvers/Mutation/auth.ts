@@ -29,11 +29,11 @@ export const auth = {
       throw new Error("Full name exceeds max length of 50 characters.");
 
     // validate email
-    if (!EmailValidator.validate(args.email))
-      throw new Error(`${args.email} is not a valid email.`);
-    var email_split = args.email.split("@");
-    if (email_split[email_split.length - 1] != "princeton.edu")
-      throw new Error("Emails is not a valid princeton email.");
+    // if (!EmailValidator.validate(args.email))
+    //   throw new Error(`${args.email} is not a valid email.`);
+    // var email_split = args.email.split("@");
+    // if (email_split[email_split.length - 1] != "princeton.edu")
+    //   throw new Error("Emails is not a valid princeton email.");
     const users = await ctx.db.query.users({
       where: { email: args.email }
     });
@@ -64,45 +64,44 @@ export const auth = {
         season: { connect: { season: 1 } }
       }
     });
-
-    // for (var i = 1; i < current.fixture + 1; i++) {
-    //   ctx.db.mutation.updateUser({
-    //     data: {
-    //       stats: {
-    //         create: [
-    //           {
-    //             playeremail: args.email,
-    //             wins: 0,
-    //             losts: 0,
-    //             totalsetlost: 0,
-    //             totalsetwon: 0,
-    //             netwins: 0,
-    //             rating: 1000,
-    //             fixture: { connect: { id: fixtures[i].id } },
-    //             season: { connect: { season: 1 } }
-    //           }
-    //         ]
-    //       },
-    //       season: { connect: { season: 1 } },
-    //       fixture: { connect: { id: "cjl6wcei8000l0807p8tcm3bu" } }
-    //     },
-    //     where: {
-    //       email: args.email
-    //     }
-    //   });
-    // }
+    const current = await ctx.db.query.currents({ where: {} });
+    for (var i = 1; i < current[0].round + 1; i++) {
+      ctx.db.mutation.updateUser({
+        data: {
+          stats: {
+            create: [
+              {
+                playeremail: args.email,
+                wins: 0,
+                losts: 0,
+                totalsetlost: 0,
+                totalsetwon: 0,
+                netwins: 0,
+                rating: 1000,
+                round: i,
+                season: { connect: { season: 1 } }
+              }
+            ]
+          },
+          season: { connect: { season: 1 } }
+        },
+        where: {
+          email: user.email
+        }
+      });
+    }
     const emailtoken = jwt.sign({ userId: user.id }, EMAIL_SECRET, {
       expiresIn: "1d"
     });
     console.log("emailToken" + emailtoken);
     const url = `http://localhost:3001/verify/${emailtoken}`;
 
-    (async () =>
-      transporter.sendMail({
-        to: args.email,
-        subject: "Princeton Ping Pong League Confirm Email",
-        html: `Hi! Thank you for signing up for Princeton Ping Pong Leauge! Please click this link to confirm your email: <a href="${url}">${url}</a>`
-      }))();
+    // (async () =>
+    //   transporter.sendMail({
+    //     to: args.email,
+    //     subject: "Princeton Ping Pong League Confirm Email",
+    //     html: `Hi! Thank you for signing up for Princeton Ping Pong Leauge! Please click this link to confirm your email: <a href="${url}">${url}</a>`
+    //   }))();
 
     return {
       token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),

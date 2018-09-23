@@ -3,6 +3,8 @@ import "./matchinfo.css"
 
 class Matchinfo extends React.Component {
   render() {
+    if (this.props.player2 == null) {
+    }
     return (
       <thead>
         <tr>
@@ -12,9 +14,17 @@ class Matchinfo extends React.Component {
             </a>
           </th>
           <th className="item">
-            <a className="email" href={"/" + this.props.player2.email}>
-              {this.props.player2.name}
-            </a>
+            {(() => {
+              if (this.props.player2 == null)
+                return <a className="email">Bye</a>
+              else {
+                return (
+                  <a className="email" href={"/" + this.props.player2.email}>
+                    {this.props.player2.name}
+                  </a>
+                )
+              }
+            })()}
           </th>
 
           <th className="item">{this.props.Player1Set}</th>
