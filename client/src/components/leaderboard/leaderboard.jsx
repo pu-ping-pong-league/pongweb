@@ -101,7 +101,7 @@ class Leaderboard extends React.Component {
             const leaderboardcontent = []
 
             if (data.getcurrent.length !== 0) {
-              for (let i = 0; i < data.getcurrent[0].round + 1; i++) {
+              for (let i = 1; i < data.getcurrent[0].round + 1; i++) {
                 leaderboard.push(
                   <NavItem>
                     <NavLink

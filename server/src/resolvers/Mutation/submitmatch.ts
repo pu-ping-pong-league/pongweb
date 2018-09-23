@@ -212,7 +212,7 @@ export default {
                   rating:
                     match.player2.stats[0].rating + ratingUpdate,
                   netwins:
-                    match.player1.stats[0].netwins +
+                    match.player2.stats[0].netwins +
                     1 + 0.01 * (args.player2set - args.player1set),
                   round: args.round,
                   season: { connect: { season: args.season } }
@@ -229,7 +229,7 @@ export default {
                     rating:
                       match.player2.stats[0].rating + ratingUpdate,
                     netwins:
-                      match.player1.stats[0].netwins +
+                      match.player2.stats[0].netwins +
                       1 + 0.01 * (args.player2set - args.player1set)
                   },
                   where: { id: stats2[0].id }
