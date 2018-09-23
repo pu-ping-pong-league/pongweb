@@ -52,7 +52,10 @@ type Mutation {
 
   login(email: String!, password: String!): AuthPayload!
   adminlogin(email: String!, password: String!): AuthPayload1!
-
+  updateseason(
+    data: SeasonUpdateInput!
+    where: SeasonWhereUniqueInput!
+  ): Season!
   submitmatch(
     player1: String!
     player2: String!

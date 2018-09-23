@@ -13,6 +13,7 @@ import setnullscoretozero from "./Mutation/setnullscoretozero";
 import forgotpassword from "./Mutation/forgotpassword";
 import resetpassword from "./Mutation/resetpassword";
 import deactivate from "./Mutation/deactivate";
+import updateseason from "./Mutation/updateseason";
 
 export const resolvers = {
   Query,
@@ -28,7 +29,8 @@ export const resolvers = {
     ...setnullscoretozero,
     ...forgotpassword,
     ...resetpassword,
-    ...deactivate
+    ...deactivate,
+    ...updateseason
   },
   AuthPayload
 };
