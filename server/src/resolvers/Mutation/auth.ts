@@ -64,6 +64,33 @@ export const auth = {
         season: { connect: { season: 1 } }
       }
     });
+
+    // for (var i = 1; i < current.fixture + 1; i++) {
+    //   ctx.db.mutation.updateUser({
+    //     data: {
+    //       stats: {
+    //         create: [
+    //           {
+    //             playeremail: args.email,
+    //             wins: 0,
+    //             losts: 0,
+    //             totalsetlost: 0,
+    //             totalsetwon: 0,
+    //             netwins: 0,
+    //             rating: 1000,
+    //             fixture: { connect: { id: fixtures[i].id } },
+    //             season: { connect: { season: 1 } }
+    //           }
+    //         ]
+    //       },
+    //       season: { connect: { season: 1 } },
+    //       fixture: { connect: { id: "cjl6wcei8000l0807p8tcm3bu" } }
+    //     },
+    //     where: {
+    //       email: args.email
+    //     }
+    //   });
+    // }
     const emailtoken = jwt.sign({ userId: user.id }, EMAIL_SECRET, {
       expiresIn: "1d"
     });

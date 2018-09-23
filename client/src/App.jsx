@@ -28,7 +28,9 @@ import screen7 from "./Wilsoncollege.png"
 import AdminLoginPage from "./components/adminlogin/adminlogin.jsx"
 import VerifyPage from "./components/verify/verify.jsx"
 import Signupthankyou from "./components/signupthankyou/signupthankyou.jsx"
-import Passwordreset from "./components/passwordreset/passwordreset"
+import Passwordreset from "./components/passwordreset/passwordreset.jsx"
+import FORGOTPASSWORD from "./components/forgotpassword/forgotpassword.jsx"
+import Passwordrestpage from "./components/passwordresetpage/passwordrestpage.jsx"
 
 const item = [screen, screen2, screen3, screen4, screen5, screen6, screen7]
 const token = localStorage.getItem("admintoken")
@@ -206,11 +208,22 @@ class App extends React.Component {
             />
             <Route
               exact={true}
+              path="/forgotpassword"
+              component={FORGOTPASSWORD}
+            />
+
+            <Route
+              exact={true}
               path="/signupthankyou"
               component={Signupthankyou}
             />
             <Route exact={true} path="/:email" component={ProfilePage} />
             <Route exact={true} path="/verify/:token" component={VerifyPage} />
+            <Route
+              exact={true}
+              path="/password/:token"
+              component={Passwordrestpage}
+            />
           </Switch>
         </div>
       </div>
