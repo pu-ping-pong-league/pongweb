@@ -84,7 +84,6 @@ const SETNULLSCORETOZERO = gql`
     setnullscoretozero(round: $round, season: $season) {
       season {
         season
-        round
       }
       player1 {
         stats {
@@ -221,8 +220,8 @@ class AdminPage extends React.Component {
                                             data
                                           } = await setnullscoretozero({
                                             variables: {
-                                              season: this.state.season,
-                                              round: this.state.round
+                                              season: season1,
+                                              round: round1
                                             }
                                           })
                                           this.props.history.push("/admin")
