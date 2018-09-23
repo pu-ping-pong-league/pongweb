@@ -14,6 +14,7 @@ import forgotpassword from "./Mutation/forgotpassword";
 import resetpassword from "./Mutation/resetpassword";
 import deactivate from "./Mutation/deactivate";
 import updateseason from "./Mutation/updateseason";
+import penaltypoints from "./Mutation/penaltypoints";
 
 export const resolvers = {
   Query,
@@ -30,7 +31,8 @@ export const resolvers = {
     ...forgotpassword,
     ...resetpassword,
     ...deactivate,
-    ...updateseason
+    ...updateseason,
+    ...penaltypoints
   },
   AuthPayload
 };

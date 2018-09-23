@@ -86,6 +86,7 @@ export default {
           }
         });
       }
+
       return await ctx.db.mutation.updateMatch(
         {
           data: {},

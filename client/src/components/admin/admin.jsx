@@ -80,6 +80,16 @@ const UPDATESEASON = gql`
     }
   }
 `
+
+const PENALTY = gql`
+  mutation {
+    penaltypoints {
+      name
+      email
+      penaltypoints
+    }
+  }
+`
 const SETNULLSCORETOZERO = gql`
   mutation setnullscoretozero($round: Int!, $season: Int!) {
     setnullscoretozero(round: $round, season: $season) {
@@ -207,40 +217,51 @@ class AdminPage extends React.Component {
                         <h1> Unplayed Matches This Round </h1>
                         {unplayedmatches}
                         {(() => {
-                          console.log(unplayedmatches.length)
+                          console.log(season1)
+                          console.log(round1)
                           if (unplayedmatches.length != 0)
                             return (
-                              <Mutation mutation={SETNULLSCORETOZERO}>
-                                {setnullscoretozero => {
+                              <Mutation mutation={PENALTY}>
+                                {penaltypoints => {
                                   return (
-                                    <Form
-                                      horizontal
-                                      onSubmit={async e => {
-                                        e.preventDefault()
+                                    <Mutation mutation={SETNULLSCORETOZERO}>
+                                      {setnullscoretozero => {
+                                        return (
+                                          <Form
+                                            horizontal
+                                            onSubmit={async e => {
+                                              e.preventDefault()
 
-                                        try {
-                                          const {
-                                            data
-                                          } = await setnullscoretozero({
-                                            variables: {
-                                              season: season1,
-                                              round: round1
-                                            }
-                                          })
-                                          this.props.history.push("/admin")
-                                          location.reload()
-                                        } catch (error) {
-                                          this.setState({
-                                            error: "Oops! Something went wrong."
-                                          })
-                                        }
+                                              try {
+                                                const {
+                                                  data
+                                                } = await setnullscoretozero({
+                                                  variables: {
+                                                    season: season1,
+                                                    round: round1
+                                                  }
+                                                })
+                                                await penaltypoints({})
+                                                this.props.history.push(
+                                                  "/admin"
+                                                )
+                                                location.reload()
+                                              } catch (error) {
+                                                this.setState({
+                                                  error:
+                                                    "Oops! Something went wrong."
+                                                })
+                                              }
+                                            }}
+                                          >
+                                            {" "}
+                                            <button type="submit">
+                                              Set Null Score to Zero
+                                            </button>
+                                          </Form>
+                                        )
                                       }}
-                                    >
-                                      {" "}
-                                      <button type="submit">
-                                        Set Null Score to Zero
-                                      </button>
-                                    </Form>
+                                    </Mutation>
                                   )
                                 }}
                               </Mutation>

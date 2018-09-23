@@ -35,6 +35,7 @@ const GET_MY_PROFILE = gql`
         totalsetlost
         rating
       }
+      penaltypoints
       deactivated
       location
       bio
@@ -343,6 +344,9 @@ class MyProfile extends React.Component {
                             <div className="bio hide1" id="userbio">
                               <h2 className="email">Bio</h2>
                               <div>{data.me.bio}</div>
+                            </div>
+                            <div className="penaltypoints">
+                              Penalty Points: {data.me.penaltypoints}
                             </div>
                           </TabPane>
                           <TabPane tabId="2">

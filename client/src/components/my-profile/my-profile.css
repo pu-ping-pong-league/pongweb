@@ -9,3 +9,8 @@
 .statstable {
   width: 100%;
 }
+.penaltypoints {
+  position: relative;
+  right: 250px;
+  top: 350px;
+}
