@@ -9,6 +9,11 @@ import generateStats from "./Mutation/generateStats";
 import updateinfo from "./Mutation/updateinfo";
 import updatecurrent from "./Mutation/updatecurrent";
 import createcurrent from "./Mutation/createcurrent";
+import setnullscoretozero from "./Mutation/setnullscoretozero";
+import forgotpassword from "./Mutation/forgotpassword";
+import resetpassword from "./Mutation/resetpassword";
+import deactivate from "./Mutation/deactivate";
+
 export const resolvers = {
   Query,
   Mutation: {
@@ -19,7 +24,11 @@ export const resolvers = {
     ...generateStats,
     ...updateinfo,
     ...updatecurrent,
-    ...createcurrent
+    ...createcurrent,
+    ...setnullscoretozero,
+    ...forgotpassword,
+    ...resetpassword,
+    ...deactivate
   },
   AuthPayload
 };
